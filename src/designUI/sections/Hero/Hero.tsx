@@ -1,17 +1,20 @@
 "use client";
 
 import clsx from "clsx";
+import { useHero } from "./function";
+import { sora } from "@/designUI/utilities/fonts/fonts";
+
+import Text from "@/designUI/elements/Text/Text";
+import Image from "@/designUI/elements/Image/Image";
 import Button from "@/designUI/elements/Button/Button";
 import Container from "@/designUI/elements/Container/Container";
-import Image from "@/designUI/elements/Image/Image";
-import Text from "@/designUI/elements/Text/Text";
+import SocialIcon from "@/designUI/components/SocialIcon/SocialIcon";
+
+import HeroGridLines from "./comp/HeroGridLines";
+import HeroContentCard, { heroCardTextClassName } from "./comp/HeroContentCard";
+
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import HeroBannerSkeleton from "@/designUI/utilities/loader/landing/heroBannerSkeleton";
-import SocialIcon from "@/designUI/components/SocialIcon/SocialIcon";
-import { sora } from "@/designUI/utilities/fonts/fonts";
-import HeroContentCard, { heroCardTextClassName } from "./comp/HeroContentCard";
-import HeroGridLines from "./comp/HeroGridLines";
-import { useHero } from "./function";
 
 export default function Hero() {
   const { data, isLoading } = useHero();
