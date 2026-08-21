@@ -1,6 +1,7 @@
 import Hero from "@/designUI/sections/Hero/Hero";
 import Feature from "@/designUI/sections/Feature/Feature";
 import Story from "@/designUI/sections/Story/Story";
+import Journey from "@/designUI/sections/Journey/Journey";
 
 export default function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default function HomePage() {
       <Hero />
       <Feature />
       <Story />
+      <Journey />
     </main>
   );
 }

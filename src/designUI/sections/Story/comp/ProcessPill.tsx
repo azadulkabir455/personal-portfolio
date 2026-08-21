@@ -14,6 +14,7 @@ export default function ProcessPill({ className = "", image, icon, children }: P
         "h-[23px] px-[8px] py-[4px]",
         "md:h-[58px] md:px-[20px] md:py-[16px]",
         "lg:h-[118px] lg:px-[80px] lg:py-[45px]",
+        "min-[1024px]:max-[1150px]:h-[100px]! min-[1024px]:max-[1150px]:px-[60px]! min-[1024px]:max-[1150px]:py-[40px]!",
         className,
       )}
     >
