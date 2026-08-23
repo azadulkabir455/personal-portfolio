@@ -3,8 +3,9 @@ import Container from "@/designUI/elements/Container/Container";
 import type { ButtonVariant, ButtonProps } from "./types";
 
 const variantClasses: Record<ButtonVariant, string> = {
-  filled:"bg-[radial-gradient(914.34%_212.5%_at_44.16%_14.42%,#242423_0%,#8A8A86_100%)] text-[#F7F7F7]",
-  plain: "bg-transparent text-neutral-900",
+  filled:
+    "gap-4 pl-8 bg-[radial-gradient(914.34%_212.5%_at_44.16%_14.42%,#242423_0%,#8A8A86_100%)] text-[#F7F7F7]",
+  plain: "gap-1 bg-transparent text-neutral-900",
 };
 
 export default function Button({
@@ -20,11 +21,10 @@ export default function Button({
       className={clsx(
         "group inline-flex items-center",
         "h-[38px] md:h-[52px]",
-        "gap-4 pl-8",
         "rounded-full",
         "text-center font-sans text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] font-bold tracking-[0.13px] md:tracking-[0.25px] capitalize",
         "cursor-pointer transition-colors duration-200",
-        !icon && "pr-8",
+        variant === "filled" && !icon && "pr-8",
         variantClasses[variant],
         className,
       )}

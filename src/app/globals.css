@@ -23,6 +23,7 @@
 
 body {
   background-color: #f7f7f7;
+  overflow-x: hidden;
 }
 
 @keyframes journey-marquee {
@@ -34,9 +35,25 @@ body {
   }
 }
 
+
 .journey-close-cursor {
   cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDM2IDM2Ij48Y2lyY2xlIGN4PSIxOCIgY3k9IjE5IiByPSIxNSIgZmlsbD0iIzAwMDAwMCIgZmlsbC1vcGFjaXR5PSIwLjI1Ii8+PGNpcmNsZSBjeD0iMTgiIGN5PSIxOCIgcj0iMTUiIGZpbGw9IiNmZmZmZmYiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSIxNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQyNDIzIiBzdHJva2Utb3BhY2l0eT0iMC4wOCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTEzIDEzTDIzIDIzTTIzIDEzTDEzIDIzIiBzdHJva2U9IiMyNDI0MjMiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=") 18 18, pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
