@@ -4,6 +4,7 @@ import Story from "@/designUI/sections/Story/Story";
 import Journey from "@/designUI/sections/Journey/Journey";
 import FeaturedProjects from "@/designUI/sections/FeaturedProjects/FeaturedProjects";
 import RecentDesign from "@/designUI/sections/RecentDesign/RecentDesign";
+import Services from "@/designUI/sections/Services/Services";
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Journey />
       <FeaturedProjects />
       <RecentDesign />
+      <Services />
     </main>
   );
 }
