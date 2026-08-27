@@ -27,7 +27,7 @@ export default function FeaturedProjects() {
             "container relative",
             "px-4 py-[20px]",
             "md:px-[40px] md:py-[40px]",
-            "lg:px-0 lg:py-[80px]",
+            "lg:px-[10px] lg:py-[80px]",
           )}
         >
           <Container className="relative flex flex-col gap-[12px] md:gap-[24px] lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
@@ -75,8 +75,8 @@ export default function FeaturedProjects() {
               />
             )}
             <div className="sticky top-0 w-full" style={{ zIndex: index + 1 }}>
-              <Container className={clsx("container relative", "px-4", "md:px-[40px]", "lg:px-0")}>
-                <Container className="relative flex w-full flex-col items-start gap-[12px] md:gap-[24px] lg:flex-row lg:justify-between">
+              <Container className={clsx("container relative", "px-4", "md:px-[40px]", "lg:px-[10px]")}>
+                <Container className="relative flex w-full flex-col items-start gap-[12px] md:gap-[24px] lg:flex-row lg:justify-between min-[1024px]:max-[1130px]:bg-[#f7f7f7]">
                   <Container
                     className={clsx(
                       "flex flex-col items-start",
@@ -125,7 +125,7 @@ export default function FeaturedProjects() {
             "container relative flex w-full justify-center",
             "px-4 py-[16px]",
             "md:px-[40px] md:py-[30px]",
-            "lg:px-0 lg:py-[60px]",
+            "lg:px-[10px] lg:py-[60px]",
           )}
         >
           <Button icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>

@@ -38,6 +38,7 @@ export default function ProtectedDashboardLayout({
         <span className="font-semibold">Dashboard</span>
         <Button
           variant="plain"
+          className="text-neutral-900"
           onClick={() => {
             signOutUser();
             router.replace("/dashboard/login");

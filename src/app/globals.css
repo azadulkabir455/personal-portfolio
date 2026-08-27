@@ -26,6 +26,10 @@ body {
   overflow-x: hidden;
 }
 
+
+
+
+
 @keyframes journey-marquee {
   from {
     transform: translateX(0);
@@ -34,6 +38,14 @@ body {
     transform: translateX(-50%);
   }
 }
+
+
+
+
+
+
+
+
 
 
 .journey-close-cursor {

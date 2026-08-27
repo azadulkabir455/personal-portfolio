@@ -31,7 +31,7 @@ export default function Journey() {
           "container relative z-10",
           "px-4 pb-[20px]",
           "md:px-[40px] md:pb-[40px]",
-          "lg:px-0 lg:pb-[80px]",
+          "lg:px-[10px] lg:pb-[80px]",
         )}
       >
         <Container

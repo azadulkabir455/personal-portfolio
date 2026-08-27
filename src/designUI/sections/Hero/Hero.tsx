@@ -80,7 +80,7 @@ export default function Hero() {
             </Text>
           </Container>
 
-          <Container className="flex flex-col items-center gap-0 md:grid md:grid-cols-2 md:justify-items-center lg:grid lg:w-full lg:grid-cols-[365fr_510fr_365fr] lg:items-end">
+          <Container className="flex flex-col items-center gap-0 md:grid md:grid-cols-2 md:justify-items-center lg:grid lg:w-full lg:grid-cols-[minmax(0,365fr)_minmax(0,510fr)_minmax(0,365fr)] lg:items-end">
             <HeroContentCard data-aos="fade-right" className="order-2 md:order-2 lg:order-none">
               <Text className={heroCardTextClassName}>{data.greeting}</Text>
               <Button
@@ -98,7 +98,7 @@ export default function Hero() {
                 src={data.photoUrl}
                 alt={[data.title, data.titleExtend].filter(Boolean).join(" ")}
                 fill
-                className="object-contain"
+                className="object-contain object-bottom"
               />
             </Container>
 
