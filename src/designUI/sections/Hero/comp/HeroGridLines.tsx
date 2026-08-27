@@ -20,10 +20,10 @@ export default function HeroGridLines() {
         <Container className="absolute inset-x-0 top-[100px] h-px bg-white/[0.24]" />
         <Container className="absolute inset-x-0 bottom-[288px] h-px bg-white/[0.24]" />
         <Container className="absolute inset-x-0 bottom-[30px] h-px bg-white/[0.24]" />
-        <Container className="absolute inset-y-0 left-[30px] w-px bg-white/[0.24]" />
+        <Container className="absolute inset-y-0 left-[40px] w-px bg-white/[0.24]" />
         <Container className="absolute top-[100px] bottom-[288px] left-[calc(50%-115px)] w-px bg-white/[0.24]" />
         <Container className="absolute top-[100px] bottom-[288px] left-[calc(50%+115px)] w-px bg-white/[0.24]" />
-        <Container className="absolute inset-y-0 right-[30px] w-px bg-white/[0.24]" />
+        <Container className="absolute inset-y-0 right-[40px] w-px bg-white/[0.24]" />
       </Container>
 
       <Container className="absolute inset-0 mx-auto max-w-[1240px] px-5 md:hidden">
@@ -35,8 +35,8 @@ export default function HeroGridLines() {
         <Container className="absolute inset-x-0 top-[30px] h-px bg-white/[0.24]" />
         <Container className="absolute inset-x-0 bottom-[472px] h-px bg-white/[0.24]" />
         <Container className="absolute inset-x-0 bottom-[30px] h-px bg-white/[0.24]" />
-        <Container className="absolute inset-y-0 left-[20px] w-px bg-white/[0.24]" />
-        <Container className="absolute inset-y-0 right-[20px] w-px bg-white/[0.24]" />
+        <Container className="absolute inset-y-0 left-[16px] w-px bg-white/[0.24]" />
+        <Container className="absolute inset-y-0 right-[16px] w-px bg-white/[0.24]" />
       </Container>
     </Container>
   );

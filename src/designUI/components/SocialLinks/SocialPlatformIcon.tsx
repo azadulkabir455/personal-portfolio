@@ -12,7 +12,7 @@ const icons: Record<FooterSocialPlatform, IconType> = {
   facebook: FaFacebookF,
 };
 
-export default function FooterSocialIcon({
+export default function SocialPlatformIcon({
   platform,
   className,
 }: {

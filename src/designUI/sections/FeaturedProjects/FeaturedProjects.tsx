@@ -68,13 +68,13 @@ export default function FeaturedProjects() {
       <div className="relative w-full">
         {data.projects.map((project, index) => (
           <Fragment key={project.title}>
-            {index > 0 && (
-              <div
-                className="relative ml-[calc(50%-50vw)] h-0 w-screen border-t border-[#242423]/12"
-                style={{ zIndex: data.projects.length + 10 }}
-              />
-            )}
-            <div className="sticky top-0 w-full" style={{ zIndex: index + 1 }}>
+            <div className="sticky top-0 w-full lg:top-[115px]" style={{ zIndex: index + 1 }}>
+              {index > 0 && (
+                <div
+                  className="relative ml-[calc(50%-50vw)] h-0 w-screen border-t border-[#242423]/12"
+                  style={{ zIndex: data.projects.length + 10 }}
+                />
+              )}
               <Container className={clsx("container relative", "px-4", "md:px-[40px]", "lg:px-[10px]")}>
                 <Container className="relative flex w-full flex-col items-start gap-[12px] md:gap-[24px] lg:flex-row lg:justify-between min-[1024px]:max-[1130px]:bg-[#f7f7f7]">
                   <Container
@@ -117,7 +117,7 @@ export default function FeaturedProjects() {
       </div>
 
       <div
-        className="sticky top-0 w-full bg-[#f7f7f7]"
+        className="sticky top-0 w-full bg-[#f7f7f7] lg:top-[115px]"
         style={{ zIndex: data.projects.length + 1 }}
       >
         <Container

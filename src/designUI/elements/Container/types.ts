@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-export type ContainerVariant = "div" | "span" | "section";
+export type ContainerVariant = "div" | "span" | "section" | "header" | "nav";
 
 export interface ContainerProps extends HTMLAttributes<HTMLElement> {
   variant?: ContainerVariant;

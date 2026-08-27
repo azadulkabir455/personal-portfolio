@@ -8,16 +8,16 @@ import Link from "@/designUI/elements/Link/Link";
 import Image from "@/designUI/elements/Image/Image";
 import Button from "@/designUI/elements/Button/Button";
 import { sora } from "@/designUI/utilities/fonts/fonts";
+import SocialLinks from "@/designUI/components/SocialLinks/SocialLinks";
 import { useFooter } from "./function";
 import FooterCTAButton from "./comp/FooterCTAButton";
-import FooterSocialIcon from "./comp/FooterSocialIcon";
 
 export default function Footer() {
   const { data } = useFooter();
 
   return (
-    <Container variant="section" id="footer" className="w-full">
-      <Container className="relative mx-[5px] bg-[#0B0B0A] md:mx-[10px]">
+    <Container variant="section" id="footer" className="w-full pb-[5px] md:pb-[10px] lg:pb-0">
+      <Container className="relative mx-[5px] bg-[#0B0B0A] md:mx-[10px] lg:mx-[10px]">
         <Container className="container relative flex flex-col gap-[10px] px-[16px] md:flex-row md:px-[30px] lg:gap-[30px] lg:px-0">
           <Container className="relative z-0 flex flex-1 flex-col overflow-hidden rounded-[8px] bg-[#FFFFFF0A] px-[16px] py-[20px] md:min-h-[460px] md:px-[30px] md:py-[40px] lg:min-h-[520px] lg:rounded-[12px] lg:px-[40px] lg:pt-[60px] lg:pb-[70px]">
             <Container className="absolute top-0 right-0 bottom-0 z-0 w-3/4 md:right-[-75px] md:w-full">
@@ -162,34 +162,8 @@ export default function Footer() {
 
             <Container className="relative -z-10 -mx-[15px] mt-[20px] border-t border-white/12 md:-mx-[29px] min-[768px]:max-[970px]:mt-[24px] min-[971px]:max-[1024px]:mt-[45px] min-[1025px]:max-[1072px]:mt-[52px] min-[1073px]:mt-[78px] lg:-mx-[39px]" />
 
-            <Container className="flex flex-col gap-[8px] pt-[30px] md:pt-[40px] lg:gap-[12px] lg:pt-[60px]">
-              <Text
-                className={clsx(
-                  sora.className,
-                  "font-medium tracking-[0px] text-[#F7F7F7]",
-                  "text-[12px] leading-[18px]",
-                  "md:text-[16px] md:leading-[28px]",
-                  "lg:text-[18px] lg:leading-[30px]",
-                )}
-              >
-                {data.social.findMeLabel}
-              </Text>
-              <Container className="flex flex-wrap items-center gap-[4px] lg:gap-[8px]">
-                {data.social.links.map((link) => (
-                  <Link
-                    key={link.platform}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#F9F9F91A] text-[#F7F7F7] transition-colors duration-200 hover:bg-white/20 lg:h-[40px] lg:w-[40px]"
-                  >
-                    <FooterSocialIcon
-                      platform={link.platform}
-                      className="h-[14px] w-[14px] lg:h-5 lg:w-5"
-                    />
-                  </Link>
-                ))}
-              </Container>
+            <Container className="pt-[30px] md:pt-[40px] lg:pt-[60px]">
+              <SocialLinks label={data.social.findMeLabel} links={data.social.links} />
             </Container>
           </Container>
         </Container>
@@ -250,7 +224,7 @@ export default function Footer() {
         </Container>
       </Container>
 
-      <Container className="relative mx-[5px] flex items-center justify-center rounded-b-[8px] bg-[#0B0B0A] md:mx-[10px] lg:rounded-b-[12px]">
+      <Container className="relative mx-[5px] flex items-center justify-center rounded-b-[8px] bg-[#0B0B0A] md:mx-[10px] lg:mx-[10px] lg:rounded-b-[12px]">
         <Text
           variant="h2"
           className={clsx(
