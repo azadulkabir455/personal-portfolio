@@ -3,7 +3,6 @@ import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
-import SocialPlatformIcon from "./SocialPlatformIcon";
 import type { SocialLinksProps } from "./types";
 
 export default function SocialLinks({
@@ -29,7 +28,7 @@ export default function SocialLinks({
       <Container className="flex flex-wrap items-center gap-[4px] lg:gap-[8px]">
         {links.map((link) => (
           <Link
-            key={link.platform}
+            key={link.href}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
@@ -38,7 +37,7 @@ export default function SocialLinks({
               iconColorClassName,
             )}
           >
-            <SocialPlatformIcon platform={link.platform} className="h-[14px] w-[14px] lg:h-5 lg:w-5" />
+            <link.icon className="h-[14px] w-[14px] lg:h-5 lg:w-5" />
           </Link>
         ))}
       </Container>

@@ -32,7 +32,7 @@ const stickyGradientClassName =
 
 const barBackgroundByMode: Record<TopBarMode, string> = {
   transparent: "bg-transparent",
-  sticky: clsx(stickyGradientClassName, "border border-white/24 shadow-[0_10px_30px_rgba(15,42,111,0.35)]"),
+  sticky: clsx(stickyGradientClassName, "border border-white/24"),
   hidden: clsx(stickyGradientClassName, "border border-white/24"),
   menu: clsx(stickyGradientClassName, "border border-white/24"),
 };

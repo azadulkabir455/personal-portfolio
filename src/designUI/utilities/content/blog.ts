@@ -3,6 +3,7 @@ export type BlogPostType = "native" | "external";
 export interface BlogPost {
   type: BlogPostType;
   category: string;
+  tags?: string[];
   title: string;
   excerpt: string;
   publishedDate: string;

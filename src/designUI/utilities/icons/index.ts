@@ -9,4 +9,7 @@ export { default as MailIcon } from "./icon/MailIcon";
 export { default as HamburgerIcon } from "./icon/HamburgerIcon";
 export { default as CloseIcon } from "./icon/CloseIcon";
 export { default as WhatsAppIcon } from "./icon/WhatsAppIcon";
+export { default as ChevronDownIcon } from "./icon/ChevronDownIcon";
+export { default as CrossCircleIcon } from "./icon/CrossCircleIcon";
+export { default as SortIcon } from "./icon/SortIcon";
 export * from "./types";

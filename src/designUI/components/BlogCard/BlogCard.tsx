@@ -16,19 +16,17 @@ export default function BlogCard({ type, category, title, image, href, ctaLabel 
       rel={type === "external" ? "noopener noreferrer" : undefined}
       className={clsx(
         "group flex w-full flex-col md:h-full",
-        "rounded-[12px] border border-[#2424231F] bg-white",
+        "rounded-[12px] border border-[#2424231F]",
         "pt-[12px] pl-[12px] pb-[20px]",
         "md:pt-[16px] md:pl-[16px] md:pb-[20px]",
         "lg:rounded-[16px] lg:pt-[24px] lg:pl-[24px] lg:pb-[30px]",
       )}
+      style={{
+        background:
+          "radial-gradient(72.72% 47.64% at 56.17% 26.75%, #388EFF 0%, rgba(56, 142, 255, 0) 100%), #FFFFFF",
+      }}
     >
-      <Container
-        className="relative h-[147px] w-full overflow-hidden rounded-l-[12px] md:h-[121px] md:rounded-l-[8px] lg:h-[252px] lg:rounded-l-[16px]"
-        style={{
-          background:
-            "radial-gradient(72.72% 47.64% at 56.17% 26.75%, #388EFF 0%, rgba(56, 142, 255, 0) 100%)",
-        }}
-      >
+      <Container className="relative h-[147px] w-full overflow-hidden rounded-l-[12px] md:h-[121px] md:rounded-l-[8px] lg:h-[252px] lg:rounded-l-[16px]">
         <Image
           src={image}
           alt={title}

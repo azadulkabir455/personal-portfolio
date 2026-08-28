@@ -1,4 +1,4 @@
-import { Sora, Poppins } from "next/font/google";
+import { Sora, Poppins, Montserrat } from "next/font/google";
 
 export const sora = Sora({
   subsets: ["latin"],
@@ -8,4 +8,9 @@ export const sora = Sora({
 export const poppins = Poppins({
   subsets: ["latin"],
   weight: ["600"],
+});
+
+export const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400"],
 });

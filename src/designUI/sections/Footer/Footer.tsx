@@ -17,7 +17,7 @@ export default function Footer() {
 
   return (
     <Container variant="section" id="footer" className="w-full pb-[5px] md:pb-[10px] lg:pb-0">
-      <Container className="relative mx-[5px] bg-[#0B0B0A] md:mx-[10px] lg:mx-[10px]">
+      <Container className="relative mx-[5px] bg-[#0B0B0A] pt-[30px] md:mx-[10px] lg:mx-[10px]">
         <Container className="container relative flex flex-col gap-[10px] px-[16px] md:flex-row md:px-[30px] lg:gap-[30px] lg:px-0">
           <Container className="relative z-0 flex flex-1 flex-col overflow-hidden rounded-[8px] bg-[#FFFFFF0A] px-[16px] py-[20px] md:min-h-[460px] md:px-[30px] md:py-[40px] lg:min-h-[520px] lg:rounded-[12px] lg:px-[40px] lg:pt-[60px] lg:pb-[70px]">
             <Container className="absolute top-0 right-0 bottom-0 z-0 w-3/4 md:right-[-75px] md:w-full">

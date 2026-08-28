@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useSectionContent } from "@/customHooks/useSectionContent";
 import { topBarContent } from "@/designUI/utilities/content/topbar";
 import type { TopBarMode } from "./types";
@@ -14,6 +15,8 @@ const TABLET_PAGE_MARGIN = 20;
 const TABLET_BREAKPOINT_QUERY = "(min-width: 768px)";
 
 export function useTopBar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const { data, isLoading } = useSectionContent("topbar", topBarContent);
   const [isOpen, setIsOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -72,7 +75,15 @@ export function useTopBar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  const mode: TopBarMode = isOpen ? "menu" : isAtTop ? "transparent" : isVisible ? "sticky" : "hidden";
+  const mode: TopBarMode = isOpen
+    ? "menu"
+    : isAtTop
+      ? isHome
+        ? "transparent"
+        : "sticky"
+      : isVisible
+        ? "sticky"
+        : "hidden";
   const menuHeight = Math.max(viewportHeight - HEADER_ROW_HEIGHT - PAGE_MARGIN, 0);
   const mobileMenuHeight = Math.max(
     viewportHeight - (isTabletUp ? TABLET_PAGE_MARGIN : MOBILE_PAGE_MARGIN),

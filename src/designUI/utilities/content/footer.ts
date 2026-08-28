@@ -1,14 +1,8 @@
-export type FooterSocialPlatform =
-  | "linkedin"
-  | "behance"
-  | "dribbble"
-  | "instagram"
-  | "x"
-  | "whatsapp"
-  | "facebook";
+import { FaLinkedinIn, FaBehance, FaDribbble, FaInstagram, FaXTwitter, FaWhatsapp, FaFacebookF } from "react-icons/fa6";
+import type { IconType } from "react-icons";
 
 export interface FooterSocialLink {
-  platform: FooterSocialPlatform;
+  icon: IconType;
   href: string;
 }
 
@@ -72,13 +66,13 @@ export const footerContent: FooterContent = {
       "Whether you're looking for a UI/UX designer, feel free to connect with me through any of the platforms below.",
     findMeLabel: "Find Me Online",
     links: [
-      { platform: "linkedin", href: "https://linkedin.com" },
-      { platform: "behance", href: "https://behance.net" },
-      { platform: "dribbble", href: "https://dribbble.com" },
-      { platform: "instagram", href: "https://instagram.com" },
-      { platform: "x", href: "https://x.com" },
-      { platform: "whatsapp", href: "https://wa.me" },
-      { platform: "facebook", href: "https://facebook.com" },
+      { icon: FaLinkedinIn, href: "https://linkedin.com" },
+      { icon: FaBehance, href: "https://behance.net" },
+      { icon: FaDribbble, href: "https://dribbble.com" },
+      { icon: FaInstagram, href: "https://instagram.com" },
+      { icon: FaXTwitter, href: "https://x.com" },
+      { icon: FaWhatsapp, href: "https://wa.me" },
+      { icon: FaFacebookF, href: "https://facebook.com" },
     ],
   },
   legal: {
