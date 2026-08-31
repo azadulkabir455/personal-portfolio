@@ -24,7 +24,7 @@ export default function CaseStudy() {
       </Container>
       <Container className="absolute inset-0 mx-[5px] overflow-hidden md:mx-[10px]">
         <CaseStudyBottomShape />
-        <CaseStudyComp />
+        <CaseStudyComp studyImage={activeSlide.studyImage} />
       </Container>
     </Container>
   );

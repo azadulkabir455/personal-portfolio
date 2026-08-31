@@ -11,3 +11,7 @@ export interface CaseStudyArrowsProps {
   canGoPrevious: boolean;
   canGoNext: boolean;
 }
+
+export interface CaseStudyCompProps {
+  studyImage: string;
+}
