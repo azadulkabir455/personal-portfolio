@@ -19,9 +19,9 @@ export const blogListContent: BlogListContent = {
     {
       id: "user-experience",
       label: "User Experience",
-      count: 4,
+      count: 3,
       subCategories: [
-        { id: "sub-category-1", label: "Research", count: 2 },
+        { id: "sub-category-1", label: "Research", count: 1 },
         { id: "sub-category-2", label: "Usability Testing", count: 2 },
       ],
     },
@@ -76,18 +76,6 @@ export const blogListContent: BlogListContent = {
       image: "/images/blog/blog.png",
       href: "/blog/design-systems-that-scale",
       ctaLabel: "View Details",
-    },
-    {
-      type: "external",
-      category: "User Experience",
-      tags: ["Ux Theory"],
-      title: "Redesigning A Flight Booking Flow — Full Breakdown On Medium",
-      excerpt:
-        "The complete process behind the ShareTrip flight booking redesign, published as a long-form case study on Medium.",
-      publishedDate: "April 27, 2026",
-      image: "/images/blog/blog.png",
-      href: "https://medium.com/@example/flight-booking-redesign",
-      ctaLabel: "Read On Medium",
     },
     {
       type: "native",

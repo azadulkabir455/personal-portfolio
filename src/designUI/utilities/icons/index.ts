@@ -7,6 +7,7 @@ export { default as TrendingUpIcon } from "./icon/TrendingUpIcon";
 export { default as DownloadIcon } from "./icon/DownloadIcon";
 export { default as MailIcon } from "./icon/MailIcon";
 export { default as HamburgerIcon } from "./icon/HamburgerIcon";
+export { default as FilterIcon } from "./icon/FilterIcon";
 export { default as CloseIcon } from "./icon/CloseIcon";
 export { default as WhatsAppIcon } from "./icon/WhatsAppIcon";
 export { default as ChevronDownIcon } from "./icon/ChevronDownIcon";

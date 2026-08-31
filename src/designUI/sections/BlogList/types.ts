@@ -12,6 +12,7 @@ export interface CategorySidebarProps {
   activeSubCategories: string[];
   onToggleSubCategory: (id: string) => void;
   onToggleExpand: (id: string) => void;
+  onClose?: () => void;
 }
 
 export interface BlogToolbarProps {
@@ -23,4 +24,5 @@ export interface BlogToolbarProps {
   resultsCount: number;
   sortDirection: BlogSortDirection;
   onToggleSortDirection: () => void;
+  onOpenFilter: () => void;
 }

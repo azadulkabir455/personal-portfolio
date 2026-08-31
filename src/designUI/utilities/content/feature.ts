@@ -9,8 +9,8 @@ export interface FeatureContent {
 
 export const featureContent: FeatureContent = {
   links: [
-    { label: "My Story", href: "#" },
-    { label: "My Path To Mastery In UI/UX Design", href: "#" },
-    { label: "Featured Projects", href: "#" },
+    { label: "My Story", href: "#story" },
+    { label: "My Path To Mastery In UI/UX Design", href: "#journey" },
+    { label: "Featured Projects", href: "#featured-projects" },
   ],
 };

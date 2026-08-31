@@ -22,7 +22,7 @@ export default function CaseStudySlide({
       <Image src={images.tab} alt={title} fill priority className="hidden object-cover object-top md:block lg:hidden" />
       <Image src={images.desktop} alt={title} fill priority className="hidden object-cover object-top lg:block" />
 
-      <Container className="container relative z-10 mx-auto flex w-full flex-col px-[16px] pt-[20px] pb-[30px] md:px-[40px] md:pt-[60px] md:pb-[40px] lg:px-[10px] lg:pt-[70px] lg:pb-[30px]">
+      <Container className="container relative z-30 mx-auto flex w-full flex-col px-[16px] pt-[20px] pb-[30px] md:px-[40px] md:pt-[60px] md:pb-[40px] lg:px-[10px] lg:pt-[70px] lg:pb-[30px]">
         <Container className="flex max-w-[calc(80%+20px)] flex-col items-start md:max-w-[360px] lg:max-w-[calc(38%+20px)]">
           <Container className="flex flex-wrap items-baseline gap-x-[6px]">
             <Text

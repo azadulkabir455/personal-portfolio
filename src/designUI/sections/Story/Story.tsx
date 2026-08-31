@@ -18,7 +18,7 @@ export default function Story() {
     <Container
       variant="section"
       id="story"
-      className="container relative px-0 py-[40px] md:px-0 lg:px-[10px]"
+      className="container relative px-0 py-[40px] md:px-0 lg:scroll-mt-[140px] lg:px-[10px]"
     >
       <Container className="relative flex flex-col gap-0">
         <Container className="relative mb-0 flex flex-col gap-0 md:flex-row md:items-start md:justify-between md:gap-[20px]">

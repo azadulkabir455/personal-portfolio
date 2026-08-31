@@ -20,7 +20,7 @@ export default function FeaturedProjects() {
   const { data } = useFeaturedProjects();
 
   return (
-    <Container variant="section" id="featured-projects" className="relative w-full">
+    <Container variant="section" id="featured-projects" className="relative w-full lg:scroll-mt-[140px]">
       <div className="relative w-full bg-[#f7f7f7]">
         <Container
           className={clsx(

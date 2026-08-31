@@ -23,7 +23,7 @@ export default function Journey() {
   const { data } = useJourney();
 
   return (
-    <Container variant="section" id="journey" className="relative w-full">
+    <Container variant="section" id="journey" className="relative w-full lg:scroll-mt-[140px]">
       <JourneyBackground />
 
       <Container

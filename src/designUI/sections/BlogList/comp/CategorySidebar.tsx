@@ -3,7 +3,7 @@ import { FaCheck } from "react-icons/fa6";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import { montserrat } from "@/designUI/utilities/fonts/fonts";
-import { ChevronDownIcon } from "@/designUI/utilities/icons";
+import { ChevronDownIcon, CloseIcon } from "@/designUI/utilities/icons";
 import type { CategorySidebarProps } from "../types";
 
 const labelClassName =
@@ -31,11 +31,31 @@ export default function CategorySidebar({
   activeSubCategories,
   onToggleSubCategory,
   onToggleExpand,
+  onClose,
 }: CategorySidebarProps) {
   const totalCount = categories.reduce((sum, category) => sum + category.count, 0);
 
   return (
-    <Container className="flex w-full flex-col rounded-[4px] border border-[#D7D7D7] bg-[#FFFFFF] px-[12px] py-[16px] md:w-[220px] md:shrink-0 lg:w-[280px]">
+    <Container
+      className={clsx(
+        "flex w-full flex-col rounded-[4px] border border-[#D7D7D7] bg-[#FFFFFF] px-[12px] py-[16px] min-[900px]:w-[220px] min-[900px]:shrink-0 lg:w-[280px]",
+        onClose && "h-full overflow-y-auto shadow-[0_20px_50px_rgba(0,0,0,0.25)]",
+      )}
+    >
+      {onClose && (
+        <Container className="mb-[15px] flex items-center justify-between gap-[8px] border-b-[1.5px] border-[#D7D7D7] pb-[15px]">
+          <Text className={labelClassName}>Filter</Text>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close filter"
+            className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full bg-[#EAF2FF]"
+          >
+            <CloseIcon width={10} height={10} />
+          </button>
+        </Container>
+      )}
+
       <Container className="flex items-center justify-between gap-[8px] border-b-[1.5px] border-[#D7D7D7] py-[15px] pt-0">
         <label className="flex flex-1 cursor-pointer items-center gap-[12px]">
           <Container className={checkboxWrapperClassName}>

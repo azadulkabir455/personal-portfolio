@@ -4,6 +4,8 @@ import Container from "@/designUI/elements/Container/Container";
 import { useCaseStudy } from "./function";
 import CaseStudySlide from "./comp/CaseStudySlide";
 import CaseStudyArrows from "./comp/CaseStudyArrows";
+import CaseStudyBottomShape from "./comp/CaseStudyBottomShape";
+import CaseStudyComp from "./comp/CaseStudyComp";
 
 export default function CaseStudy() {
   const { activeSlide, goToPrevious, goToNext, canGoPrevious, canGoNext } = useCaseStudy();
@@ -19,6 +21,10 @@ export default function CaseStudy() {
             canGoNext={canGoNext}
           />
         </CaseStudySlide>
+      </Container>
+      <Container className="absolute inset-0 mx-[5px] overflow-hidden md:mx-[10px]">
+        <CaseStudyBottomShape />
+        <CaseStudyComp />
       </Container>
     </Container>
   );
