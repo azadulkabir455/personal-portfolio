@@ -19,8 +19,8 @@ export const topBarContent: TopBarContent = {
   resumeLabel: "My Resume",
   resumeHref: "/resume.pdf",
   navLinks: [
-    { label: "About Me", href: "/#about" },
-    { label: "My Service", href: "/#services" },
-    { label: "Blog", href: "/blog" },
+    { label: "Home", href: "/" },
+    { label: "Projects", href: "/projects" },
+    { label: "Blogs", href: "/blog" },
   ],
 };

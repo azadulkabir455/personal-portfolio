@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Container from "@/designUI/elements/Container/Container";
 
-const lineClassName = "absolute inset-y-0 w-px bg-[#242423]/20";
+const lineClassName = "absolute inset-y-0 w-px bg-[#2424230F]";
 
 export default function JourneyGridLines() {
   return (

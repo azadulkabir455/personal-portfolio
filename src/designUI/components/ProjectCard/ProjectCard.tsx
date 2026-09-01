@@ -18,7 +18,7 @@ export default function ProjectCard({
   return (
     <Container
       className={clsx(
-        "flex w-full flex-col-reverse gap-[16px] md:flex-row md:items-center md:justify-between",
+        "flex w-full flex-col-reverse items-center gap-[16px] md:flex-row md:justify-between",
         reverse && "md:flex-row-reverse",
       )}
     >

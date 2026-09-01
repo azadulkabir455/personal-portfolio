@@ -8,6 +8,7 @@ import CaseStudy from "@/designUI/sections/CaseStudy/CaseStudy";
 import Services from "@/designUI/sections/Services/Services";
 import Blog from "@/designUI/sections/Blog/Blog";
 import Footer from "@/designUI/sections/Footer/Footer";
+import ScrollSpy from "@/designUI/sections/ScrollSpy/ScrollSpy";
 
 export default function HomePage() {
   return (
@@ -24,6 +25,7 @@ export default function HomePage() {
         <Blog />
       </main>
       <Footer />
+      <ScrollSpy />
     </>
   );
 }

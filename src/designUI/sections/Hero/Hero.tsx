@@ -24,7 +24,7 @@ export default function Hero() {
   }
 
   return (
-    <Container className="p-[5px] md:p-[10px]">
+    <Container id="hero" className="p-[5px] md:p-[10px]">
       <Container className="relative overflow-hidden rounded-xl">
         <Image
           src={data.backgroundUrlMobile}

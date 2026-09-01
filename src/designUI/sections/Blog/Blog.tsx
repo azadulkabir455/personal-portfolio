@@ -7,6 +7,7 @@ import Image from "@/designUI/elements/Image/Image";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import BlogCard from "@/designUI/components/BlogCard/BlogCard";
 import { useBlog } from "./function";
+import type { BlogProps } from "./types";
 
 function BlogNumber({ index }: { index: number }) {
   return (
@@ -26,8 +27,10 @@ function BlogNumber({ index }: { index: number }) {
   );
 }
 
-export default function Blog() {
+export default function Blog({ intro, posts }: BlogProps) {
   const { data } = useBlog();
+  const resolvedIntro = intro ?? data.intro;
+  const resolvedPosts = posts ?? data.posts;
 
   return (
     <Container variant="section" id="blog" className="w-full">
@@ -59,20 +62,22 @@ export default function Blog() {
                   "md:px-[16px] md:text-[12px] md:leading-[18px]",
                 )}
               >
-                {data.intro.badge}
+                {resolvedIntro.badge}
               </Text>
             </Container>
 
-            <Text
-              className={clsx(
-                sora.className,
-                "block flex-1 align-middle font-medium tracking-[0px] text-[#F7F7F7]/70 lg:max-w-[740px]",
-                "text-[12px] leading-[20px] indent-[55px]",
-                "md:text-[16px] md:leading-[26px]",
-              )}
-            >
-              {data.intro.description}
-            </Text>
+            {resolvedIntro.description && (
+              <Text
+                className={clsx(
+                  sora.className,
+                  "block flex-1 align-middle font-medium tracking-[0px] text-[#F7F7F7]/70 lg:max-w-[740px]",
+                  "text-[12px] leading-[20px] indent-[55px]",
+                  "md:text-[16px] md:leading-[26px]",
+                )}
+              >
+                {resolvedIntro.description}
+              </Text>
+            )}
           </Container>
         </Container>
 
@@ -87,7 +92,7 @@ export default function Blog() {
           )}
         >
           <Container className="grid grid-cols-1 gap-[8px] md:grid-cols-3 md:gap-[16px] lg:gap-[30px]">
-            {data.posts.map((post, index) => (
+            {resolvedPosts.map((post, index) => (
               <Container key={post.title} className="relative md:flex md:h-full md:flex-col">
                 <Container className="relative z-10 md:flex-1">
                   <BlogCard {...post} />
