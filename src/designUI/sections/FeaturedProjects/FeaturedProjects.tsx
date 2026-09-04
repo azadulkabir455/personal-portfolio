@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Button from "@/designUI/elements/Button/Button";
+import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import ProjectCard from "@/designUI/components/ProjectCard/ProjectCard";
@@ -128,9 +129,11 @@ export default function FeaturedProjects() {
             "lg:px-[10px] lg:py-[60px]",
           )}
         >
-          <Button icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
-            {data.cta.label}
-          </Button>
+          <Link href={data.cta.link}>
+            <Button as="span" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
+              {data.cta.label}
+            </Button>
+          </Link>
         </Container>
       </div>
     </Container>

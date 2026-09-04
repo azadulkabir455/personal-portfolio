@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Link from "@/designUI/elements/Link/Link";
+import Icon from "@/designUI/elements/Icon/Icon";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import type { SocialLinksProps } from "./types";
 
@@ -37,7 +38,7 @@ export default function SocialLinks({
               iconColorClassName,
             )}
           >
-            <link.icon className="h-[14px] w-[14px] lg:h-5 lg:w-5" />
+            <Icon name={link.icon.name} width="50%" height="50%" />
           </Link>
         ))}
       </Container>

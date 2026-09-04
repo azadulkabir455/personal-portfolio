@@ -1,6 +1,7 @@
 export interface TopBarNavLink {
   label: string;
   href: string;
+  enabled: boolean;
 }
 
 export interface TopBarContent {
@@ -19,8 +20,8 @@ export const topBarContent: TopBarContent = {
   resumeLabel: "My Resume",
   resumeHref: "/resume.pdf",
   navLinks: [
-    { label: "Home", href: "/" },
-    { label: "Projects", href: "/projects" },
-    { label: "Blogs", href: "/blog" },
+    { label: "Home", href: "/", enabled: true },
+    { label: "Projects", href: "/projects", enabled: true },
+    { label: "Blogs", href: "/blog", enabled: true },
   ],
 };

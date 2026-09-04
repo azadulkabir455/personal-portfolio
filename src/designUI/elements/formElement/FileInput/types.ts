@@ -4,5 +4,6 @@ export interface FileInputProps {
   value?: string | File | null;
   onChange: (file: File | null) => void;
   accept?: string;
+  hint?: string;
   containerClassName?: string;
 }

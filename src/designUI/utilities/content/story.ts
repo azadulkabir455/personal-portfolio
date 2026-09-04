@@ -19,8 +19,8 @@ export interface StoryStat {
 
 export interface StoryContent {
   title: string;
-  paragraph: string;
-  impactHeading: string;
+  description: string;
+  clientLogosHeading: string;
   clientLogos: StoryClientLogo[];
   processSteps: StoryProcessStep[];
   statsImageUrl: string;
@@ -29,9 +29,8 @@ export interface StoryContent {
 
 export const storyContent: StoryContent = {
   title: "My Story",
-  paragraph:
-    "Over the years, I've worked with startups, agencies, and product teams to improve usability, increase engagement, and simplify digital experiences across web and mobile platforms. My expertise lies primarily in product design and UI/UX, including mobile application design for iOS and Android.",
-  impactHeading: "Designing Products That Create Measurable Impact",
+  description:"Over the years, I've worked with startups, agencies, and product teams to improve usability, increase engagement, and simplify digital experiences across web and mobile platforms. My expertise lies primarily in product design and UI/UX, including mobile application design for iOS and Android.",
+  clientLogosHeading: "Designing Products That Create Measurable Impact",
   clientLogos: [
     { src: "/images/story/officeLogo/gp.png", alt: "GP", height: 31 },
     { src: "/images/story/officeLogo/robi.png", alt: "Robi", height: 31 },

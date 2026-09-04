@@ -53,6 +53,8 @@ export default function TopBar() {
 
   if (pathname?.startsWith("/admin")) return null;
 
+  const visibleNavLinks = data.navLinks.filter((link) => link.enabled);
+
   return (
     <>
       <Container
@@ -105,7 +107,7 @@ export default function TopBar() {
                   className="relative z-10 flex w-full flex-col overflow-hidden"
                 >
                   <Container className="no-scrollbar mx-auto flex w-full max-w-[1240px] flex-1 flex-col overflow-y-auto">
-                    <TopBarNav navLinks={data.navLinks} onNavigate={closeMenu} />
+                    <TopBarNav navLinks={visibleNavLinks} onNavigate={closeMenu} />
                   </Container>
 
                   <TopBarSocialFooter />
@@ -161,7 +163,7 @@ export default function TopBar() {
                 <Container className="pointer-events-none absolute inset-y-0 right-[15px] z-0 w-px bg-white/[0.24] md:right-[40px]" />
 
                 <Container className="no-scrollbar relative z-10 flex w-full flex-1 flex-col justify-between overflow-y-auto">
-                  <TopBarNav navLinks={data.navLinks} onNavigate={closeMenu} />
+                  <TopBarNav navLinks={visibleNavLinks} onNavigate={closeMenu} />
 
                   <Container className="flex flex-col gap-[20px] px-[31px] pb-[24px] md:px-[70px]">
                     <SocialLinks label={footerContent.social.findMeLabel} links={footerContent.social.links} />

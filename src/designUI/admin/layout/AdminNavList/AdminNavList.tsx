@@ -11,7 +11,7 @@ import { useAdminNavList } from "./function";
 import type { AdminNavListProps } from "./types";
 
 const navRowClassName =
-  "flex items-center gap-3 rounded-[10px] px-4 py-3 font-sans text-[14px] font-medium transition-colors duration-200";
+  "flex cursor-pointer items-center gap-3 rounded-[10px] px-4 py-3 font-sans text-[14px] font-medium transition-colors duration-200";
 
 export default function AdminNavList({ onNavigate, className = "" }: AdminNavListProps) {
   const { openLabel, toggle, isActive } = useAdminNavList(adminNav);
@@ -68,7 +68,12 @@ export default function AdminNavList({ onNavigate, className = "" }: AdminNavLis
                       const isLast = index === (item.children?.length ?? 0) - 1;
 
                       return (
-                        <Link key={child.href} href={child.href} onClick={onNavigate} className="relative py-2">
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={onNavigate}
+                          className="relative cursor-pointer py-2"
+                        >
                           <span className="absolute top-0 -left-5 h-1/2 w-4 rounded-bl-[6px] border-b border-l border-[#E4E4E4]" />
                           {!isLast && <span className="absolute top-1/2 -left-5 h-1/2 w-px bg-[#E4E4E4]" />}
                           <span

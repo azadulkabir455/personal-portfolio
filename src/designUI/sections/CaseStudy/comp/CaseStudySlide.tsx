@@ -3,6 +3,7 @@ import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Image from "@/designUI/elements/Image/Image";
 import Button from "@/designUI/elements/Button/Button";
+import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import type { CaseStudySlideProps } from "../types";
@@ -13,6 +14,7 @@ export default function CaseStudySlide({
   title,
   description,
   ctaLabel,
+  ctaLink,
   images,
   children,
 }: CaseStudySlideProps) {
@@ -73,7 +75,11 @@ export default function CaseStudySlide({
         </Container>
 
         <Container className="mt-[20px] flex max-w-[80%] justify-start md:mt-[10px] md:max-w-[48%] lg:mt-[80px] lg:max-w-[38%]">
-          <Button icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>{ctaLabel}</Button>
+          <Link href={ctaLink}>
+            <Button as="span" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
+              {ctaLabel}
+            </Button>
+          </Link>
         </Container>
 
         <Container className="mt-[150px] flex w-full justify-center md:mt-0 md:pt-[160px] lg:mt-[135px] lg:pt-0">

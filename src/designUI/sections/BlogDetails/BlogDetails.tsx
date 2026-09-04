@@ -94,7 +94,7 @@ export default function BlogDetails() {
         </Container>
       </Container>
 
-      <Blog intro={{ badge: "Others Post", description: "" }} posts={relatedPosts} />
+      <Blog intro={data.othersPostIntro} posts={relatedPosts} />
     </>
   );
 }

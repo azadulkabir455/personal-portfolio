@@ -1,13 +1,14 @@
+import type { BlogIntro } from "./blog";
+
 export interface BlogDetailsContent {
   backLabel: string;
   backHref: string;
   title: string;
   subtitle: string;
-  publishedDate: string;
-  readTime: string;
   image: string;
   content: string;
   tags: string[];
+  othersPostIntro: BlogIntro;
 }
 
 export const blogDetailsContent: BlogDetailsContent = {
@@ -16,8 +17,6 @@ export const blogDetailsContent: BlogDetailsContent = {
   title: "The Subtle Power Of Micro-Interactions In Art Auction Platforms",
   subtitle:
     "Why the smallest details in a bidding flow often decide whether a buyer trusts the platform enough to place a bid.",
-  publishedDate: "June 12th, 2026",
-  readTime: "6 min read",
   image: "/images/blog/blog.png",
   content: `
     <h1>Demo Heading Level 1</h1>
@@ -40,4 +39,8 @@ export const blogDetailsContent: BlogDetailsContent = {
     <p>Treat micro-interactions as a first-class part of the design system, not a polish pass at the end. On platforms where trust is the product, they are often the difference between a user who bids again and one who never returns.</p>
   `,
   tags: ["UX Research", "Micro-Interactions", "Auction Platforms", "Design Systems"],
+  othersPostIntro: {
+    badge: "Others Post",
+    description: "",
+  },
 };

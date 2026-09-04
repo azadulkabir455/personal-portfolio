@@ -20,14 +20,16 @@ export default function Switch({
         className,
       )}
     >
-      {label && <span className="font-sans text-[13px] font-medium text-[#171717]">{label}</span>}
+      {label && (
+        <span className="font-sans text-[12px] font-medium text-[#171717] lg:text-[13px]">
+          {label}
+        </span>
+      )}
 
       <span
         className={clsx(
           "relative inline-flex h-[26px] w-[46px] shrink-0 items-center rounded-full transition-colors duration-200",
-          checked
-            ? "bg-[radial-gradient(914.34%_212.5%_at_44.16%_14.42%,#242423_0%,#8A8A86_100%)]"
-            : "bg-[#E4E4E4]",
+          checked ? "bg-[#388EFF]" : "bg-[#E4E4E4]",
         )}
       >
         <span

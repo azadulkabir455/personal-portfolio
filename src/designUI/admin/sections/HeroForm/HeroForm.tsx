@@ -101,7 +101,7 @@ export default function HeroForm() {
               type="button"
               onClick={() => remove(index)}
               aria-label="Remove social link"
-              className="col-start-2 row-start-1 flex h-[52px] w-[52px] items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8] md:col-start-3"
+              className="col-start-2 row-start-1 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8] md:col-start-3"
             >
               <Icon name="FaTrashAlt" width={16} height={16} />
             </button>

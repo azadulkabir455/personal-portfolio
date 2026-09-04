@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Button from "@/designUI/elements/Button/Button";
+import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import { useJourney } from "./function";
@@ -73,9 +74,14 @@ export default function Journey() {
                 </span>
               </Text>
 
-              <Button icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
-                {data.intro.ctaLabel}
-              </Button>
+              <Link href={data.intro.ctaLink} className="self-start">
+                <Button
+                  as="span"
+                  icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}
+                >
+                  {data.intro.ctaLabel}
+                </Button>
+              </Link>
             </Container>
           </Container>
 

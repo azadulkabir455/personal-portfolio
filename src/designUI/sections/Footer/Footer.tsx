@@ -177,7 +177,14 @@ export default function Footer() {
               "lg:text-[14px] lg:leading-[18px] lg:tracking-[0px]",
             )}
           >
-            {data.legal.copyright}
+            Copyright © {new Date().getFullYear()}{" "}
+            <Link
+              href={data.legal.copyrightNameHref}
+              className="transition-colors duration-200 hover:text-[#388EFF]"
+            >
+              {data.legal.copyrightName}
+            </Link>{" "}
+            | All Rights Reserved
           </Text>
 
           <Container className="flex items-center gap-[16px] lg:gap-[24px]">

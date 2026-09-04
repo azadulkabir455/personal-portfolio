@@ -11,7 +11,7 @@ export const landingSections: LandingSectionItem[] = [
   { key: "journey", label: "Journey", href: "/admin/landing/journey" },
   { key: "featuredProjects", label: "Featured Projects", href: "/admin/landing/featured-projects" },
   { key: "recentDesign", label: "Recent Design", href: "/admin/landing/recent-design" },
-  { key: "caseStudy", label: "Case Study", href: "/admin/landing/case-study" },
   { key: "services", label: "Services", href: "/admin/landing/services" },
+  { key: "caseStudy", label: "Case Study", href: "/admin/landing/case-study" },
   { key: "blog", label: "Blog", href: "/admin/landing/blog" },
 ];

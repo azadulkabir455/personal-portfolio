@@ -1,8 +1,7 @@
-import { FaLinkedinIn, FaBehance, FaDribbble, FaInstagram, FaXTwitter, FaWhatsapp, FaFacebookF } from "react-icons/fa6";
-import type { IconType } from "react-icons";
+import type { SocialIconConfig } from "@/designUI/components/SocialIcon/types";
 
 export interface FooterSocialLink {
-  icon: IconType;
+  icon: SocialIconConfig;
   href: string;
 }
 
@@ -33,7 +32,8 @@ export interface FooterSocial {
 }
 
 export interface FooterLegal {
-  copyright: string;
+  copyrightName: string;
+  copyrightNameHref: string;
   links: FooterLegalLink[];
   developedByLabel: string;
   developedByName: string;
@@ -66,17 +66,18 @@ export const footerContent: FooterContent = {
       "Whether you're looking for a UI/UX designer, feel free to connect with me through any of the platforms below.",
     findMeLabel: "Find Me Online",
     links: [
-      { icon: FaLinkedinIn, href: "https://linkedin.com" },
-      { icon: FaBehance, href: "https://behance.net" },
-      { icon: FaDribbble, href: "https://dribbble.com" },
-      { icon: FaInstagram, href: "https://instagram.com" },
-      { icon: FaXTwitter, href: "https://x.com" },
-      { icon: FaWhatsapp, href: "https://wa.me" },
-      { icon: FaFacebookF, href: "https://facebook.com" },
+      { icon: { name: "FaLinkedinIn" }, href: "https://linkedin.com" },
+      { icon: { name: "FaBehance" }, href: "https://behance.net" },
+      { icon: { name: "FaDribbble" }, href: "https://dribbble.com" },
+      { icon: { name: "FaInstagram" }, href: "https://instagram.com" },
+      { icon: { name: "FaTwitter" }, href: "https://x.com" },
+      { icon: { name: "FaWhatsapp" }, href: "https://wa.me" },
+      { icon: { name: "FaFacebookF" }, href: "https://facebook.com" },
     ],
   },
   legal: {
-    copyright: "Copyright © 2026 Fatema Tuz Sultana | All Rights Reserved",
+    copyrightName: "Fatema Tuz Sultana",
+    copyrightNameHref: "/",
     links: [
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms & Conditions", href: "/terms-and-conditions" },

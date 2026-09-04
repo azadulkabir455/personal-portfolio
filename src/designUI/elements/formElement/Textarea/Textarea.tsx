@@ -17,7 +17,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textare
           placeholder=" "
           aria-invalid={Boolean(error)}
           className={clsx(
-            "peer w-full resize-none rounded-[10px] border bg-white px-4 pt-6 pb-2 font-sans text-[14px] text-[#171717] outline-none transition-colors duration-200",
+            "peer w-full resize-none rounded-[10px] border bg-white px-3 pt-5 pb-2 font-sans text-[13px] text-[#171717] outline-none transition-colors duration-200 lg:px-4 lg:pt-6 lg:text-[14px]",
             error ? "border-[#E5484D]" : "border-[#E4E4E4] focus:border-[#242423]",
             className,
           )}
@@ -26,10 +26,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textare
         <label
           htmlFor={id}
           className={clsx(
-            "pointer-events-none absolute left-4 font-sans text-[#8A8A86] transition-all duration-200",
-            "top-2 text-[11px]",
-            "peer-placeholder-shown:top-4 peer-placeholder-shown:text-[14px]",
-            "peer-focus:top-2 peer-focus:text-[11px]",
+            "pointer-events-none absolute left-3 font-sans text-[#8A8A86] transition-all duration-200 lg:left-4",
+            "top-2 text-[10px] lg:text-[11px]",
+            "peer-placeholder-shown:top-4 peer-placeholder-shown:text-[13px] lg:peer-placeholder-shown:text-[14px]",
+            "peer-focus:top-2 peer-focus:text-[10px] lg:peer-focus:text-[11px]",
           )}
         >
           {label}

@@ -60,7 +60,7 @@ export default function Story() {
                 "lg:text-[16px] lg:leading-[26px]",
               )}
             >
-              {data.paragraph}
+              {data.description}
             </Text>
 
             <Container className="flex flex-col gap-0">
@@ -71,7 +71,7 @@ export default function Story() {
                   "md:text-[14px] md:leading-[22px]",
                 )}
               >
-                {data.impactHeading}
+                {data.clientLogosHeading}
               </Text>
               <Container className="mt-[12px] mb-4 border-b border-[#242423]/12 md:mt-4" />
               <Container className="flex flex-wrap items-center justify-start gap-x-[30px] gap-y-[12px] md:gap-y-[16px]">

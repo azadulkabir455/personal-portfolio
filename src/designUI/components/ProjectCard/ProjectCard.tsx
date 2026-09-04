@@ -3,6 +3,7 @@ import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Image from "@/designUI/elements/Image/Image";
 import Button from "@/designUI/elements/Button/Button";
+import Link from "@/designUI/elements/Link/Link";
 import { PlusIcon, ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import type { ProjectCardProps } from "./types";
@@ -12,8 +13,10 @@ export default function ProjectCard({
   description,
   tags,
   ctaLabel,
+  ctaLink,
   image,
   reverse = false,
+  secondaryCta,
 }: ProjectCardProps) {
   return (
     <Container
@@ -51,13 +54,33 @@ export default function ProjectCard({
           ))}
         </Container>
 
-        <Button
-          variant="plain"
-          className="mt-[16px] self-start text-[#242423] md:mt-[20px] lg:mt-[30px]"
-          icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" color="#388EFF" />}
-        >
-          {ctaLabel}
-        </Button>
+        <Container className="mt-[16px] flex flex-wrap items-center gap-x-[24px] gap-y-[8px] md:mt-[20px] lg:mt-[30px]">
+          {ctaLabel && ctaLink && (
+            <Link href={ctaLink}>
+              <Button
+                as="span"
+                variant="plain"
+                className="self-start text-[#242423]"
+                icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" color="#388EFF" />}
+              >
+                {ctaLabel}
+              </Button>
+            </Link>
+          )}
+
+          {secondaryCta && (
+            <Link href={secondaryCta.href}>
+              <Button
+                as="span"
+                variant="plain"
+                className="self-start text-[#242423]"
+                icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" color="#388EFF" />}
+              >
+                {secondaryCta.label}
+              </Button>
+            </Link>
+          )}
+        </Container>
       </Container>
 
       <Container className="relative shrink-0 p-[16px] md:p-[20px] lg:p-[22px]">

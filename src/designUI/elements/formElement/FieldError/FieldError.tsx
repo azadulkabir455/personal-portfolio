@@ -5,7 +5,7 @@ export default function FieldError({ message, className = "" }: FieldErrorProps)
   return (
     <span
       className={clsx(
-        "block min-h-[16px] font-sans text-[11px] leading-[16px] text-[#E5484D]",
+        "block min-h-[14px] font-sans text-[10px] leading-[14px] text-[#E5484D] lg:min-h-[16px] lg:text-[11px] lg:leading-[16px]",
         className,
       )}
     >

@@ -3,6 +3,7 @@ export interface JourneyIntro {
   paragraphPrimary: string;
   paragraphSecondary: string;
   ctaLabel: string;
+  ctaLink: string;
   subHeading: string;
 }
 
@@ -43,6 +44,7 @@ export const journeyContent: JourneyContent = {
     paragraphPrimary: "I believe great design goes beyond aesthetics - it solves real problems and creates meaningful user experiences. My approach combines user research, strategic thinking, and modern UI principles to design products that are both intuitive and accessible.",
     paragraphSecondary: "From wireframes to high-fidelity prototypes, every design decision is guided by usability, business goals, and industry best practices, including WCAG accessibility standards.",
     ctaLabel: "Let's Talk Now",
+    ctaLink: "#",
     subHeading: "Depends on the scope of work I extend my design process",
   },
   steps: [

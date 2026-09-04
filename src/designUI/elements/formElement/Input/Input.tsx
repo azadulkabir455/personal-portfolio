@@ -17,7 +17,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           placeholder=" "
           aria-invalid={Boolean(error)}
           className={clsx(
-            "peer h-[52px] w-full rounded-[10px] border bg-white px-4 font-sans text-[14px] text-[#171717] outline-none transition-colors duration-200",
+            "peer h-[44px] w-full rounded-[10px] border bg-white px-3 font-sans text-[13px] text-[#171717] outline-none transition-colors duration-200 lg:h-[52px] lg:px-4 lg:text-[14px]",
+            "disabled:cursor-not-allowed disabled:border-[#E4E4E4] disabled:bg-[#F7F7F7] disabled:text-[#8A8A86]",
             endAdornment && "pr-12",
             error ? "border-[#E5484D]" : "border-[#E4E4E4] focus:border-[#242423]",
             className,
@@ -27,10 +28,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         <label
           htmlFor={id}
           className={clsx(
-            "pointer-events-none absolute left-3 rounded-[6px] bg-white px-1 font-sans text-[#8A8A86] transition-all duration-200",
-            "top-0 -translate-y-1/2 text-[11px]",
-            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px]",
-            "peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[11px] peer-focus:text-[#242423]",
+            "pointer-events-none absolute left-3 rounded-[6px] bg-white px-1 font-sans text-[#8A8A86] transition-all duration-200 peer-disabled:bg-[#F7F7F7]",
+            "top-0 -translate-y-1/2 text-[10px] lg:text-[11px]",
+            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[13px] lg:peer-placeholder-shown:text-[14px]",
+            "peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[10px] peer-focus:text-[#242423] lg:peer-focus:text-[11px]",
           )}
         >
           {label}

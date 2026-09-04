@@ -26,20 +26,20 @@ export default function IconSelect({
         id={id}
         onClick={() => setIsOpen((current) => !current)}
         className={clsx(
-          "flex h-[52px] w-full items-center gap-3 rounded-[10px] border bg-white px-4 font-sans text-[14px] text-[#171717] transition-colors duration-200",
+          "flex h-[44px] w-full items-center gap-2 rounded-[10px] border bg-white px-3 font-sans text-[13px] text-[#171717] transition-colors duration-200 lg:h-[52px] lg:gap-3 lg:px-4 lg:text-[14px]",
           error ? "border-[#E5484D]" : "border-[#E4E4E4] focus:border-[#242423]",
         )}
       >
         {value ? (
           <>
-            <Icon name={value} width={18} height={18} />
+            <Icon name={value} width={16} height={16} />
             <span>{value}</span>
           </>
         ) : (
           <span className="text-[#8A8A86]">Select an icon</span>
         )}
       </button>
-      <span className="pointer-events-none absolute top-0 left-3 -translate-y-1/2 rounded-[6px] bg-white px-1 font-sans text-[11px] text-[#8A8A86]">
+      <span className="pointer-events-none absolute top-0 left-3 -translate-y-1/2 rounded-[6px] bg-white px-1 font-sans text-[10px] text-[#8A8A86] lg:text-[11px]">
         {label}
       </span>
 

@@ -10,6 +10,7 @@ export interface CaseStudySlide {
   title: string;
   description: string;
   ctaLabel: string;
+  ctaLink: string;
   images: CaseStudyImages;
   studyImage: string;
 }
@@ -33,6 +34,7 @@ export const caseStudyContent: CaseStudyContent = {
       description:
         "A UX redesign of ShareTrip's flight booking experience focused on simplifying the user journey, improving navigation, and creating a clean, intuitive interface that makes booking flights faster and more effortless.",
       ctaLabel: "View Case Study",
+      ctaLink: "#",
       images: bgImages,
       studyImage: "/images/featureprojects/p3.png",
     },
@@ -43,6 +45,7 @@ export const caseStudyContent: CaseStudyContent = {
       description:
         "Mobile-first landing page redesign focused on improving user experience, clarity of messaging, and conversion across every device.",
       ctaLabel: "View Case Study",
+      ctaLink: "#",
       images: bgImages,
       studyImage: "/images/featureprojects/p1.png",
     },
@@ -53,6 +56,7 @@ export const caseStudyContent: CaseStudyContent = {
       description:
         "A clean, intuitive interface redesign for a real estate SaaS platform, streamlining property discovery and boosting user engagement.",
       ctaLabel: "View Case Study",
+      ctaLink: "#",
       images: bgImages,
       studyImage: "/images/featureprojects/p2.png",
     },
