@@ -51,7 +51,7 @@ export default function TopBar() {
     onMouseLeave,
   } = useTopBar();
 
-  if (pathname?.startsWith("/dashboard")) return null;
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>

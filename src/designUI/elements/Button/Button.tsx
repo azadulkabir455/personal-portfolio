@@ -33,7 +33,7 @@ export default function Button({
         "rounded-full",
         "text-center font-sans text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] font-bold tracking-[0.13px] md:tracking-[0.25px] capitalize",
         as === "button" && "cursor-pointer",
-        "transition-colors duration-200",
+        "transition-all duration-200 hover:opacity-85 active:scale-[0.97]",
         variant === "filled" && !icon && "pr-8",
         variantClasses[variant],
         className,
