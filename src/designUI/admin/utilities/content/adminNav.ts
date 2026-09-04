@@ -59,4 +59,13 @@ export const adminNav: AdminNavItem[] = [
       { label: "Tag", href: "/admin/project/tag" },
     ],
   },
+  {
+    label: "Legal",
+    href: "/admin/global/privacy-policy",
+    icon: "FaShieldAlt",
+    children: [
+      { label: "Privacy Policy", href: "/admin/global/privacy-policy" },
+      { label: "Terms & Conditions", href: "/admin/global/terms-and-conditions" },
+    ],
+  },
 ];

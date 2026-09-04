@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import clsx from "clsx";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Button from "@/designUI/elements/Button/Button";
@@ -14,6 +16,22 @@ import ProjectViewModal from "./comp/ProjectViewModal";
 import { useProjectListManager } from "./function";
 
 export default function ProjectListManager() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const filterContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isFilterOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (filterContainerRef.current && !filterContainerRef.current.contains(event.target as Node)) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isFilterOpen]);
+
   const {
     projects,
     filteredCount,
@@ -39,51 +57,76 @@ export default function ProjectListManager() {
 
   return (
     <Container className="flex w-full flex-col gap-6 rounded-[16px] border border-[#E4E4E4] bg-white p-4 lg:gap-8 lg:p-10">
-      <Container className="flex items-start justify-between gap-4 border-b border-[#E4E4E4] pb-4 lg:pb-6">
-        <Container className="flex flex-col gap-1.5 lg:gap-2">
-          <Text variant="h2" className="font-sans text-[18px] font-semibold text-[#171717] lg:text-[24px]">
-            All Projects
-          </Text>
-          <Text className="font-sans text-[12px] text-[#8A8A86] lg:text-[14px]">
-            {filteredCount === totalCount
-              ? `${totalCount} project${totalCount === 1 ? "" : "s"} total.`
-              : `Showing ${filteredCount} of ${totalCount} projects.`}
-          </Text>
+      <div ref={filterContainerRef} className="relative border-b border-[#E4E4E4] pb-4 lg:pb-6">
+        <Container className="flex items-start justify-between gap-4">
+          <Container className="flex flex-col gap-1.5 lg:gap-2">
+            <Text variant="h2" className="font-sans text-[18px] font-semibold text-[#171717] lg:text-[24px]">
+              All Projects
+            </Text>
+            <Text className="font-sans text-[12px] text-[#8A8A86] lg:text-[14px]">
+              {filteredCount === totalCount
+                ? `${totalCount} project${totalCount === 1 ? "" : "s"} total.`
+                : `Showing ${filteredCount} of ${totalCount} projects.`}
+            </Text>
+          </Container>
+
+          <Container className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsFilterOpen((current) => !current)}
+              aria-label="Toggle filters"
+              className={clsx(
+                "flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-full border transition-colors duration-150 md:hidden",
+                isFilterOpen
+                  ? "border-[#242423] bg-[#242423] text-white"
+                  : "border-[#E4E4E4] text-[#171717] hover:border-[#242423]",
+              )}
+            >
+              <Icon name="FaFilter" width={14} height={14} />
+            </button>
+
+            <Link href="/admin/project/add">
+              <Button type="button">+ Add Project</Button>
+            </Link>
+          </Container>
         </Container>
 
-        <Link href="/admin/project/add">
-          <Button type="button">+ Add Project</Button>
-        </Link>
-      </Container>
-
-      <Container className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <Input
-          id="filter-search"
-          label="Search"
-          placeholder="Search by title"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-          endAdornment={
-            searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                aria-label="Clear search"
-                className="mr-3 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full text-[#8A8A86] hover:bg-[#F7F7F7] hover:text-[#171717]"
-              >
-                <Icon name="FaTimes" width={10} height={10} />
-              </button>
-            )
-          }
-        />
-        <Select id="filter-tag" label="Tag" value={tagFilter} onChange={setTagFilter} options={tagOptions} />
-        <DatePicker
-          id="filter-date"
-          label="Published Date"
-          value={dateFilter}
-          onChange={setDateFilter}
-        />
-      </Container>
+        <Container
+          className={clsx(
+            "grid-cols-1 gap-4 md:static md:mt-4 md:grid md:grid-cols-3 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none lg:mt-6",
+            isFilterOpen
+              ? "absolute inset-x-0 top-full z-20 mt-2 grid rounded-[12px] border border-[#E4E4E4] bg-white p-4 shadow-lg"
+              : "hidden",
+          )}
+        >
+          <Input
+            id="filter-search"
+            label="Search"
+            placeholder="Search by title"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            endAdornment={
+              searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  className="mr-3 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full text-[#8A8A86] hover:bg-[#F7F7F7] hover:text-[#171717]"
+                >
+                  <Icon name="FaTimes" width={10} height={10} />
+                </button>
+              )
+            }
+          />
+          <Select id="filter-tag" label="Tag" value={tagFilter} onChange={setTagFilter} options={tagOptions} />
+          <DatePicker
+            id="filter-date"
+            label="Published Date"
+            value={dateFilter}
+            onChange={setDateFilter}
+          />
+        </Container>
+      </div>
 
       {selected.size > 0 && (
         <Container className="flex items-center justify-between rounded-[10px] bg-[#F7F7F7] px-4 py-3">

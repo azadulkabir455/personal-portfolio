@@ -47,26 +47,20 @@ export default function HeaderForm() {
         {navLinksArray.fields.map((field, index) => (
           <Container
             key={field.id}
-            className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1fr_auto]"
+            className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[1fr_1fr_auto]"
           >
             <Input
               id={`navLinks.${index}.label`}
               label="Label"
+              containerClassName="col-start-1 row-start-1"
               error={errors.navLinks?.[index]?.label?.message}
               {...register(`navLinks.${index}.label`)}
-            />
-            <Input
-              id={`navLinks.${index}.href`}
-              label="Link"
-              disabled
-              error={errors.navLinks?.[index]?.href?.message}
-              {...register(`navLinks.${index}.href`)}
             />
             <Controller
               control={control}
               name={`navLinks.${index}.enabled`}
               render={({ field: enabledField }) => (
-                <Container className="flex h-[44px] items-center justify-center lg:h-[52px]">
+                <Container className="col-start-2 row-start-1 flex h-[44px] items-center justify-center md:col-start-3 lg:h-[52px]">
                   <Switch
                     id={`navLinks.${index}.enabled`}
                     checked={enabledField.value}
@@ -74,6 +68,14 @@ export default function HeaderForm() {
                   />
                 </Container>
               )}
+            />
+            <Input
+              id={`navLinks.${index}.href`}
+              label="Link"
+              disabled
+              containerClassName="col-span-2 row-start-2 md:col-span-1 md:col-start-2 md:row-start-1"
+              error={errors.navLinks?.[index]?.href?.message}
+              {...register(`navLinks.${index}.href`)}
             />
           </Container>
         ))}

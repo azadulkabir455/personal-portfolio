@@ -25,7 +25,7 @@ export default function PersonalInfoForm() {
         control={control}
         name="cv"
         render={({ field }) => (
-          <Container className="flex flex-col items-start gap-3 md:col-span-2 md:flex-row md:items-center">
+          <Container className="mb-2 flex flex-col items-start gap-3 md:col-span-2 md:mb-0 md:flex-row md:items-center">
             <FileInput
               label="CV"
               value={field.value}

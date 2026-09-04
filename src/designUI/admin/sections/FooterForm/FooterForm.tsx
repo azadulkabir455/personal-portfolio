@@ -208,28 +208,30 @@ export default function FooterForm() {
           {legalLinksArray.fields.map((field, index) => (
             <Container
               key={field.id}
-              className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1fr_auto]"
+              className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[1fr_1fr_auto]"
             >
               <Input
                 id={`legal.links.${index}.label`}
                 label="Label"
+                containerClassName="col-start-1 row-start-1"
                 error={errors.legal?.links?.[index]?.label?.message}
                 {...register(`legal.links.${index}.label`)}
-              />
-              <Input
-                id={`legal.links.${index}.href`}
-                label="Link"
-                error={errors.legal?.links?.[index]?.href?.message}
-                {...register(`legal.links.${index}.href`)}
               />
               <button
                 type="button"
                 onClick={() => legalLinksArray.remove(index)}
                 aria-label="Remove legal link"
-                className={removeButtonClassName}
+                className={clsx(removeButtonClassName, "col-start-2 row-start-1 md:col-start-3")}
               >
                 <Icon name="FaTrashAlt" width={14} height={14} />
               </button>
+              <Input
+                id={`legal.links.${index}.href`}
+                label="Link"
+                containerClassName="col-span-2 row-start-2 md:col-span-1 md:col-start-2 md:row-start-1"
+                error={errors.legal?.links?.[index]?.href?.message}
+                {...register(`legal.links.${index}.href`)}
+              />
             </Container>
           ))}
         </Container>
