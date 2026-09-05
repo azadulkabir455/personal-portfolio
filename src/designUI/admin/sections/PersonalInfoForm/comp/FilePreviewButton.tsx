@@ -10,7 +10,15 @@ function getFileName(file: File | string | null) {
   return file.name;
 }
 
-export default function CvPreviewButton({ file }: { file: File | string | null }) {
+export default function FilePreviewButton({
+  file,
+  label = "View",
+  kind = "pdf",
+}: {
+  file: File | string | null;
+  label?: string;
+  kind?: "pdf" | "image";
+}) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(typeof file === "string" ? file : null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,9 +44,10 @@ export default function CvPreviewButton({ file }: { file: File | string | null }
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="h-[32px] shrink-0 cursor-pointer rounded-full border border-[#388EFF]/30 bg-[#EAF3FF] px-3 font-sans text-[11px] font-semibold text-[#388EFF] transition-colors duration-200 hover:bg-[#DCEBFF] lg:h-[36px] lg:px-4 lg:text-[12px]"
+        className="flex h-[32px] shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-[#388EFF]/30 bg-[#EAF3FF] px-3 font-sans text-[11px] font-semibold text-[#388EFF] transition-colors duration-200 hover:bg-[#DCEBFF] lg:h-[36px] lg:px-4 lg:text-[12px]"
       >
-        View CV
+        <Icon name="FaEye" width={13} height={13} color="#388EFF" />
+        {label}
       </button>
 
       {isOpen && (
@@ -61,11 +70,13 @@ export default function CvPreviewButton({ file }: { file: File | string | null }
                 <Icon name="FaTimes" width={12} height={12} />
               </button>
             </Container>
-            <iframe
-              src={`${previewUrl}#navpanes=0`}
-              title={fileName}
-              className="h-full w-full flex-1"
-            />
+            {kind === "image" ? (
+              <Container className="flex h-full w-full flex-1 items-center justify-center bg-[#FAFAFA] p-6">
+                <img src={previewUrl} alt={fileName} className="max-h-full max-w-full object-contain" />
+              </Container>
+            ) : (
+              <iframe src={`${previewUrl}#navpanes=0`} title={fileName} className="h-full w-full flex-1" />
+            )}
           </Container>
         </Container>
       )}

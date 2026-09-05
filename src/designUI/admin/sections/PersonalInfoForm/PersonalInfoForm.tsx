@@ -6,7 +6,7 @@ import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
 import Container from "@/designUI/elements/Container/Container";
-import CvPreviewButton from "./comp/CvPreviewButton";
+import FilePreviewButton from "./comp/FilePreviewButton";
 import { usePersonalInfoForm } from "./function";
 
 export default function PersonalInfoForm() {
@@ -25,7 +25,7 @@ export default function PersonalInfoForm() {
         control={control}
         name="cv"
         render={({ field }) => (
-          <Container className="mb-2 flex flex-col items-start gap-3 md:col-span-2 md:mb-0 md:flex-row md:items-center">
+          <Container className="mb-2 flex w-full flex-col items-start gap-3 md:mb-0 md:w-[60%] md:flex-row md:items-center">
             <FileInput
               label="CV"
               value={field.value}
@@ -33,9 +33,26 @@ export default function PersonalInfoForm() {
               accept="application/pdf"
               hint="PDF, up to 5MB"
               error={errors.cv?.message}
-              containerClassName="w-full md:max-w-[280px]"
             />
-            <CvPreviewButton file={field.value} />
+            <FilePreviewButton file={field.value} label="View CV" kind="pdf" />
+          </Container>
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="favicon"
+        render={({ field }) => (
+          <Container className="flex w-full flex-col items-start gap-3 md:w-[60%] md:flex-row md:items-center">
+            <FileInput
+              label="Favicon"
+              value={field.value}
+              onChange={field.onChange}
+              accept="image/png, image/x-icon, image/svg+xml"
+              hint="PNG, ICO or SVG, 32x32 recommended"
+              error={errors.favicon?.message}
+            />
+            <FilePreviewButton file={field.value} label="View Fav" kind="image" />
           </Container>
         )}
       />

@@ -6,6 +6,7 @@ export const personalInfoFormSchema = z.object({
     .refine((value) => value !== null && value !== undefined && value !== "", {
       message: "CV is required",
     }),
+  favicon: z.custom<File | string | null>(),
   phone: z.string().min(1, "Phone number is required"),
   email: z.string().min(1, "Email is required").email("Enter a valid email"),
 });

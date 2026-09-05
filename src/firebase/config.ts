@@ -16,6 +16,3 @@ export const firebaseApp =
 export const isFirebaseConfigured = Boolean(
   process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 );
-export const isRealtimeDbConfigured = Boolean(
-  process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-);

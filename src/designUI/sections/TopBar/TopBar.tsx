@@ -51,7 +51,12 @@ export default function TopBar() {
     onMouseLeave,
   } = useTopBar();
 
-  if (pathname?.startsWith("/admin")) return null;
+  if (
+    pathname?.startsWith("/admin") ||
+    pathname === "/login" ||
+    pathname === "/forgot-password"
+  )
+    return null;
 
   const visibleNavLinks = data.navLinks.filter((link) => link.enabled);
 

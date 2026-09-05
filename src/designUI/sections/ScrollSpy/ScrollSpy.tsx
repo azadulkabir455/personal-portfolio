@@ -11,25 +11,27 @@ export default function ScrollSpy() {
 
   return (
     <>
-      <Container
-        role="button"
-        tabIndex={0}
-        aria-label="Open section navigator"
-        onClick={toggleOpen}
-        className="fixed top-1/2 right-[50px] z-40 hidden -translate-y-1/2 cursor-pointer flex-col items-center gap-[6px] lg:flex"
-      >
-        {sections.map((section, index) => (
-          <Container key={section.id} className="flex h-[10px] w-[48px] items-center justify-center">
-            <Container
-              className={clsx(
-                "h-0 w-[24px] transition-[width,border-color] duration-300",
-                index === activeIndex
-                  ? "w-[48px] border-t-2 border-[#005CD6]"
-                  : "border-t border-[#8FBFFF]",
-              )}
-            />
-          </Container>
-        ))}
+      <Container className="fixed top-1/2 right-[50px] z-40 hidden -translate-y-1/2 flex-col items-center gap-[10px] lg:flex">
+        <Container
+          role="button"
+          tabIndex={0}
+          aria-label="Open section navigator"
+          onClick={toggleOpen}
+          className="flex cursor-pointer flex-col items-center gap-[6px]"
+        >
+          {sections.map((section, index) => (
+            <Container key={section.id} className="flex h-[10px] w-[48px] items-center justify-center">
+              <Container
+                className={clsx(
+                  "h-0 w-[24px] transition-[width,border-color] duration-300",
+                  index === activeIndex
+                    ? "w-[48px] border-t-2 border-[#005CD6]"
+                    : "border-t border-[#8FBFFF]",
+                )}
+              />
+            </Container>
+          ))}
+        </Container>
       </Container>
 
       {isOpen && (

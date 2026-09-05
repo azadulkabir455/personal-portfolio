@@ -1,5 +1,6 @@
 import {
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -21,4 +22,8 @@ export function signOutUser() {
 
 export function subscribeToAuthState(callback: (user: User | null) => void) {
   return onAuthStateChanged(getFirebaseAuth(), callback);
+}
+
+export function resetPassword(email: string) {
+  return sendPasswordResetEmail(getFirebaseAuth(), email);
 }
