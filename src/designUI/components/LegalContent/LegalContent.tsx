@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import { sora } from "@/designUI/utilities/fonts/fonts";
+import { formatISODate } from "@/designUI/utilities/date";
 import type { LegalContentProps } from "./types";
 
 export default function LegalContent({ title, updatedAt, content }: LegalContentProps) {
@@ -35,7 +36,7 @@ export default function LegalContent({ title, updatedAt, content }: LegalContent
             "lg:mb-[40px] lg:text-[18px] lg:leading-[24px]",
           )}
         >
-          Last updated: {updatedAt}
+          Last updated: {formatISODate(updatedAt)}
         </Text>
 
         <Container

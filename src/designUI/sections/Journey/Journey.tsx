@@ -7,6 +7,7 @@ import Button from "@/designUI/elements/Button/Button";
 import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
+import { handleTelLinkClick } from "@/designUI/utilities/phone";
 import { useJourney } from "./function";
 import JourneyBackground from "./comp/JourneyBackground";
 import JourneyGridLines from "./comp/JourneyGridLines";
@@ -21,7 +22,7 @@ const toolkitTitleClassName = clsx(
 );
 
 export default function Journey() {
-  const { data } = useJourney();
+  const { data, phone } = useJourney();
 
   return (
     <Container variant="section" id="journey" className="relative w-full lg:scroll-mt-[140px]">
@@ -74,7 +75,11 @@ export default function Journey() {
                 </span>
               </Text>
 
-              <Link href={data.intro.ctaLink} className="self-start">
+              <Link
+                href={data.intro.ctaLink}
+                onClick={(event) => handleTelLinkClick(event, phone)}
+                className="self-start"
+              >
                 <Button
                   as="span"
                   icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}

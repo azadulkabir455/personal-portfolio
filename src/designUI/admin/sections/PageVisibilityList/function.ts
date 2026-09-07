@@ -11,7 +11,7 @@ export function usePageVisibilityList() {
   const { data } = useSectionContent("topbar", topBarContent);
   const [navLinks, setNavLinks] = useState<TopBarNavLink[]>(topBarContent.navLinks);
   const [syncedNavLinks, setSyncedNavLinks] = useState(data.navLinks);
-  const { status, run } = useSaveStatus();
+  const { run } = useSaveStatus();
 
   if (data.navLinks !== syncedNavLinks) {
     setSyncedNavLinks(data.navLinks);
@@ -19,17 +19,14 @@ export function usePageVisibilityList() {
   }
 
   const toggle = (href: string) => {
-    setNavLinks((current) =>
-      current.map((link) => (link.href === href ? { ...link, enabled: !link.enabled } : link)),
+    const updated = navLinks.map((link) =>
+      link.href === href ? { ...link, enabled: !link.enabled } : link,
     );
+    setNavLinks(updated);
+    run(() => saveSectionContent("topbar", { ...data, navLinks: updated }));
   };
 
   const isEnabled = (href: string) => navLinks.find((link) => link.href === href)?.enabled ?? true;
 
-  const onSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    run(() => saveSectionContent("topbar", { ...data, navLinks }));
-  };
-
-  return { items: pageVisibilityItems, isEnabled, toggle, onSubmit, status };
+  return { items: pageVisibilityItems, isEnabled, toggle };
 }

@@ -17,7 +17,6 @@ export const journeyFormSchema = z.object({
     paragraphPrimary: z.string().min(1, "This field is required"),
     paragraphSecondary: z.string().min(1, "This field is required"),
     ctaLabel: z.string().min(1, "Button label is required"),
-    ctaLink: z.string().min(1, "Button link is required"),
     subHeading: z.string().min(1, "This field is required"),
   }),
   steps: z

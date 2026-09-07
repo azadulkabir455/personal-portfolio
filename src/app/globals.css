@@ -35,6 +35,12 @@ body {
   display: none;
 }
 
+.Toastify__progress-bar--wrp {
+  height: 2px;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+}
+
 
 
 

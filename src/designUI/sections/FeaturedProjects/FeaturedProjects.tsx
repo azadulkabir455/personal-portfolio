@@ -8,6 +8,7 @@ import Button from "@/designUI/elements/Button/Button";
 import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
+import { handleTelLinkClick } from "@/designUI/utilities/phone";
 import ProjectCard from "@/designUI/components/ProjectCard/ProjectCard";
 import { useFeaturedProjects } from "./function";
 
@@ -18,7 +19,7 @@ const NUMBER_OFFSET_LG_CLASSES = [
   "ml-[60px] md:ml-[90px]",
 ];
 export default function FeaturedProjects() {
-  const { data } = useFeaturedProjects();
+  const { data, phone } = useFeaturedProjects();
 
   return (
     <Container variant="section" id="featured-projects" className="relative w-full lg:scroll-mt-[140px]">
@@ -129,7 +130,7 @@ export default function FeaturedProjects() {
             "lg:px-[10px] lg:py-[60px]",
           )}
         >
-          <Link href={data.cta.link}>
+          <Link href={data.cta.link} onClick={(event) => handleTelLinkClick(event, phone)}>
             <Button as="span" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
               {data.cta.label}
             </Button>

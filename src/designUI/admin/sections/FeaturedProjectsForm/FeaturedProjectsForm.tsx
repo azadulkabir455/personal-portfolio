@@ -36,14 +36,9 @@ export default function FeaturedProjectsForm() {
       <Input
         id="ctaLabel"
         label="Button Label"
+        containerClassName="md:col-span-2"
         error={errors.ctaLabel?.message}
         {...register("ctaLabel")}
-      />
-      <Input
-        id="ctaLink"
-        label="Button Link"
-        error={errors.ctaLink?.message}
-        {...register("ctaLink")}
       />
     </FormContainer>
   );

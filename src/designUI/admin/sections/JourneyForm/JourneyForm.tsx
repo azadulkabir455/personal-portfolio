@@ -45,14 +45,14 @@ export default function JourneyForm() {
       <Textarea
         id="intro.paragraphPrimary"
         label="Paragraph Primary"
-        containerClassName="md:col-span-2"
+        resizable
         error={errors.intro?.paragraphPrimary?.message}
         {...register("intro.paragraphPrimary")}
       />
       <Textarea
         id="intro.paragraphSecondary"
         label="Paragraph Secondary"
-        containerClassName="md:col-span-2"
+        resizable
         error={errors.intro?.paragraphSecondary?.message}
         {...register("intro.paragraphSecondary")}
       />
@@ -60,14 +60,9 @@ export default function JourneyForm() {
       <Input
         id="intro.ctaLabel"
         label="Button Label"
+        containerClassName="md:col-span-2"
         error={errors.intro?.ctaLabel?.message}
         {...register("intro.ctaLabel")}
-      />
-      <Input
-        id="intro.ctaLink"
-        label="Button Link"
-        error={errors.intro?.ctaLink?.message}
-        {...register("intro.ctaLink")}
       />
 
       <Container className={dividerClassName}>

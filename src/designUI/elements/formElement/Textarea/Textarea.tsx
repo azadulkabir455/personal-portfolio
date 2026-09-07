@@ -4,12 +4,12 @@ import FieldError from "@/designUI/elements/formElement/FieldError/FieldError";
 import type { TextareaProps } from "./types";
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
-  { id, label, error, rows = 4, containerClassName = "", className = "", ...props },
+  { id, label, error, rows = 4, resizable = false, containerClassName = "", className = "", ...props },
   ref,
 ) {
   return (
-    <div className={clsx("flex flex-col gap-1", containerClassName)}>
-      <div className="relative">
+    <div className={clsx("flex flex-col gap-1", resizable && "h-full", containerClassName)}>
+      <div className={clsx("relative", resizable && "flex-1")}>
         <textarea
           ref={ref}
           id={id}
@@ -17,7 +17,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textare
           placeholder=" "
           aria-invalid={Boolean(error)}
           className={clsx(
-            "peer w-full resize-none rounded-[10px] border bg-white px-3 pt-5 pb-2 font-sans text-[13px] text-[#171717] outline-none transition-colors duration-200 lg:px-4 lg:pt-6 lg:text-[14px]",
+            "peer w-full rounded-[10px] border bg-white px-3 pt-5 pb-2 font-sans text-[13px] text-[#171717] outline-none transition-colors duration-200 lg:px-4 lg:pt-6 lg:text-[14px]",
+            resizable ? "h-full min-h-[120px] resize-y" : "resize-none",
             error ? "border-[#E5484D]" : "border-[#E4E4E4] focus:border-[#242423]",
             className,
           )}

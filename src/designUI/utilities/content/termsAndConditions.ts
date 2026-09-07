@@ -6,7 +6,7 @@ export interface TermsAndConditionsContent {
 
 export const termsAndConditionsContent: TermsAndConditionsContent = {
   title: "Terms & Conditions",
-  updatedAt: "September 1, 2026",
+  updatedAt: "2026-09-01",
   content: `
     <p>By accessing this portfolio website, you agree to the following terms and conditions. Please read them carefully.</p>
     <h2>Use of Content</h2>

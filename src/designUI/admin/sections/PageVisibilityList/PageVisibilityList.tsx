@@ -5,20 +5,14 @@ import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Switch from "@/designUI/elements/formElement/Switch/Switch";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import { usePageVisibilityList } from "./function";
 
 export default function PageVisibilityList() {
-  const { items, isEnabled, toggle, onSubmit, status } = usePageVisibilityList();
+  const { items, isEnabled, toggle } = usePageVisibilityList();
 
   return (
-    <FormContainer
-      title="Pages"
-      description="Turn a page off to hide its link from the site navbar."
-      onSubmit={onSubmit}
-      actions={<SaveButton status={status} label="Save Pages" />}
-    >
+    <FormContainer title="Pages" description="Turn a page off to hide its link from the site navbar.">
       <Container className="grid grid-cols-1 gap-4 md:col-span-2 md:grid-cols-2">
         {items.map((item) => (
           <Container

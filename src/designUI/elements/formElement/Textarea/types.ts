@@ -5,4 +5,5 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   label: string;
   error?: string;
   containerClassName?: string;
+  resizable?: boolean;
 }

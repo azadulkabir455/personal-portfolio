@@ -40,7 +40,7 @@ export default function ScrollSpy() {
           <Container
             className={clsx(
               sora.className,
-              "fixed top-1/2 right-[50px] z-50 hidden h-[396px] w-[431px] -translate-y-1/2 flex-col gap-[15px] rounded-[12px] p-[40px] lg:flex",
+              "fixed top-1/2 right-[50px] z-50 hidden min-h-[396px] w-[431px] -translate-y-1/2 flex-col gap-[15px] rounded-[12px] p-[40px] lg:flex",
             )}
             style={{ background: "linear-gradient(180deg, #64A6FF 18.22%, #00275C 100%)" }}
           >

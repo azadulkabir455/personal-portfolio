@@ -10,8 +10,8 @@ export default function HeroGridLines() {
 
         <Container className="absolute inset-y-0 left-1/2 w-full max-w-[1240px] -translate-x-1/2">
           <Container className="absolute inset-y-0 left-[10px] w-px bg-white/[0.24]" />
-          <Container className="absolute top-[100px] bottom-0 left-[30.2419%] w-px bg-white/[0.24]" />
-          <Container className="absolute top-[100px] bottom-0 left-[69.7581%] w-px bg-white/[0.24]" />
+          <Container className="absolute top-[100px] bottom-0 left-[29.7737%] w-px bg-white/[0.24]" />
+          <Container className="absolute top-[100px] bottom-0 left-[70.2328%] w-px bg-white/[0.24]" />
           <Container className="absolute inset-y-0 right-[10px] w-px bg-white/[0.24]" />
         </Container>
       </Container>

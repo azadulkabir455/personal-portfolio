@@ -6,7 +6,7 @@ export interface PrivacyPolicyContent {
 
 export const privacyPolicyContent: PrivacyPolicyContent = {
   title: "Privacy Policy",
-  updatedAt: "September 1, 2026",
+  updatedAt: "2026-09-01",
   content: `
     <p>This Privacy Policy explains how I collect, use, and protect the information you share when you visit this portfolio website or reach out through the contact form.</p>
     <h2>Information I Collect</h2>

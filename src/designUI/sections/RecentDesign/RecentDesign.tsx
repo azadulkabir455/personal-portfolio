@@ -13,7 +13,11 @@ export default function RecentDesign() {
   const track = [...data.groups, ...data.groups];
 
   return (
-    <Container variant="section" className="w-full overflow-hidden pb-[20px] md:pb-[40px] lg:pb-[80px]">
+    <Container
+      variant="section"
+      id="recent-design"
+      className="w-full overflow-hidden pb-[20px] md:pb-[40px] lg:pb-[80px]"
+    >
       <Text
         className={clsx(
           "block text-center font-sans font-light tracking-[0px] text-[#242423]",

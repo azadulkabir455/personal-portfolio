@@ -22,7 +22,9 @@ export default function PrivacyPolicyForm() {
       <Input id="title" label="Title" error={errors.title?.message} {...register("title")} />
       <Input
         id="updatedAt"
+        type="date"
         label="Last Updated"
+        disabled
         error={errors.updatedAt?.message}
         {...register("updatedAt")}
       />

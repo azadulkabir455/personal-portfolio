@@ -6,6 +6,7 @@ import { sora } from "@/designUI/utilities/fonts/fonts";
 
 import Text from "@/designUI/elements/Text/Text";
 import Image from "@/designUI/elements/Image/Image";
+import Link from "@/designUI/elements/Link/Link";
 import Button from "@/designUI/elements/Button/Button";
 import Container from "@/designUI/elements/Container/Container";
 import SocialIcon from "@/designUI/components/SocialIcon/SocialIcon";
@@ -51,7 +52,7 @@ export default function Hero() {
               className={clsx(
                 sora.className,
                 "relative -bottom-[25px] md:-bottom-[35px] lg:-bottom-[35px]",
-                "bg-gradient-to-b from-[#8FBFFF] to-[#64A6FF] bg-clip-text text-transparent",
+                "bg-gradient-to-b from-[#F2F8FF] to-[#93C1FF] bg-clip-text text-transparent",
                 "text-center text-[37px] md:text-[80px] lg:text-[94px] leading-[56px] md:leading-[92px] lg:leading-[108px] font-bold tracking-[0px] capitalize",
               )}
             >
@@ -78,22 +79,29 @@ export default function Hero() {
           <Container className="flex flex-col items-center gap-0 md:grid md:grid-cols-2 md:justify-items-center lg:grid lg:w-full lg:grid-cols-[minmax(0,365fr)_minmax(0,510fr)_minmax(0,365fr)] lg:items-end">
             <HeroContentCard data-aos="fade-right" className="order-2 md:order-2 lg:order-none">
               <Text className={heroCardTextClassName}>{data.greeting}</Text>
-              <Button
-                icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}
-              >
-                {data.ctaLabel}
-              </Button>
+              <Link href={data.ctaLink} target="_blank" rel="noopener noreferrer">
+                <Button
+                  as="span"
+                  icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}
+                >
+                  {data.ctaLabel}
+                </Button>
+              </Link>
             </HeroContentCard>
 
             <Container
               data-aos="zoom-in"
-              className="relative z-20 order-1 h-[255px] w-[249px] opacity-100 md:order-1 md:col-span-2 md:h-[400px] md:w-[390px] lg:order-none lg:col-span-1 lg:h-[499px] lg:w-full lg:max-w-[487px] lg:justify-self-center"
+              className="relative z-20 order-1 h-[255px] w-[249px] overflow-hidden opacity-100 md:order-1 md:col-span-2 md:h-[400px] md:w-[390px] lg:order-none lg:col-span-1 lg:h-[499px] lg:w-full lg:max-w-[487px] lg:justify-self-center"
             >
               <Image
                 src={data.photoUrl}
                 alt={[data.title, data.titleExtend].filter(Boolean).join(" ")}
                 fill
                 className="object-contain object-bottom"
+                style={{
+                  maskImage: "linear-gradient(to bottom, #000 60%, transparent 100%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, #000 60%, transparent 100%)",
+                }}
               />
             </Container>
 

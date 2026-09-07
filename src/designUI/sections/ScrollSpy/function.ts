@@ -1,10 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { scrollSpyContent } from "@/designUI/utilities/content/scrollSpy";
+import { defaultSectionVisibility } from "@/designUI/admin/utilities/content/landingSections";
+import { useSectionContent } from "@/customHooks/useSectionContent";
 
 export function useScrollSpy() {
-  const sections = scrollSpyContent.sections;
+  const { data: sectionVisibility } = useSectionContent("homeSections", defaultSectionVisibility);
+  const sections = useMemo(
+    () =>
+      scrollSpyContent.sections.filter(
+        (section) => !section.visibilityKey || sectionVisibility[section.visibilityKey],
+      ),
+    [sectionVisibility],
+  );
   const [activeIndex, setActiveIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 

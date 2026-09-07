@@ -13,7 +13,7 @@ export function useLandingSectionsList() {
   const { data } = useSectionContent("homeSections", defaultSectionVisibility);
   const [enabledMap, setEnabledMap] = useState(defaultSectionVisibility);
   const [syncedData, setSyncedData] = useState(data);
-  const { status, run } = useSaveStatus();
+  const { run } = useSaveStatus();
 
   if (data !== syncedData) {
     setSyncedData(data);
@@ -21,13 +21,10 @@ export function useLandingSectionsList() {
   }
 
   const toggle = (key: string) => {
-    setEnabledMap((current) => ({ ...current, [key]: !current[key] }));
+    const updated = { ...enabledMap, [key]: !enabledMap[key] };
+    setEnabledMap(updated);
+    run(() => saveSectionContent("homeSections", updated));
   };
 
-  const onSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    run(() => saveSectionContent("homeSections", enabledMap));
-  };
-
-  return { sections: landingSections, enabledMap, toggle, onSubmit, status };
+  return { sections: landingSections, enabledMap, toggle };
 }

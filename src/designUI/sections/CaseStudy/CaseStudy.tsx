@@ -11,7 +11,7 @@ export default function CaseStudy() {
   const { activeSlide, goToPrevious, goToNext, canGoPrevious, canGoNext } = useCaseStudy();
 
   return (
-    <Container variant="section" className="relative w-full overflow-hidden">
+    <Container variant="section" id="case-study" className="relative w-full overflow-hidden">
       <Container className="px-[5px] md:px-[10px]">
         <CaseStudySlide {...activeSlide}>
           <CaseStudyArrows
