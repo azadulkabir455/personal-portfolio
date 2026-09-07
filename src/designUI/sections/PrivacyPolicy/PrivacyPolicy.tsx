@@ -1,3 +1,5 @@
+"use client";
+
 import LegalContent from "@/designUI/components/LegalContent/LegalContent";
 import { usePrivacyPolicy } from "./function";
 

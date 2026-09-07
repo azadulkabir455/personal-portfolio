@@ -1,16 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { landingSections } from "@/designUI/admin/utilities/content/landingSections";
+import {
+  landingSections,
+  defaultSectionVisibility,
+} from "@/designUI/admin/utilities/content/landingSections";
+import { useSectionContent } from "@/customHooks/useSectionContent";
+import { saveSectionContent } from "@/firebase/sectionContent";
+import { useSaveStatus } from "@/customHooks/useSaveStatus";
 
 export function useLandingSectionsList() {
-  const [enabledMap, setEnabledMap] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(landingSections.map((section) => [section.key, true])),
-  );
+  const { data } = useSectionContent("homeSections", defaultSectionVisibility);
+  const [enabledMap, setEnabledMap] = useState(defaultSectionVisibility);
+  const [syncedData, setSyncedData] = useState(data);
+  const { status, run } = useSaveStatus();
+
+  if (data !== syncedData) {
+    setSyncedData(data);
+    setEnabledMap(data);
+  }
 
   const toggle = (key: string) => {
     setEnabledMap((current) => ({ ...current, [key]: !current[key] }));
   };
 
-  return { sections: landingSections, enabledMap, toggle };
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    run(() => saveSectionContent("homeSections", enabledMap));
+  };
+
+  return { sections: landingSections, enabledMap, toggle, onSubmit, status };
 }

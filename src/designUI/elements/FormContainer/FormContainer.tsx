@@ -39,7 +39,7 @@ export default function FormContainer({
       <div className="grid grid-cols-1 gap-x-4 gap-y-3 md:grid-cols-2 lg:gap-x-6">{children}</div>
 
       {actions && (
-        <div className="flex items-center justify-end gap-3 border-t border-[#E4E4E4] pt-4 lg:pt-6">
+        <div className="sticky bottom-[84px] z-10 -mx-4 -mb-4 flex items-center justify-end gap-3 rounded-b-[16px] border-t border-[#E4E4E4] bg-white/95 px-4 py-4 backdrop-blur-sm lg:bottom-[10px] lg:-mx-10 lg:-mb-10 lg:px-10 lg:py-6">
           {actions}
         </div>
       )}

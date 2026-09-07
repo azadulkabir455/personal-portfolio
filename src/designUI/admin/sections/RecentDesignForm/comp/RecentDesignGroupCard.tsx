@@ -37,13 +37,6 @@ export default function RecentDesignGroupCard({
         </button>
       </Container>
 
-      <Input
-        id={`groups.${index}.href`}
-        label="Link"
-        error={errors.groups?.[index]?.href?.message}
-        {...register(`groups.${index}.href`)}
-      />
-
       <Container className="flex flex-col gap-4">
         <Container className="flex items-center justify-between">
           <span className="font-sans text-[12px] font-semibold text-[#8A8A86]">Images</span>
@@ -51,7 +44,7 @@ export default function RecentDesignGroupCard({
             type="button"
             variant="plain"
             className="text-[#171717]"
-            onClick={() => imagesArray.append({ src: null, alt: "" })}
+            onClick={() => imagesArray.append({ src: null, alt: "", href: "" })}
           >
             + Add Image
           </Button>
@@ -77,22 +70,31 @@ export default function RecentDesignGroupCard({
                 )}
               />
 
-              <Container className="flex w-full items-end gap-4">
+              <Container className="flex w-full flex-col gap-4">
+                <Container className="flex w-full items-end gap-4">
+                  <Input
+                    id={`groups.${index}.images.${imageIndex}.alt`}
+                    label="Alt Text"
+                    containerClassName="w-full"
+                    error={errors.groups?.[index]?.images?.[imageIndex]?.alt?.message}
+                    {...register(`groups.${index}.images.${imageIndex}.alt`)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => imagesArray.remove(imageIndex)}
+                    aria-label="Remove image"
+                    className={clsx(removeButtonClassName, "mb-[18px] lg:mb-5")}
+                  >
+                    <Icon name="FaTrashAlt" width={14} height={14} />
+                  </button>
+                </Container>
+
                 <Input
-                  id={`groups.${index}.images.${imageIndex}.alt`}
-                  label="Alt Text"
-                  containerClassName="w-full"
-                  error={errors.groups?.[index]?.images?.[imageIndex]?.alt?.message}
-                  {...register(`groups.${index}.images.${imageIndex}.alt`)}
+                  id={`groups.${index}.images.${imageIndex}.href`}
+                  label="Link"
+                  error={errors.groups?.[index]?.images?.[imageIndex]?.href?.message}
+                  {...register(`groups.${index}.images.${imageIndex}.href`)}
                 />
-                <button
-                  type="button"
-                  onClick={() => imagesArray.remove(imageIndex)}
-                  aria-label="Remove image"
-                  className={clsx(removeButtonClassName, "mb-[18px] lg:mb-5")}
-                >
-                  <Icon name="FaTrashAlt" width={14} height={14} />
-                </button>
               </Container>
             </Container>
           ))}

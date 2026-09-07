@@ -75,7 +75,7 @@ export default function CaseStudySlide({
         </Container>
 
         <Container className="mt-[20px] flex max-w-[80%] justify-start md:mt-[10px] md:max-w-[48%] lg:mt-[80px] lg:max-w-[38%]">
-          <Link href={ctaLink}>
+          <Link href={ctaLink} target="_blank" rel="noopener noreferrer">
             <Button as="span" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
               {ctaLabel}
             </Button>

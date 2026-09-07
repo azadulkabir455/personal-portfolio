@@ -13,7 +13,7 @@ import { useFooter } from "./function";
 import FooterCTAButton from "./comp/FooterCTAButton";
 
 export default function Footer() {
-  const { data } = useFooter();
+  const { data, phone } = useFooter();
 
   return (
     <Container variant="section" id="footer" className="w-full pb-[5px] md:pb-[10px] lg:pb-0">
@@ -85,15 +85,18 @@ export default function Footer() {
                         </span>
                       ))}
                     </Text>
-                    <Button
-                      variant="filled"
-                      iconMotion="vertical"
-                      className="!h-[40px] !gap-[18px] !bg-none !bg-[#FFFFFF0A] !py-[9px] !pl-[24px]"
-                      iconClassName="my-1 mr-[5px] !h-[32px] !w-[32px] !bg-[#F7F7F7]"
-                      icon={<DownloadIcon width={16} height={16} />}
-                    >
-                      {data.profile.resumeLabel}
-                    </Button>
+                    <Link href={data.profile.resumeHref} target="_blank" rel="noopener noreferrer">
+                      <Button
+                        as="span"
+                        variant="filled"
+                        iconMotion="vertical"
+                        className="!h-[40px] !gap-[18px] !bg-none !bg-[#FFFFFF0A] !py-[9px] !pl-[24px]"
+                        iconClassName="my-1 mr-[5px] !h-[32px] !w-[32px] !bg-[#F7F7F7]"
+                        icon={<DownloadIcon width={16} height={16} />}
+                      >
+                        {data.profile.resumeLabel}
+                      </Button>
+                    </Link>
                   </Container>
                 </Container>
               </Container>
@@ -131,6 +134,7 @@ export default function Footer() {
               <FooterCTAButton
                 label={data.profile.ctaLabel}
                 href={data.profile.ctaHref}
+                phone={phone}
               />
             </Container>
           </Container>

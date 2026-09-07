@@ -3,11 +3,11 @@
 import Input from "@/designUI/elements/formElement/Input/Input";
 import Textarea from "@/designUI/elements/formElement/Textarea/Textarea";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import { useFeaturedProjectsForm } from "./function";
 
 export default function FeaturedProjectsForm() {
-  const { form, onSubmit } = useFeaturedProjectsForm();
+  const { form, onSubmit, status } = useFeaturedProjectsForm();
   const { register, formState } = form;
   const { errors } = formState;
 
@@ -16,7 +16,7 @@ export default function FeaturedProjectsForm() {
       title="Featured Projects Section"
       description="Title and description shown above the featured projects list. The projects themselves are managed separately."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input
         id="badge"

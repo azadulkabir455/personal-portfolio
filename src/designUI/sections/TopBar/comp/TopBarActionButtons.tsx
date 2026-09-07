@@ -1,6 +1,7 @@
 import Link from "@/designUI/elements/Link/Link";
 import Button from "@/designUI/elements/Button/Button";
 import { DownloadIcon, WhatsAppIcon } from "@/designUI/utilities/icons";
+import { handleTelLinkClick } from "@/designUI/utilities/phone";
 import type { TopBarActionButtonsProps } from "../types";
 
 const buttonClassName = "!h-[40px] !gap-[18px] !bg-none !bg-[#F9F9F91A] !py-[9px] !pl-[24px]";
@@ -8,12 +9,13 @@ const buttonClassName = "!h-[40px] !gap-[18px] !bg-none !bg-[#F9F9F91A] !py-[9px
 export default function TopBarActionButtons({
   talkLabel,
   talkHref,
+  phone,
   resumeLabel,
   resumeHref,
 }: TopBarActionButtonsProps) {
   return (
     <>
-      <Link href={talkHref} target="_blank" rel="noopener noreferrer">
+      <Link href={talkHref} onClick={(event) => handleTelLinkClick(event, phone)}>
         <Button
           as="span"
           variant="filled"
@@ -25,7 +27,7 @@ export default function TopBarActionButtons({
           {talkLabel}
         </Button>
       </Link>
-      <Link href={resumeHref}>
+      <Link href={resumeHref} target="_blank" rel="noopener noreferrer">
         <Button
           as="span"
           variant="filled"

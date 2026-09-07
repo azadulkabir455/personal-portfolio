@@ -20,7 +20,7 @@ export default function BlogListRow({ post, checked, onToggle, onView, onDelete 
       />
 
       <Container className="relative h-[52px] w-[72px] shrink-0 overflow-hidden rounded-[8px] bg-[#F7F7F7]">
-        <NextImage src={post.image} alt={post.title} fill className="object-cover" />
+        {post.image && <NextImage src={post.image} alt={post.title} fill className="object-cover" />}
       </Container>
 
       <Container className="flex min-w-0 flex-1 flex-col gap-0.5">

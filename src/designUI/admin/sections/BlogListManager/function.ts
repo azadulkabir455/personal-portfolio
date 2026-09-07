@@ -1,10 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { blogListContent } from "@/designUI/utilities/content/blogList";
 import type { BlogPost } from "@/designUI/utilities/content/blog";
 import type { SelectOption } from "@/designUI/elements/formElement/Select/types";
 import type { DateRangeValue } from "@/designUI/elements/formElement/DatePicker/types";
+import { deletePost as deletePostRemote, getAllPostsForDashboard } from "@/firebase/blogService";
+import { isFirebaseConfigured } from "@/firebase/config";
+
+type DashboardPost = BlogPost & { id: string };
 
 function buildCategoryOptions(): SelectOption[] {
   const options: SelectOption[] = [{ value: "", label: "All Categories" }];
@@ -39,13 +43,22 @@ const PAGE_SIZE = 10;
 const EMPTY_DATE_RANGE: DateRangeValue = { from: "", to: "" };
 
 export function useBlogListManager() {
-  const [posts, setPosts] = useState<BlogPost[]>(blogListContent.posts);
+  const [posts, setPosts] = useState<DashboardPost[]>(
+    blogListContent.posts.map((post) => ({ ...post, id: post.href })),
+  );
   const [categoryFilter, setCategoryFilterState] = useState("");
   const [tagFilter, setTagFilterState] = useState("");
   const [dateFilter, setDateFilterState] = useState<DateRangeValue>(EMPTY_DATE_RANGE);
   const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [viewPost, setViewPost] = useState<BlogPost | null>(null);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured) return;
+    getAllPostsForDashboard().then((remotePosts) => {
+      if (remotePosts.length) setPosts(remotePosts as DashboardPost[]);
+    });
+  }, []);
 
   const setCategoryFilter = (value: string) => {
     setCategoryFilterState(value);
@@ -103,8 +116,10 @@ export function useBlogListManager() {
     );
   };
 
-  const deletePost = (href: string) => {
-    setPosts((current) => current.filter((post) => post.href !== href));
+  const deletePost = async (href: string) => {
+    const post = posts.find((item) => item.href === href);
+    if (post && isFirebaseConfigured) await deletePostRemote(post.id);
+    setPosts((current) => current.filter((item) => item.href !== href));
     setSelected((current) => {
       const next = new Set(current);
       next.delete(href);
@@ -112,7 +127,12 @@ export function useBlogListManager() {
     });
   };
 
-  const bulkDelete = () => {
+  const bulkDelete = async () => {
+    if (isFirebaseConfigured) {
+      await Promise.all(
+        posts.filter((post) => selected.has(post.href)).map((post) => deletePostRemote(post.id)),
+      );
+    }
     setPosts((current) => current.filter((post) => !selected.has(post.href)));
     setSelected(new Set());
   };

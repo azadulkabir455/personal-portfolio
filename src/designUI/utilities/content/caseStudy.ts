@@ -36,7 +36,7 @@ export const caseStudyContent: CaseStudyContent = {
       ctaLabel: "View Case Study",
       ctaLink: "#",
       images: bgImages,
-      studyImage: "/images/featureprojects/p3.png",
+      studyImage: "/images/casestudy/caseStudyImage/cs1.jpg",
     },
     {
       publishedLabel: "Published Date:",
@@ -47,7 +47,7 @@ export const caseStudyContent: CaseStudyContent = {
       ctaLabel: "View Case Study",
       ctaLink: "#",
       images: bgImages,
-      studyImage: "/images/featureprojects/p1.png",
+      studyImage: "/images/casestudy/caseStudyImage/cs2.jpg",
     },
     {
       publishedLabel: "Published Date:",
@@ -58,7 +58,7 @@ export const caseStudyContent: CaseStudyContent = {
       ctaLabel: "View Case Study",
       ctaLink: "#",
       images: bgImages,
-      studyImage: "/images/featureprojects/p2.png",
+      studyImage: "/images/casestudy/caseStudyImage/cs3.jpg",
     },
   ],
 };

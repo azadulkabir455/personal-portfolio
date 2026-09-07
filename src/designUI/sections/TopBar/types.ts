@@ -3,6 +3,7 @@ export type TopBarMode = "transparent" | "sticky" | "hidden" | "menu";
 export interface TopBarActionButtonsProps {
   talkLabel: string;
   talkHref: string;
+  phone: string;
   resumeLabel: string;
   resumeHref: string;
 }

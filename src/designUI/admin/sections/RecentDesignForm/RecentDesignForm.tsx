@@ -3,12 +3,13 @@
 import Input from "@/designUI/elements/formElement/Input/Input";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import { useRecentDesignForm } from "./function";
 import RecentDesignGroupCard from "./comp/RecentDesignGroupCard";
 
 export default function RecentDesignForm() {
-  const { form, onSubmit, groupsArray } = useRecentDesignForm();
+  const { form, onSubmit, groupsArray, status } = useRecentDesignForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -17,7 +18,7 @@ export default function RecentDesignForm() {
       title="Recent Design Section"
       description="Content shown in the landing page recent design section."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input
         id="text"
@@ -34,7 +35,7 @@ export default function RecentDesignForm() {
             type="button"
             variant="plain"
             className="text-[#171717]"
-            onClick={() => groupsArray.append({ href: "", images: [{ src: null, alt: "" }] })}
+            onClick={() => groupsArray.append({ images: [{ src: null, alt: "", href: "" }] })}
           >
             + Add Group
           </Button>

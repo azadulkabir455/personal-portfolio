@@ -3,6 +3,9 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { journeyContent } from "@/designUI/utilities/content/journey";
+import { saveSectionContent } from "@/firebase/sectionContent";
+import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { journeyFormSchema, type JourneyFormValues } from "./types";
 
 export function useJourneyForm() {
@@ -23,6 +26,7 @@ export function useJourneyForm() {
           image: certificate.image,
           width: String(certificate.width),
           height: String(certificate.height),
+          link: certificate.link,
         })),
       },
     },
@@ -32,9 +36,46 @@ export function useJourneyForm() {
   const toolsArray = useFieldArray({ control: form.control, name: "toolkit.tools" });
   const certificatesArray = useFieldArray({ control: form.control, name: "toolkit.certificates" });
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Journey form submitted", values);
-  });
+  const { status, run } = useSaveStatus();
 
-  return { form, onSubmit, stepsArray, toolsArray, certificatesArray };
+  const onSubmit = form.handleSubmit((values) =>
+    run(async () => {
+      const tools = values.toolkit.tools.map((tool, index) => ({
+        name: tool.name,
+        icon: resolveStringValue(tool.icon, journeyContent.toolkit.tools[index]?.icon),
+      }));
+      const certificates = values.toolkit.certificates.map((certificate, index) => ({
+        title: certificate.title,
+        image: resolveStringValue(certificate.image, journeyContent.toolkit.certificates[index]?.image),
+        width: Number(certificate.width),
+        height: Number(certificate.height),
+        link: certificate.link,
+      }));
+
+      await saveSectionContent("journey", {
+        intro: values.intro,
+        steps: values.steps,
+        toolkit: {
+          toolsTitle: values.toolkit.toolsTitle,
+          tools,
+          certificationsTitle: values.toolkit.certificationsTitle,
+          certificates,
+        },
+      });
+
+      form.reset({
+        ...values,
+        toolkit: {
+          ...values.toolkit,
+          tools: values.toolkit.tools.map((tool, index) => ({ ...tool, icon: tools[index].icon })),
+          certificates: values.toolkit.certificates.map((certificate, index) => ({
+            ...certificate,
+            image: certificates[index].image,
+          })),
+        },
+      });
+    }),
+  );
+
+  return { form, onSubmit, stepsArray, toolsArray, certificatesArray, status };
 }

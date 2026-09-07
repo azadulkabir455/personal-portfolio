@@ -27,12 +27,14 @@ export default function BlogCard({ type, category, title, image, href, ctaLabel 
       }}
     >
       <Container className="relative h-[147px] w-full overflow-hidden rounded-l-[12px] md:h-[121px] md:rounded-l-[8px] lg:h-[252px] lg:rounded-l-[16px]">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+        {image && (
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        )}
       </Container>
 
       <Container className="mt-[16px] flex flex-col pr-[12px] md:flex-1 md:justify-between md:pr-[16px] lg:pr-[24px]">

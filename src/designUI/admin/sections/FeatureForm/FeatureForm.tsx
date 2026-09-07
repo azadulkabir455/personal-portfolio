@@ -3,12 +3,13 @@
 import Input from "@/designUI/elements/formElement/Input/Input";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import { useFeatureForm } from "./function";
 
 export default function FeatureForm() {
-  const { form, onSubmit, linksArray } = useFeatureForm();
+  const { form, onSubmit, linksArray, status } = useFeatureForm();
   const { register, formState } = form;
   const { errors } = formState;
 
@@ -17,7 +18,7 @@ export default function FeatureForm() {
       title="Feature Section"
       description="Quick navigation links shown in the landing page feature section."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Container className="flex flex-col gap-4 md:col-span-2">
         <Container className="flex items-center justify-between">

@@ -47,6 +47,7 @@ export const journeyFormSchema = z.object({
           image: uploadedFileSchema,
           width: positiveNumberString,
           height: positiveNumberString,
+          link: z.string().min(1, "Link is required"),
         }),
       )
       .min(1, "Add at least one certificate"),

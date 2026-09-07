@@ -23,6 +23,7 @@ export interface JourneyCertificate {
   image: string;
   width: number;
   height: number;
+  link: string;
 }
 
 export interface JourneyToolkit {
@@ -84,24 +85,28 @@ export const journeyContent: JourneyContent = {
         image: "/images/journey/certificate/cer1.jpg",
         width: 500,
         height: 366,
+        link: "#",
       },
       {
         title: "Visual Design: The Ultimate Guide",
         image: "/images/journey/certificate/cer2.jpg",
         width: 500,
         height: 366,
+        link: "#",
       },
       {
         title: "Foundations of User Experience (UX) Design",
         image: "/images/journey/certificate/cer3.jpg",
         width: 670,
         height: 520,
+        link: "#",
       },
       {
         title: "Claude 101",
         image: "/images/journey/certificate/cer4.png",
         width: 3300,
         height: 2550,
+        link: "#",
       },
     ],
   },

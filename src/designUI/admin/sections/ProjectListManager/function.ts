@@ -1,10 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { featuredProjectsContent } from "@/designUI/utilities/content/featuredProjects";
 import type { FeaturedProject } from "@/designUI/utilities/content/featuredProjects";
 import type { SelectOption } from "@/designUI/elements/formElement/Select/types";
 import type { DateRangeValue } from "@/designUI/elements/formElement/DatePicker/types";
+import {
+  deleteProject as deleteProjectRemote,
+  getAllProjectsForDashboard,
+} from "@/firebase/projectService";
+import { isFirebaseConfigured } from "@/firebase/config";
 
 function buildTagOptions(): SelectOption[] {
   return [
@@ -33,6 +38,13 @@ export function useProjectListManager() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [viewProject, setViewProject] = useState<FeaturedProject | null>(null);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured) return;
+    getAllProjectsForDashboard().then((remoteProjects) => {
+      if (remoteProjects.length) setProjects(remoteProjects as FeaturedProject[]);
+    });
+  }, []);
 
   const setSearchQuery = (value: string) => {
     setSearchQueryState(value);
@@ -92,7 +104,8 @@ export function useProjectListManager() {
     );
   };
 
-  const deleteProject = (id: string) => {
+  const deleteProject = async (id: string) => {
+    if (isFirebaseConfigured) await deleteProjectRemote(id);
     setProjects((current) => current.filter((project) => project.id !== id));
     setSelected((current) => {
       const next = new Set(current);
@@ -101,7 +114,10 @@ export function useProjectListManager() {
     });
   };
 
-  const bulkDelete = () => {
+  const bulkDelete = async () => {
+    if (isFirebaseConfigured) {
+      await Promise.all(Array.from(selected).map((id) => deleteProjectRemote(id)));
+    }
     setProjects((current) => current.filter((project) => !selected.has(project.id)));
     setSelected(new Set());
   };

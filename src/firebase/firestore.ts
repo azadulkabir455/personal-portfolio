@@ -1,4 +1,11 @@
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
 import { firebaseApp } from "./config";
 
-export const firestore = getFirestore(firebaseApp);
+let firestoreInstance: ReturnType<typeof getFirestore>;
+try {
+  firestoreInstance = initializeFirestore(firebaseApp, { ignoreUndefinedProperties: true });
+} catch {
+  firestoreInstance = getFirestore(firebaseApp);
+}
+
+export const firestore = firestoreInstance;

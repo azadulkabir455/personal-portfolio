@@ -4,13 +4,13 @@ import { Controller } from "react-hook-form";
 import Input from "@/designUI/elements/formElement/Input/Input";
 import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import FilePreviewButton from "./comp/FilePreviewButton";
 import { usePersonalInfoForm } from "./function";
 
 export default function PersonalInfoForm() {
-  const { form, onSubmit } = usePersonalInfoForm();
+  const { form, onSubmit, status } = usePersonalInfoForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -19,7 +19,7 @@ export default function PersonalInfoForm() {
       title="Personal Information"
       description="Contact details and CV shown across the site."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Controller
         control={control}
@@ -59,6 +59,12 @@ export default function PersonalInfoForm() {
 
       <Input id="phone" label="Phone" error={errors.phone?.message} {...register("phone")} />
       <Input id="email" label="Email" error={errors.email?.message} {...register("email")} />
+      <Input
+        id="address"
+        label="Address"
+        error={errors.address?.message}
+        {...register("address")}
+      />
     </FormContainer>
   );
 }

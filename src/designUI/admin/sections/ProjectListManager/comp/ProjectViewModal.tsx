@@ -51,7 +51,9 @@ export default function ProjectViewModal({ project, onClose }: ProjectViewModalP
         </Container>
 
         <Container className="relative mb-4 h-[220px] w-full shrink-0 overflow-hidden rounded-[10px] bg-[#F7F7F7]">
-          <NextImage src={project.image} alt={project.title} fill className="object-cover" />
+          {project.image && (
+            <NextImage src={project.image} alt={project.title} fill className="object-cover" />
+          )}
         </Container>
 
         {project.tags.length > 0 && (

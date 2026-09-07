@@ -6,8 +6,3 @@ export type JourneyToolBadgeProps = JourneyTool;
 export interface JourneyCertificateCarouselProps {
   certificates: JourneyCertificate[];
 }
-
-export interface JourneyCertificateModalProps {
-  certificate: JourneyCertificate | null;
-  onClose: () => void;
-}

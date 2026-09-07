@@ -14,14 +14,9 @@ import HeroGridLines from "./comp/HeroGridLines";
 import HeroContentCard, { heroCardTextClassName } from "./comp/HeroContentCard";
 
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
-import HeroBannerSkeleton from "@/designUI/utilities/loader/landing/heroBannerSkeleton";
 
 export default function Hero() {
-  const { data, isLoading } = useHero();
-
-  if (isLoading) {
-    return <HeroBannerSkeleton />;
-  }
+  const { data } = useHero();
 
   return (
     <Container id="hero" className="p-[5px] md:p-[10px]">

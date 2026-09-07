@@ -7,12 +7,14 @@ import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import Switch from "@/designUI/elements/formElement/Switch/Switch";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import { useStoryForm } from "./function";
 
 export default function StoryForm() {
-  const { form, onSubmit, clientLogosArray, processStepsArray, statsArray } = useStoryForm();
+  const { form, onSubmit, clientLogosArray, processStepsArray, statsArray, status } =
+    useStoryForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -21,7 +23,7 @@ export default function StoryForm() {
       title="Story Section"
       description="Content shown in the landing page story section."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input id="title" label="Title" error={errors.title?.message} {...register("title")} />
       <Input

@@ -20,7 +20,9 @@ export default function ProjectListRow({ project, checked, onToggle, onView, onD
       />
 
       <Container className="relative h-[52px] w-[72px] shrink-0 overflow-hidden rounded-[8px] bg-[#F7F7F7]">
-        <NextImage src={project.image} alt={project.title} fill className="object-cover" />
+        {project.image && (
+          <NextImage src={project.image} alt={project.title} fill className="object-cover" />
+        )}
       </Container>
 
       <Container className="flex min-w-0 flex-1 flex-col gap-0.5">

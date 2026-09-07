@@ -12,12 +12,12 @@ export const recentDesignFormSchema = z.object({
   groups: z
     .array(
       z.object({
-        href: z.string().min(1, "Link is required"),
         images: z
           .array(
             z.object({
               src: uploadedFileSchema,
               alt: z.string().min(1, "Alt text is required"),
+              href: z.string().min(1, "Link is required"),
             }),
           )
           .min(1, "Add at least one image"),

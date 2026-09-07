@@ -4,12 +4,12 @@ import { Controller } from "react-hook-form";
 import Input from "@/designUI/elements/formElement/Input/Input";
 import Switch from "@/designUI/elements/formElement/Switch/Switch";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import { useHeaderForm } from "./function";
 
 export default function HeaderForm() {
-  const { form, onSubmit, navLinksArray } = useHeaderForm();
+  const { form, onSubmit, navLinksArray, status } = useHeaderForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -18,7 +18,7 @@ export default function HeaderForm() {
       title="Header Section"
       description="Content shown in the site-wide top navigation bar."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input
         id="experienceLabel"

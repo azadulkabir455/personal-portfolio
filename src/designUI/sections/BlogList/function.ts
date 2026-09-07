@@ -2,14 +2,21 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSectionContent } from "@/customHooks/useSectionContent";
+import { useFirestoreCollection } from "@/customHooks/useFirestoreCollection";
 import { blogListContent } from "@/designUI/utilities/content/blogList";
+import { getPublishedPosts } from "@/firebase/blogService";
 import type { BlogSortDirection, BlogViewMode } from "./types";
 
 const POSTS_PER_PAGE = 6;
 const LOAD_MORE_DELAY = 600;
 
 export function useBlogList() {
-  const { data } = useSectionContent("blogList", blogListContent);
+  const { data: taxonomy } = useSectionContent("blogList", {
+    categories: blogListContent.categories,
+    suggestions: blogListContent.suggestions,
+  });
+  const { data: allPosts } = useFirestoreCollection(getPublishedPosts, blogListContent.posts);
+  const data = { ...taxonomy, posts: allPosts };
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const [activeSubCategories, setActiveSubCategories] = useState<string[]>([]);
   const [expandedCategoryId, setExpandedCategoryId] = useState<string | null>(

@@ -6,6 +6,7 @@ import Textarea from "@/designUI/elements/formElement/Textarea/Textarea";
 import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import { useJourneyForm } from "./function";
@@ -17,7 +18,7 @@ const removeButtonClassName =
   "flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]";
 
 export default function JourneyForm() {
-  const { form, onSubmit, stepsArray, toolsArray, certificatesArray } = useJourneyForm();
+  const { form, onSubmit, stepsArray, toolsArray, certificatesArray, status } = useJourneyForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -26,7 +27,7 @@ export default function JourneyForm() {
       title="Journey Section"
       description="Content shown in the landing page journey section."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input
         id="intro.preHeader"
@@ -206,7 +207,13 @@ export default function JourneyForm() {
             variant="plain"
             className="text-[#171717]"
             onClick={() =>
-              certificatesArray.append({ title: "", image: null, width: "500", height: "366" })
+              certificatesArray.append({
+                title: "",
+                image: null,
+                width: "500",
+                height: "366",
+                link: "",
+              })
             }
           >
             + Add Certificate
@@ -253,6 +260,12 @@ export default function JourneyForm() {
                   label="Title"
                   error={errors.toolkit?.certificates?.[index]?.title?.message}
                   {...register(`toolkit.certificates.${index}.title`)}
+                />
+                <Input
+                  id={`toolkit.certificates.${index}.link`}
+                  label="Link"
+                  error={errors.toolkit?.certificates?.[index]?.link?.message}
+                  {...register(`toolkit.certificates.${index}.link`)}
                 />
                 <span className="font-sans text-[11px] font-semibold text-[#8A8A86] lg:text-[12px]">
                   Image Resolution

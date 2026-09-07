@@ -3,6 +3,7 @@ import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import LandingSectionsList from "@/designUI/admin/sections/LandingSectionsList/LandingSectionsList";
+import PageVisibilityList from "@/designUI/admin/sections/PageVisibilityList/PageVisibilityList";
 import PersonalInfoForm from "@/designUI/admin/sections/PersonalInfoForm/PersonalInfoForm";
 
 export default function AdminHomePage() {
@@ -30,6 +31,7 @@ export default function AdminHomePage() {
       </Container>
 
       <PersonalInfoForm />
+      <PageVisibilityList />
       <LandingSectionsList />
     </Container>
   );

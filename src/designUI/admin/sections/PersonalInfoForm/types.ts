@@ -9,6 +9,7 @@ export const personalInfoFormSchema = z.object({
   favicon: z.custom<File | string | null>(),
   phone: z.string().min(1, "Phone number is required"),
   email: z.string().min(1, "Email is required").email("Enter a valid email"),
+  address: z.string().min(1, "Address is required"),
 });
 
 export type PersonalInfoFormValues = z.infer<typeof personalInfoFormSchema>;

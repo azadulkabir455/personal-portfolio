@@ -7,13 +7,14 @@ import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import IconSelect from "@/designUI/elements/formElement/IconSelect/IconSelect";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import type { IconName } from "@/designUI/elements/Icon/types";
 import { useHeroForm } from "./function";
 
 export default function HeroForm() {
-  const { form, onSubmit, socialLinksArray } = useHeroForm();
+  const { form, onSubmit, socialLinksArray, status } = useHeroForm();
   const { register, control, formState } = form;
   const { errors } = formState;
   const { fields, append, remove } = socialLinksArray;
@@ -23,7 +24,7 @@ export default function HeroForm() {
       title="Hero Section"
       description="Content shown in the landing page hero banner."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Controller
         control={control}

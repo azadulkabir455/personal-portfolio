@@ -8,12 +8,19 @@ import Select from "@/designUI/elements/formElement/Select/Select";
 import TagInput from "@/designUI/elements/formElement/TagInput/TagInput";
 import RichTextEditor from "@/designUI/elements/formElement/RichTextEditor/RichTextEditor";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import { useAddBlogForm } from "./function";
 import type { AddBlogFormProps } from "./types";
 
-export default function AddBlogForm({ heading = "Add Blog", defaultValues }: AddBlogFormProps) {
-  const { form, onSubmit, categoryOptions, tagSuggestions } = useAddBlogForm(defaultValues);
+export default function AddBlogForm({
+  heading = "Add Blog",
+  defaultValues,
+  existingPost,
+}: AddBlogFormProps) {
+  const { form, onSubmit, status, categoryOptions, tagSuggestions } = useAddBlogForm(
+    defaultValues,
+    existingPost,
+  );
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -22,7 +29,7 @@ export default function AddBlogForm({ heading = "Add Blog", defaultValues }: Add
       title={heading}
       description="Write and publish a new blog post."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Blog</Button>}
+      actions={<SaveButton status={status} label="Save Blog" />}
     >
       <Controller
         control={control}

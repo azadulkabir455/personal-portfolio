@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSectionContent } from "@/customHooks/useSectionContent";
 import { topBarContent } from "@/designUI/utilities/content/topbar";
+import { personalInfoContent } from "@/designUI/utilities/content/personalInfo";
+import { toTelLink } from "@/designUI/utilities/phone";
 import type { TopBarMode } from "./types";
 
 const TOP_THRESHOLD = 24;
@@ -18,6 +20,7 @@ export function useTopBar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { data, isLoading } = useSectionContent("topbar", topBarContent);
+  const { data: personalInfo } = useSectionContent("personalInfo", personalInfoContent);
   const [isOpen, setIsOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
@@ -92,6 +95,9 @@ export function useTopBar() {
 
   return {
     data,
+    talkHref: toTelLink(personalInfo.phone),
+    phone: personalInfo.phone,
+    resumeHref: personalInfo.cv,
     isLoading,
     isOpen,
     mode,

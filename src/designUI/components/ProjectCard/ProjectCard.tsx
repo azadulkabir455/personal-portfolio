@@ -56,7 +56,7 @@ export default function ProjectCard({
 
         <Container className="mt-[16px] flex flex-wrap items-center gap-x-[24px] gap-y-[8px] md:mt-[20px] lg:mt-[30px]">
           {ctaLabel && ctaLink && (
-            <Link href={ctaLink}>
+            <Link href={ctaLink} target="_blank" rel="noopener noreferrer">
               <Button
                 as="span"
                 variant="plain"
@@ -69,7 +69,7 @@ export default function ProjectCard({
           )}
 
           {secondaryCta && (
-            <Link href={secondaryCta.href}>
+            <Link href={secondaryCta.href} target="_blank" rel="noopener noreferrer">
               <Button
                 as="span"
                 variant="plain"
@@ -101,7 +101,7 @@ export default function ProjectCard({
           className="absolute right-0 bottom-0 z-10 h-[8px] w-[8px] md:h-[12px] md:w-[12px]"
         />
         <Container className="relative h-[229px] w-[288px] overflow-hidden rounded-[8px] md:h-[229px] md:w-[304px] md:rounded-[12px] lg:h-[319px] lg:w-[425px] lg:rounded-[16px]">
-          <Image src={image} alt={title} fill className="object-cover" />
+          {image && <Image src={image} alt={title} fill className="object-cover" />}
         </Container>
       </Container>
     </Container>

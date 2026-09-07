@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoContent } from "@/designUI/utilities/content/personalInfo";
+import { saveSectionContent } from "@/firebase/sectionContent";
+import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { personalInfoFormSchema, type PersonalInfoFormValues } from "./types";
 
 export function usePersonalInfoForm() {
@@ -14,6 +17,7 @@ export function usePersonalInfoForm() {
       favicon: personalInfoContent.favicon,
       phone: personalInfoContent.phone,
       email: personalInfoContent.email,
+      address: personalInfoContent.address,
     },
   });
 
@@ -36,9 +40,23 @@ export function usePersonalInfoForm() {
     };
   }, [favicon]);
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Personal Info form submitted", values);
-  });
+  const { status, run } = useSaveStatus();
 
-  return { form, onSubmit };
+  const onSubmit = form.handleSubmit((values) =>
+    run(async () => {
+      const cv = resolveStringValue(values.cv, personalInfoContent.cv);
+      const faviconUrl = resolveStringValue(values.favicon, personalInfoContent.favicon);
+
+      await saveSectionContent("personalInfo", {
+        cv,
+        favicon: faviconUrl,
+        phone: values.phone,
+        email: values.email,
+        address: values.address,
+      });
+      form.reset({ ...values, cv, favicon: faviconUrl });
+    }),
+  );
+
+  return { form, onSubmit, status };
 }

@@ -3,14 +3,16 @@ import Link from "@/designUI/elements/Link/Link";
 import Container from "@/designUI/elements/Container/Container";
 import { poppins } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
+import { handleTelLinkClick } from "@/designUI/utilities/phone";
 import type { FooterCTAButtonProps } from "../types";
 
-export default function FooterCTAButton({ label, href }: FooterCTAButtonProps) {
+export default function FooterCTAButton({ label, href, phone }: FooterCTAButtonProps) {
   const repeated = `${label} • `.repeat(2);
 
   return (
     <Link
       href={href}
+      onClick={(event) => handleTelLinkClick(event, phone)}
       className="group relative hidden h-[150px] w-[150px] shrink-0 items-center justify-center lg:flex"
     >
       <svg

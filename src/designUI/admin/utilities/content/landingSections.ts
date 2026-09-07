@@ -15,3 +15,7 @@ export const landingSections: LandingSectionItem[] = [
   { key: "caseStudy", label: "Case Study", href: "/admin/landing/case-study" },
   { key: "blog", label: "Blog", href: "/admin/landing/blog" },
 ];
+
+export const defaultSectionVisibility: Record<string, boolean> = Object.fromEntries(
+  landingSections.map((section) => [section.key, true]),
+);

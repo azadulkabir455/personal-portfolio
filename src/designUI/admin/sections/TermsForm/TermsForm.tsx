@@ -4,11 +4,11 @@ import { Controller } from "react-hook-form";
 import Input from "@/designUI/elements/formElement/Input/Input";
 import RichTextEditor from "@/designUI/elements/formElement/RichTextEditor/RichTextEditor";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import { useTermsForm } from "./function";
 
 export default function TermsForm() {
-  const { form, onSubmit } = useTermsForm();
+  const { form, onSubmit, status } = useTermsForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -17,7 +17,7 @@ export default function TermsForm() {
       title="Terms & Conditions"
       description="Content shown on the public Terms & Conditions page."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input id="title" label="Title" error={errors.title?.message} {...register("title")} />
       <Input

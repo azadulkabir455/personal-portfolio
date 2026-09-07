@@ -3,12 +3,12 @@
 import Input from "@/designUI/elements/formElement/Input/Input";
 import Textarea from "@/designUI/elements/formElement/Textarea/Textarea";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import { useBlogForm } from "./function";
 
 export default function BlogForm() {
-  const { form, onSubmit } = useBlogForm();
+  const { form, onSubmit, status } = useBlogForm();
   const { register, formState } = form;
   const { errors } = formState;
 
@@ -17,7 +17,7 @@ export default function BlogForm() {
       title="Blog Section"
       description="Intro text shown above the blog list on the landing page and on the blog details page."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Container className="flex flex-col gap-4 md:col-span-2">
         <span className="font-sans text-[13px] font-semibold text-[#171717]">

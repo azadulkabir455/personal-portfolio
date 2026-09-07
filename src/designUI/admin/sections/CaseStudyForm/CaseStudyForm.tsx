@@ -6,6 +6,7 @@ import Textarea from "@/designUI/elements/formElement/Textarea/Textarea";
 import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import { useCaseStudyForm } from "./function";
@@ -14,7 +15,7 @@ const removeButtonClassName =
   "flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]";
 
 export default function CaseStudyForm() {
-  const { form, onSubmit, slidesArray } = useCaseStudyForm();
+  const { form, onSubmit, slidesArray, status } = useCaseStudyForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -23,7 +24,7 @@ export default function CaseStudyForm() {
       title="Case Study Section"
       description="Content shown in the landing page case study slider."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Container className="flex flex-col gap-4 md:col-span-2">
         <Container className="flex items-center justify-between">

@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { termsAndConditionsContent } from "@/designUI/utilities/content/termsAndConditions";
+import { saveSectionContent } from "@/firebase/sectionContent";
+import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { termsFormSchema, type TermsFormValues } from "./types";
 
 export function useTermsForm() {
@@ -14,10 +16,14 @@ export function useTermsForm() {
       content: termsAndConditionsContent.content,
     },
   });
+  const { status, run } = useSaveStatus();
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Terms & Conditions form submitted", values);
-  });
+  const onSubmit = form.handleSubmit((values) =>
+    run(async () => {
+      await saveSectionContent("termsAndConditions", values);
+      form.reset(values);
+    }),
+  );
 
-  return { form, onSubmit };
+  return { form, onSubmit, status };
 }

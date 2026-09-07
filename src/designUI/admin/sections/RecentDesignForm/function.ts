@@ -3,6 +3,9 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { recentDesignContent } from "@/designUI/utilities/content/recentDesign";
+import { saveSectionContent } from "@/firebase/sectionContent";
+import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { recentDesignFormSchema, type RecentDesignFormValues } from "./types";
 
 export function useRecentDesignForm() {
@@ -16,9 +19,32 @@ export function useRecentDesignForm() {
 
   const groupsArray = useFieldArray({ control: form.control, name: "groups" });
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Recent Design form submitted", values);
-  });
+  const { status, run } = useSaveStatus();
 
-  return { form, onSubmit, groupsArray };
+  const onSubmit = form.handleSubmit((values) =>
+    run(async () => {
+      const groups = values.groups.map((group, groupIndex) => ({
+        images: group.images.map((image, imageIndex) => ({
+          src: resolveStringValue(image.src, recentDesignContent.groups[groupIndex]?.images[imageIndex]?.src),
+          alt: image.alt,
+          href: image.href,
+        })),
+      }));
+
+      await saveSectionContent("recentDesign", { intro: { text: values.text }, groups });
+
+      form.reset({
+        text: values.text,
+        groups: values.groups.map((group, groupIndex) => ({
+          ...group,
+          images: group.images.map((image, imageIndex) => ({
+            ...image,
+            src: groups[groupIndex].images[imageIndex].src,
+          })),
+        })),
+      });
+    }),
+  );
+
+  return { form, onSubmit, groupsArray, status };
 }

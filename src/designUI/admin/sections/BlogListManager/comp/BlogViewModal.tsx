@@ -53,7 +53,7 @@ export default function BlogViewModal({ post, onClose }: BlogViewModalProps) {
         </Container>
 
         <Container className="relative mb-4 h-[220px] w-full shrink-0 overflow-hidden rounded-[10px] bg-[#F7F7F7]">
-          <NextImage src={post.image} alt={post.title} fill className="object-cover" />
+          {post.image && <NextImage src={post.image} alt={post.title} fill className="object-cover" />}
         </Container>
 
         {post.tags && post.tags.length > 0 && (

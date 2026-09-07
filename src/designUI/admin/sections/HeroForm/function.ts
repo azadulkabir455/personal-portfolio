@@ -3,6 +3,9 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { heroContent } from "@/designUI/utilities/content/hero";
+import { saveSectionContent } from "@/firebase/sectionContent";
+import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { heroFormSchema, type HeroFormValues } from "./types";
 
 export function useHeroForm() {
@@ -24,10 +27,25 @@ export function useHeroForm() {
   });
 
   const socialLinksArray = useFieldArray({ control: form.control, name: "socialLinks" });
+  const { status, run } = useSaveStatus();
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Hero form submitted", values);
-  });
+  const onSubmit = form.handleSubmit((values) =>
+    run(async () => {
+      const photoUrl = resolveStringValue(values.photo, heroContent.photoUrl);
 
-  return { form, onSubmit, socialLinksArray };
+      await saveSectionContent("hero", {
+        title: values.title,
+        titleExtend: values.titleExtend,
+        greeting: values.greeting,
+        description: values.description,
+        ctaLabel: values.ctaLabel,
+        ctaLink: values.ctaLink,
+        photoUrl,
+        socialLinks: values.socialLinks.map((link) => ({ icon: { name: link.icon }, url: link.url })),
+      });
+      form.reset({ ...values, photo: photoUrl });
+    }),
+  );
+
+  return { form, onSubmit, socialLinksArray, status };
 }

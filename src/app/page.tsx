@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { usePageDataLoading } from "@/customHooks/usePageDataLoading";
+import { useSectionContent } from "@/customHooks/useSectionContent";
+import { defaultSectionVisibility } from "@/designUI/admin/utilities/content/landingSections";
 import Hero from "@/designUI/sections/Hero/Hero";
 import Feature from "@/designUI/sections/Feature/Feature";
 import Story from "@/designUI/sections/Story/Story";
@@ -15,27 +17,23 @@ import ScrollSpy from "@/designUI/sections/ScrollSpy/ScrollSpy";
 import PageLoader from "@/designUI/components/PageLoader/PageLoader";
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timeout);
-  }, []);
+  const isLoading = usePageDataLoading();
+  const { data: sectionVisibility } = useSectionContent("homeSections", defaultSectionVisibility);
 
   return (
     <>
       <PageLoader isLoading={isLoading} />
 
       <main className="flex flex-1 flex-col">
-        <Hero />
-        <Feature />
-        <Story />
-        <Journey />
-        <FeaturedProjects />
-        <RecentDesign />
-        <Services />
-        <CaseStudy />
-        <Blog />
+        {sectionVisibility.hero && <Hero />}
+        {sectionVisibility.feature && <Feature />}
+        {sectionVisibility.story && <Story />}
+        {sectionVisibility.journey && <Journey />}
+        {sectionVisibility.featuredProjects && <FeaturedProjects />}
+        {sectionVisibility.recentDesign && <RecentDesign />}
+        {sectionVisibility.services && <Services />}
+        {sectionVisibility.caseStudy && <CaseStudy />}
+        {sectionVisibility.blog && <Blog />}
       </main>
       <Footer />
       <ScrollSpy />

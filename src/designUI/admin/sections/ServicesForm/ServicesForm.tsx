@@ -3,12 +3,13 @@
 import Input from "@/designUI/elements/formElement/Input/Input";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import { useServicesForm } from "./function";
 
 export default function ServicesForm() {
-  const { form, onSubmit, itemsArray } = useServicesForm();
+  const { form, onSubmit, itemsArray, status } = useServicesForm();
   const { register, formState } = form;
   const { errors } = formState;
 
@@ -17,7 +18,7 @@ export default function ServicesForm() {
       title="Services Section"
       description="Content shown in the landing page services section."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Input
         id="badge"

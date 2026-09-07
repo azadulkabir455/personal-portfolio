@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { blogListContent } from "@/designUI/utilities/content/blogList";
+import { getPostBySlug } from "@/firebase/blogService";
+import { isFirebaseConfigured } from "@/firebase/config";
 import AddBlogForm from "@/designUI/admin/sections/AddBlogForm/AddBlogForm";
 
 export default async function AdminEditBlogPage({
@@ -9,20 +11,23 @@ export default async function AdminEditBlogPage({
 }) {
   const { slug } = await params;
   const href = decodeURIComponent(slug);
-  const post = blogListContent.posts.find((item) => item.href === href);
+  const post = isFirebaseConfigured ? await getPostBySlug(href) : null;
+  const fallbackPost = blogListContent.posts.find((item) => item.href === href);
+  const resolved = post ?? fallbackPost;
 
-  if (!post) return notFound();
+  if (!resolved) return notFound();
 
   return (
     <AddBlogForm
       heading="Edit Blog"
+      existingPost={post ? { id: post.id, href: post.href } : undefined}
       defaultValues={{
-        title: post.title,
-        subtitle: post.subtitle ?? post.excerpt,
-        image: post.image,
-        category: post.category,
-        tags: post.tags ?? [],
-        content: post.content ?? "",
+        title: resolved.title,
+        subtitle: resolved.subtitle ?? resolved.excerpt,
+        image: resolved.image,
+        category: resolved.category,
+        tags: resolved.tags ?? [],
+        content: resolved.content ?? "",
       }}
     />
   );

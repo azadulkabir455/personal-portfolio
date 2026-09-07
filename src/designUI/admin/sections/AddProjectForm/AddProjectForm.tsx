@@ -6,13 +6,20 @@ import Textarea from "@/designUI/elements/formElement/Textarea/Textarea";
 import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import TagSelect from "@/designUI/elements/formElement/TagSelect/TagSelect";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
-import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import { useAddProjectForm } from "./function";
 import type { AddProjectFormProps } from "./types";
 
-export default function AddProjectForm({ heading = "Add Project", defaultValues }: AddProjectFormProps) {
-  const { form, onSubmit, tagOptions } = useAddProjectForm(defaultValues);
+export default function AddProjectForm({
+  heading = "Add Project",
+  defaultValues,
+  existingProjectId,
+}: AddProjectFormProps) {
+  const { form, onSubmit, status, tagOptions } = useAddProjectForm(
+    defaultValues,
+    existingProjectId,
+  );
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -21,7 +28,7 @@ export default function AddProjectForm({ heading = "Add Project", defaultValues 
       title={heading}
       description="Add a project to the featured projects list."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Project</Button>}
+      actions={<SaveButton status={status} label="Save Project" />}
     >
       <Controller
         control={control}

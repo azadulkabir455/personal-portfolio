@@ -41,6 +41,9 @@ export default function TopBar() {
   const pathname = usePathname();
   const {
     data,
+    talkHref,
+    phone,
+    resumeHref,
     isOpen,
     mode,
     menuHeight,
@@ -91,9 +94,10 @@ export default function TopBar() {
               <Container className="flex items-center gap-2 md:gap-3">
                 <TopBarActionButtons
                   talkLabel={data.talkLabel}
-                  talkHref={data.talkHref}
+                  talkHref={talkHref}
+                  phone={phone}
                   resumeLabel={data.resumeLabel}
-                  resumeHref={data.resumeHref}
+                  resumeHref={resumeHref}
                 />
                 <TopBarMenuToggle isOpen={isOpen} onToggle={toggleOpen} />
               </Container>
@@ -174,9 +178,10 @@ export default function TopBar() {
                     <SocialLinks label={footerContent.social.findMeLabel} links={footerContent.social.links} />
                     <TopBarMobileActions
                       talkLabel={data.talkLabel}
-                      talkHref={data.talkHref}
+                      talkHref={talkHref}
+                      phone={phone}
                       resumeLabel={data.resumeLabel}
-                      resumeHref={data.resumeHref}
+                      resumeHref={resumeHref}
                     />
                   </Container>
                 </Container>

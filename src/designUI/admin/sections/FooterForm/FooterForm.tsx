@@ -8,6 +8,7 @@ import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import IconSelect from "@/designUI/elements/formElement/IconSelect/IconSelect";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
+import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 import type { IconName } from "@/designUI/elements/Icon/types";
@@ -20,7 +21,7 @@ const removeButtonClassName =
   "flex h-[44px] w-[44px] shrink-0 cursor-pointer items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8] lg:h-[52px] lg:w-[52px]";
 
 export default function FooterForm() {
-  const { form, onSubmit, socialLinksArray, legalLinksArray } = useFooterForm();
+  const { form, onSubmit, socialLinksArray, legalLinksArray, status } = useFooterForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -29,7 +30,7 @@ export default function FooterForm() {
       title="Footer Section"
       description="Content shown in the site-wide footer."
       onSubmit={onSubmit}
-      actions={<Button type="submit">Save Changes</Button>}
+      actions={<SaveButton status={status} />}
     >
       <Controller
         control={control}
