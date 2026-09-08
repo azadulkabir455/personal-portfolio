@@ -1,16 +1,10 @@
 import { z } from "zod";
 
-const uploadedFileSchema = z
-  .custom<File | string | null>()
-  .refine((value) => value !== null && value !== undefined && value !== "", {
-    message: "Image is required",
-  });
-
 export const footerFormSchema = z.object({
   profile: z.object({
     name: z.string().min(1, "Name is required"),
     tagline: z.string().min(1, "Tagline is required"),
-    image: uploadedFileSchema,
+    image: z.string().nullable().refine((value) => Boolean(value), "Image is required"),
     availabilityLabel: z.string().min(1, "This field is required"),
     availability: z.string().min(1, "Add at least one availability option"),
     resumeLabel: z.string().min(1, "Button label is required"),

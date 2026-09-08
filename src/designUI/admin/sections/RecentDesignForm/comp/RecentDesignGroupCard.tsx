@@ -64,6 +64,7 @@ export default function RecentDesignGroupCard({
                     label="Image"
                     value={srcField.value}
                     onChange={srcField.onChange}
+                    folder="recent-design"
                     error={errors.groups?.[index]?.images?.[imageIndex]?.src?.message}
                     containerClassName="w-full max-w-[220px] md:shrink-0"
                   />

@@ -10,7 +10,7 @@ import FilePreviewButton from "./comp/FilePreviewButton";
 import { usePersonalInfoForm } from "./function";
 
 export default function PersonalInfoForm() {
-  const { form, onSubmit, status } = usePersonalInfoForm();
+  const { form, onSubmit, status, isContentLoading } = usePersonalInfoForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -19,6 +19,7 @@ export default function PersonalInfoForm() {
       title="Personal Information"
       description="Contact details and CV shown across the site."
       onSubmit={onSubmit}
+      isLoading={isContentLoading}
       actions={<SaveButton status={status} />}
     >
       <Controller
@@ -30,8 +31,9 @@ export default function PersonalInfoForm() {
               label="CV"
               value={field.value}
               onChange={field.onChange}
+              folder="personal-info"
               accept="application/pdf"
-              hint="PDF, up to 5MB"
+              hint="PDF, up to 3MB"
               error={errors.cv?.message}
             />
             <FilePreviewButton file={field.value} label="View CV" kind="pdf" />
@@ -48,8 +50,9 @@ export default function PersonalInfoForm() {
               label="Favicon"
               value={field.value}
               onChange={field.onChange}
-              accept="image/png, image/x-icon, image/svg+xml"
-              hint="PNG, ICO or SVG, 32x32 recommended"
+              folder="personal-info"
+              accept="image/png"
+              hint="PNG, 32x32 recommended, up to 3MB"
               error={errors.favicon?.message}
             />
             <FilePreviewButton file={field.value} label="View Fav" kind="image" />

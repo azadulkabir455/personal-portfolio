@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { heroContent, type HeroContent } from "@/designUI/utilities/content/hero";
 import { saveSectionContent } from "@/firebase/sectionContent";
-import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { cleanupReplacedFiles } from "@/lib/uploadClient";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { useSectionContent } from "@/customHooks/useSectionContent";
 import { heroFormSchema, type HeroFormValues } from "./types";
@@ -24,14 +24,17 @@ function toFormValues(data: HeroContent): HeroFormValues {
 }
 
 export function useHeroForm() {
-  const { data } = useSectionContent("hero", heroContent);
+  const { data, isLoading: isContentLoading } = useSectionContent("hero", heroContent);
   const form = useForm<HeroFormValues>({
     resolver: zodResolver(heroFormSchema),
     defaultValues: toFormValues(heroContent),
   });
 
+  const savedPhotoRef = useRef<string | null>(data.photoUrl ?? null);
+
   useEffect(() => {
     form.reset(toFormValues(data));
+    savedPhotoRef.current = data.photoUrl ?? null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
@@ -40,7 +43,7 @@ export function useHeroForm() {
 
   const onSubmit = form.handleSubmit((values) =>
     run(async () => {
-      const photoUrl = resolveStringValue(values.photo, heroContent.photoUrl);
+      const photoUrl = values.photo as string;
 
       await saveSectionContent("hero", {
         title: values.title,
@@ -52,9 +55,11 @@ export function useHeroForm() {
         photoUrl,
         socialLinks: values.socialLinks.map((link) => ({ icon: { name: link.icon }, url: link.url })),
       });
+      cleanupReplacedFiles([savedPhotoRef.current], [photoUrl]);
+      savedPhotoRef.current = photoUrl;
       form.reset({ ...values, photo: photoUrl });
     }),
   );
 
-  return { form, onSubmit, socialLinksArray, status };
+  return { form, onSubmit, socialLinksArray, status, isContentLoading };
 }

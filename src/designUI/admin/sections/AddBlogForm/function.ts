@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { blogListContent } from "@/designUI/utilities/content/blogList";
 import type { SelectOption } from "@/designUI/elements/formElement/Select/types";
 import { createPost, updatePost } from "@/firebase/blogService";
-import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { cleanupReplacedFiles } from "@/lib/uploadClient";
 import { slugify } from "@/designUI/utilities/slugify";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { addBlogFormSchema, type AddBlogFormValues } from "./types";
@@ -48,7 +48,7 @@ export function useAddBlogForm(
 
   const onSubmit = form.handleSubmit((values) =>
     run(async () => {
-      const image = resolveStringValue(values.image, existingImage);
+      const image = values.image as string;
 
       const href = existingPost?.href ?? `/blog/${slugify(values.title)}`;
       const payload = {
@@ -72,6 +72,7 @@ export function useAddBlogForm(
       if (existingPost) await updatePost(existingPost.id, payload);
       else await createPost(payload);
 
+      cleanupReplacedFiles([existingImage], [image]);
       router.push("/admin/blog");
     }),
   );

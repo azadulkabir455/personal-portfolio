@@ -14,7 +14,7 @@ import type { IconName } from "@/designUI/elements/Icon/types";
 import { useHeroForm } from "./function";
 
 export default function HeroForm() {
-  const { form, onSubmit, socialLinksArray, status } = useHeroForm();
+  const { form, onSubmit, socialLinksArray, status, isContentLoading } = useHeroForm();
   const { register, control, formState } = form;
   const { errors } = formState;
   const { fields, append, remove } = socialLinksArray;
@@ -25,6 +25,7 @@ export default function HeroForm() {
       description="Content shown in the landing page hero banner."
       onSubmit={onSubmit}
       actions={<SaveButton status={status} />}
+      isLoading={isContentLoading}
     >
       <Controller
         control={control}
@@ -34,6 +35,7 @@ export default function HeroForm() {
             label="Photo"
             value={field.value}
             onChange={field.onChange}
+            folder="hero"
             error={errors.photo?.message}
             containerClassName="w-full md:max-w-[280px] md:col-span-2"
           />

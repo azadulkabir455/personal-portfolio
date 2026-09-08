@@ -1,10 +1,6 @@
 import { z } from "zod";
 
-const uploadedFileSchema = z
-  .custom<File | string | null>()
-  .refine((value) => value !== null && value !== undefined && value !== "", {
-    message: "Image is required",
-  });
+const uploadedFileSchema = z.string().nullable().refine((value) => Boolean(value), "Image is required");
 
 export const caseStudyFormSchema = z.object({
   slides: z

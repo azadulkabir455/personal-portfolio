@@ -13,7 +13,7 @@ import Icon from "@/designUI/elements/Icon/Icon";
 import { useStoryForm } from "./function";
 
 export default function StoryForm() {
-  const { form, onSubmit, clientLogosArray, processStepsArray, statsArray, status } =
+  const { form, onSubmit, clientLogosArray, processStepsArray, statsArray, status, isContentLoading } =
     useStoryForm();
   const { register, control, formState } = form;
   const { errors } = formState;
@@ -24,6 +24,7 @@ export default function StoryForm() {
       description="Content shown in the landing page story section."
       onSubmit={onSubmit}
       actions={<SaveButton status={status} />}
+      isLoading={isContentLoading}
     >
       <Input id="title" label="Title" error={errors.title?.message} {...register("title")} />
       <Input
@@ -82,6 +83,7 @@ export default function StoryForm() {
                     label="Logo"
                     value={srcField.value}
                     onChange={srcField.onChange}
+                    folder="story"
                     error={errors.clientLogos?.[index]?.src?.message}
                     containerClassName="w-full md:max-w-[220px] md:shrink-0"
                   />
@@ -169,6 +171,7 @@ export default function StoryForm() {
                       label="Image"
                       value={imageField.value}
                       onChange={imageField.onChange}
+                      folder="story"
                       error={errors.processSteps?.[index]?.image?.message}
                       containerClassName="w-full md:max-w-[220px]"
                     />
@@ -189,6 +192,7 @@ export default function StoryForm() {
               label="Stats Image"
               value={field.value}
               onChange={field.onChange}
+              folder="story"
               error={errors.statsImageUrl?.message}
               containerClassName="w-full md:max-w-[280px]"
             />

@@ -7,11 +7,7 @@ export const heroFormSchema = z.object({
   description: z.string().min(1, "Description is required"),
   ctaLabel: z.string().min(1, "Button label is required"),
   ctaLink: z.string().min(1, "Button link is required"),
-  photo: z
-    .custom<File | string | null>()
-    .refine((value) => value !== null && value !== undefined && value !== "", {
-      message: "Photo is required",
-    }),
+  photo: z.string().nullable().refine((value) => Boolean(value), "Photo is required"),
   socialLinks: z
     .array(
       z.object({

@@ -8,6 +8,7 @@ export default function FormContainer({
   children,
   actions,
   className = "",
+  isLoading = false,
   ...props
 }: FormContainerProps) {
   return (
@@ -36,9 +37,15 @@ export default function FormContainer({
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-x-4 gap-y-3 md:grid-cols-2 lg:gap-x-6">{children}</div>
+      {isLoading ? (
+        <div className="flex items-center justify-center py-16">
+          <span className="h-8 w-8 animate-spin rounded-full border-2 border-[#E4E4E4] border-t-[#171717]" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-x-4 gap-y-3 md:grid-cols-2 lg:gap-x-6">{children}</div>
+      )}
 
-      {actions && (
+      {!isLoading && actions && (
         <div className="sticky bottom-[84px] z-10 -mx-4 -mb-4 flex items-center justify-end gap-3 rounded-b-[16px] border-t border-[#E4E4E4] bg-white/95 px-4 py-4 backdrop-blur-sm lg:bottom-[10px] lg:-mx-10 lg:-mb-10 lg:px-10 lg:py-6">
           {actions}
         </div>

@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
 
-function getFileName(file: File | string | null) {
+function getFileName(file: string | null) {
   if (!file) return "";
-  if (typeof file === "string") return file.split("/").pop() ?? file;
-  return file.name;
+  return file.split("/").pop() ?? file;
 }
 
 export default function FilePreviewButton({
@@ -15,28 +14,15 @@ export default function FilePreviewButton({
   label = "View",
   kind = "pdf",
 }: {
-  file: File | string | null;
+  file: string | null;
   label?: string;
   kind?: "pdf" | "image";
 }) {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(typeof file === "string" ? file : null);
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (typeof file === "string") {
-      setPreviewUrl(file);
-      return;
-    }
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-      return () => URL.revokeObjectURL(url);
-    }
-    setPreviewUrl(null);
-  }, [file]);
+  if (!file) return null;
 
-  if (!previewUrl) return null;
-
+  const previewUrl = file;
   const fileName = getFileName(file);
 
   return (

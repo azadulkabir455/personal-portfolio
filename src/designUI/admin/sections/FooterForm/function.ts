@@ -1,31 +1,43 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { footerContent } from "@/designUI/utilities/content/footer";
+import { footerContent, type FooterContent } from "@/designUI/utilities/content/footer";
 import { saveSectionContent } from "@/firebase/sectionContent";
-import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { cleanupReplacedFiles } from "@/lib/uploadClient";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
+import { useSectionContent } from "@/customHooks/useSectionContent";
 import { footerFormSchema, type FooterFormValues } from "./types";
 
+function toFormValues(data: FooterContent): FooterFormValues {
+  return {
+    profile: {
+      ...data.profile,
+      availability: data.profile.availability.join(", "),
+    },
+    social: {
+      ...data.social,
+      links: data.social.links.map((link) => ({ icon: link.icon.name, href: link.href })),
+    },
+    legal: data.legal,
+  };
+}
+
 export function useFooterForm() {
+  const { data, isLoading: isContentLoading } = useSectionContent("footer", footerContent);
   const form = useForm<FooterFormValues>({
     resolver: zodResolver(footerFormSchema),
-    defaultValues: {
-      profile: {
-        ...footerContent.profile,
-        availability: footerContent.profile.availability.join(", "),
-      },
-      social: {
-        ...footerContent.social,
-        links: footerContent.social.links.map((link) => ({
-          icon: link.icon.name,
-          href: link.href,
-        })),
-      },
-      legal: footerContent.legal,
-    },
+    defaultValues: toFormValues(footerContent),
   });
+
+  const savedImageRef = useRef<string | null>(data.profile.image ?? null);
+
+  useEffect(() => {
+    form.reset(toFormValues(data));
+    savedImageRef.current = data.profile.image ?? null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const socialLinksArray = useFieldArray({ control: form.control, name: "social.links" });
   const legalLinksArray = useFieldArray({ control: form.control, name: "legal.links" });
@@ -33,7 +45,7 @@ export function useFooterForm() {
 
   const onSubmit = form.handleSubmit((values) =>
     run(async () => {
-      const image = resolveStringValue(values.profile.image, footerContent.profile.image);
+      const image = values.profile.image as string;
 
       await saveSectionContent("footer", {
         profile: {
@@ -47,9 +59,11 @@ export function useFooterForm() {
         },
         legal: values.legal,
       });
+      cleanupReplacedFiles([savedImageRef.current], [image]);
+      savedImageRef.current = image;
       form.reset({ ...values, profile: { ...values.profile, image } });
     }),
   );
 
-  return { form, onSubmit, socialLinksArray, legalLinksArray, status };
+  return { form, onSubmit, socialLinksArray, legalLinksArray, status, isContentLoading };
 }

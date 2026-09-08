@@ -9,7 +9,7 @@ import { useRecentDesignForm } from "./function";
 import RecentDesignGroupCard from "./comp/RecentDesignGroupCard";
 
 export default function RecentDesignForm() {
-  const { form, onSubmit, groupsArray, status } = useRecentDesignForm();
+  const { form, onSubmit, groupsArray, status, isContentLoading } = useRecentDesignForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -18,6 +18,7 @@ export default function RecentDesignForm() {
       title="Recent Design Section"
       description="Content shown in the landing page recent design section."
       onSubmit={onSubmit}
+      isLoading={isContentLoading}
       actions={<SaveButton status={status} />}
     >
       <Input

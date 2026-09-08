@@ -15,7 +15,7 @@ const removeButtonClassName =
   "flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]";
 
 export default function CaseStudyForm() {
-  const { form, onSubmit, slidesArray, status } = useCaseStudyForm();
+  const { form, onSubmit, slidesArray, status, isContentLoading } = useCaseStudyForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -24,6 +24,7 @@ export default function CaseStudyForm() {
       title="Case Study Section"
       description="Content shown in the landing page case study slider."
       onSubmit={onSubmit}
+      isLoading={isContentLoading}
       actions={<SaveButton status={status} />}
     >
       <Container className="flex flex-col gap-4 md:col-span-2">
@@ -76,6 +77,7 @@ export default function CaseStudyForm() {
                   label="Study Image"
                   value={imageField.value}
                   onChange={imageField.onChange}
+                  folder="case-study"
                   error={errors.slides?.[index]?.studyImage?.message}
                   containerClassName="w-full md:max-w-[280px]"
                 />

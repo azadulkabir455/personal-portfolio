@@ -21,7 +21,7 @@ const removeButtonClassName =
   "flex h-[44px] w-[44px] shrink-0 cursor-pointer items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8] lg:h-[52px] lg:w-[52px]";
 
 export default function FooterForm() {
-  const { form, onSubmit, socialLinksArray, legalLinksArray, status } = useFooterForm();
+  const { form, onSubmit, socialLinksArray, legalLinksArray, status, isContentLoading } = useFooterForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -31,6 +31,7 @@ export default function FooterForm() {
       description="Content shown in the site-wide footer."
       onSubmit={onSubmit}
       actions={<SaveButton status={status} />}
+      isLoading={isContentLoading}
     >
       <Controller
         control={control}
@@ -40,6 +41,7 @@ export default function FooterForm() {
             label="Profile Photo"
             value={field.value}
             onChange={field.onChange}
+            folder="footer"
             error={errors.profile?.image?.message}
             containerClassName="w-full md:max-w-[280px] md:col-span-2"
           />

@@ -68,4 +68,5 @@ export const adminNav: AdminNavItem[] = [
       { label: "Terms & Conditions", href: "/admin/global/terms-and-conditions" },
     ],
   },
+  { label: "Storage", href: "/admin/storage", icon: "FaFolderOpen" },
 ];

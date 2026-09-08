@@ -38,6 +38,7 @@ export default function AddProjectForm({
             label="Cover Image"
             value={field.value}
             onChange={field.onChange}
+            folder="project"
             error={errors.image?.message}
             containerClassName="w-full md:max-w-[280px] md:col-span-2"
           />

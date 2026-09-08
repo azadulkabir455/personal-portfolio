@@ -1,34 +1,53 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { storyContent } from "@/designUI/utilities/content/story";
+import { storyContent, type StoryContent } from "@/designUI/utilities/content/story";
 import { saveSectionContent } from "@/firebase/sectionContent";
-import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { cleanupReplacedFiles } from "@/lib/uploadClient";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
+import { useSectionContent } from "@/customHooks/useSectionContent";
 import { storyFormSchema, type StoryFormValues } from "./types";
 
+function toFormValues(data: StoryContent): StoryFormValues {
+  return {
+    title: data.title,
+    description: data.description,
+    clientLogosHeading: data.clientLogosHeading,
+    clientLogos: data.clientLogos.map((logo) => ({
+      src: logo.src,
+      alt: logo.alt,
+      height: String(logo.height),
+    })),
+    processSteps: data.processSteps.map((step) => ({
+      label: step.label,
+      image: step.image ?? null,
+      icon: step.icon ?? false,
+    })),
+    statsImageUrl: data.statsImageUrl,
+    stats: data.stats,
+  };
+}
+
 export function useStoryForm() {
+  const { data, isLoading: isContentLoading } = useSectionContent("story", storyContent);
   const form = useForm<StoryFormValues>({
     resolver: zodResolver(storyFormSchema),
-    defaultValues: {
-      title: storyContent.title,
-      description: storyContent.description,
-      clientLogosHeading: storyContent.clientLogosHeading,
-      clientLogos: storyContent.clientLogos.map((logo) => ({
-        src: logo.src,
-        alt: logo.alt,
-        height: String(logo.height),
-      })),
-      processSteps: storyContent.processSteps.map((step) => ({
-        label: step.label,
-        image: step.image ?? null,
-        icon: step.icon ?? false,
-      })),
-      statsImageUrl: storyContent.statsImageUrl,
-      stats: storyContent.stats,
-    },
+    defaultValues: toFormValues(storyContent),
   });
+
+  const savedClientLogoUrlsRef = useRef(data.clientLogos.map((logo) => logo.src));
+  const savedProcessStepImageUrlsRef = useRef(data.processSteps.map((step) => step.image ?? null));
+  const savedStatsImageUrlRef = useRef<string | null>(data.statsImageUrl);
+
+  useEffect(() => {
+    form.reset(toFormValues(data));
+    savedClientLogoUrlsRef.current = data.clientLogos.map((logo) => logo.src);
+    savedProcessStepImageUrlsRef.current = data.processSteps.map((step) => step.image ?? null);
+    savedStatsImageUrlRef.current = data.statsImageUrl;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const clientLogosArray = useFieldArray({ control: form.control, name: "clientLogos" });
   const processStepsArray = useFieldArray({ control: form.control, name: "processSteps" });
@@ -38,18 +57,18 @@ export function useStoryForm() {
 
   const onSubmit = form.handleSubmit((values) =>
     run(async () => {
-      const clientLogos = values.clientLogos.map((logo, index) => ({
-        src: resolveStringValue(logo.src, storyContent.clientLogos[index]?.src),
+      const clientLogos = values.clientLogos.map((logo) => ({
+        src: logo.src as string,
         alt: logo.alt,
         height: Number(logo.height),
       }));
       const processSteps = values.processSteps.map((step, index) => ({
         label: step.label,
         className: storyContent.processSteps[index]?.className ?? "",
-        image: resolveStringValue(step.image, storyContent.processSteps[index]?.image),
+        image: step.image ?? undefined,
         icon: step.icon,
       }));
-      const statsImageUrl = resolveStringValue(values.statsImageUrl, storyContent.statsImageUrl);
+      const statsImageUrl = values.statsImageUrl as string;
 
       await saveSectionContent("story", {
         title: values.title,
@@ -61,6 +80,18 @@ export function useStoryForm() {
         stats: values.stats,
       });
 
+      cleanupReplacedFiles(
+        [
+          ...savedClientLogoUrlsRef.current,
+          ...savedProcessStepImageUrlsRef.current,
+          savedStatsImageUrlRef.current,
+        ],
+        [...clientLogos.map((logo) => logo.src), ...processSteps.map((step) => step.image), statsImageUrl],
+      );
+      savedClientLogoUrlsRef.current = clientLogos.map((logo) => logo.src);
+      savedProcessStepImageUrlsRef.current = processSteps.map((step) => step.image ?? null);
+      savedStatsImageUrlRef.current = statsImageUrl;
+
       form.reset({
         ...values,
         clientLogos: values.clientLogos.map((logo, index) => ({
@@ -69,12 +100,12 @@ export function useStoryForm() {
         })),
         processSteps: values.processSteps.map((step, index) => ({
           ...step,
-          image: processSteps[index].image,
+          image: processSteps[index].image ?? null,
         })),
         statsImageUrl,
       });
     }),
   );
 
-  return { form, onSubmit, clientLogosArray, processStepsArray, statsArray, status };
+  return { form, onSubmit, clientLogosArray, processStepsArray, statsArray, status, isContentLoading };
 }

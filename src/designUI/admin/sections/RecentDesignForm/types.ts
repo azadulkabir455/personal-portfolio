@@ -1,11 +1,7 @@
 import { z } from "zod";
 import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 
-const uploadedFileSchema = z
-  .custom<File | string | null>()
-  .refine((value) => value !== null && value !== undefined && value !== "", {
-    message: "Image is required",
-  });
+const uploadedFileSchema = z.string().nullable().refine((value) => Boolean(value), "Image is required");
 
 export const recentDesignFormSchema = z.object({
   text: z.string().min(1, "Text is required"),

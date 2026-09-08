@@ -1,10 +1,6 @@
 import { z } from "zod";
 
-const uploadedFileSchema = z
-  .custom<File | string | null>()
-  .refine((value) => value !== null && value !== undefined && value !== "", {
-    message: "Image is required",
-  });
+const uploadedFileSchema = z.string().nullable().refine((value) => Boolean(value), "Image is required");
 
 export const storyFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -26,7 +22,7 @@ export const storyFormSchema = z.object({
     .array(
       z.object({
         label: z.string().min(1, "Label is required"),
-        image: z.custom<File | string | null>().optional(),
+        image: z.string().nullable(),
         icon: z.boolean(),
       }),
     )

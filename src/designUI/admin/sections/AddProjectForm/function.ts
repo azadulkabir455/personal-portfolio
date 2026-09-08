@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { deleteField } from "firebase/firestore";
 import { featuredProjectsContent } from "@/designUI/utilities/content/featuredProjects";
 import { createProject, updateProject } from "@/firebase/projectService";
-import { resolveStringValue } from "@/designUI/utilities/resolveStringValue";
+import { cleanupReplacedFiles } from "@/lib/uploadClient";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { addProjectFormSchema, type AddProjectFormValues } from "./types";
 
@@ -36,7 +36,7 @@ export function useAddProjectForm(
 
   const onSubmit = form.handleSubmit((values) =>
     run(async () => {
-      const image = resolveStringValue(values.image, existingImage);
+      const image = values.image as string;
       const secondaryCta =
         values.secondaryCtaLabel && values.secondaryCtaHref
           ? { label: values.secondaryCtaLabel, href: values.secondaryCtaHref }
@@ -70,6 +70,7 @@ export function useAddProjectForm(
         });
       }
 
+      cleanupReplacedFiles([existingImage], [image]);
       router.push("/admin/project");
     }),
   );

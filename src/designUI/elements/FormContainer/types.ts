@@ -6,4 +6,5 @@ export interface FormContainerProps extends FormHTMLAttributes<HTMLFormElement> 
   actions?: ReactNode;
   children: ReactNode;
   className?: string;
+  isLoading?: boolean;
 }

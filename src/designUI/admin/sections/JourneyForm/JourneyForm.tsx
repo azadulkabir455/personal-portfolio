@@ -18,7 +18,8 @@ const removeButtonClassName =
   "flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]";
 
 export default function JourneyForm() {
-  const { form, onSubmit, stepsArray, toolsArray, certificatesArray, status } = useJourneyForm();
+  const { form, onSubmit, stepsArray, toolsArray, certificatesArray, status, isContentLoading } =
+    useJourneyForm();
   const { register, control, formState } = form;
   const { errors } = formState;
 
@@ -27,6 +28,7 @@ export default function JourneyForm() {
       title="Journey Section"
       description="Content shown in the landing page journey section."
       onSubmit={onSubmit}
+      isLoading={isContentLoading}
       actions={<SaveButton status={status} />}
     >
       <Input
@@ -170,6 +172,7 @@ export default function JourneyForm() {
                     label="Icon"
                     value={iconField.value}
                     onChange={iconField.onChange}
+                    folder="journey"
                     error={errors.toolkit?.tools?.[index]?.icon?.message}
                     containerClassName="w-full md:max-w-[160px] md:shrink-0"
                   />
@@ -243,6 +246,7 @@ export default function JourneyForm() {
                     label="Certificate Image"
                     value={imageField.value}
                     onChange={imageField.onChange}
+                    folder="journey"
                     error={errors.toolkit?.certificates?.[index]?.image?.message}
                     containerClassName="w-full md:max-w-[220px] md:shrink-0"
                   />
