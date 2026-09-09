@@ -174,7 +174,7 @@ export default function JourneyForm() {
                     onChange={iconField.onChange}
                     folder="journey"
                     error={errors.toolkit?.tools?.[index]?.icon?.message}
-                    containerClassName="w-full md:max-w-[160px] md:shrink-0"
+                    containerClassName="w-full md:max-w-[220px] md:shrink-0"
                   />
                 )}
               />

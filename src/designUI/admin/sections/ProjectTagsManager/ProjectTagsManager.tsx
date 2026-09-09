@@ -4,17 +4,28 @@ import { useState } from "react";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Button from "@/designUI/elements/Button/Button";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import EditableLabelRow from "@/designUI/admin/comp/EditableLabelRow/EditableLabelRow";
 import { useProjectTagsManager } from "./function";
 
 export default function ProjectTagsManager() {
   const { tags, addTag, renameTag, removeTag } = useProjectTagsManager();
   const [tagDraft, setTagDraft] = useState("");
+  const confirmDialog = useConfirmDialog();
 
   const submitTag = () => {
     if (!tagDraft.trim()) return;
     addTag(tagDraft);
     setTagDraft("");
+  };
+
+  const confirmRemoveTag = (tag: string) => {
+    confirmDialog.openConfirm({
+      title: "Delete this tag?",
+      message: "This tag will be permanently removed. This can't be undone.",
+      onConfirm: () => removeTag(tag),
+    });
   };
 
   return (
@@ -49,12 +60,14 @@ export default function ProjectTagsManager() {
                 label={tag}
                 size="sm"
                 onRename={(label) => renameTag(tag, label)}
-                onRemove={() => removeTag(tag)}
+                onRemove={() => confirmRemoveTag(tag)}
               />
             </Container>
           ))}
         </Container>
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </Container>
   );
 }

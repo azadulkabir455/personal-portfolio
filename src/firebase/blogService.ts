@@ -30,7 +30,11 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostBySlug(href: string): Promise<DashboardPost | null> {
-  const q = query(collection(firestore, POSTS_COLLECTION), where("href", "==", href));
+  const q = query(
+    collection(firestore, POSTS_COLLECTION),
+    where("href", "==", href),
+    where("published", "==", true),
+  );
   const snapshot = await getDocs(q);
   if (snapshot.empty) return null;
   const d = snapshot.docs[0];

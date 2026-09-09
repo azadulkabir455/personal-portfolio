@@ -1,3 +1,5 @@
-import type { BlogDetailsContent } from "@/designUI/utilities/content/blogDetails";
+import type { BlogPost } from "@/designUI/utilities/content/blog";
 
-export type { BlogDetailsContent };
+export interface BlogDetailsProps {
+  post: BlogPost;
+}

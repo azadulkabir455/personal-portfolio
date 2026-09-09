@@ -12,6 +12,9 @@ import type { RecentDesignGroupCardProps } from "../types";
 const removeButtonClassName =
   "flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]";
 
+const removeImageButtonClassName =
+  "flex h-[44px] w-[44px] lg:h-[52px] lg:w-[52px] shrink-0 cursor-pointer items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]";
+
 export default function RecentDesignGroupCard({
   control,
   register,
@@ -84,9 +87,9 @@ export default function RecentDesignGroupCard({
                     type="button"
                     onClick={() => imagesArray.remove(imageIndex)}
                     aria-label="Remove image"
-                    className={clsx(removeButtonClassName, "mb-[18px] lg:mb-5")}
+                    className={clsx(removeImageButtonClassName, "mb-[18px] lg:mb-5")}
                   >
-                    <Icon name="FaTrashAlt" width={14} height={14} />
+                    <Icon name="FaTrashAlt" width={16} height={16} />
                   </button>
                 </Container>
 

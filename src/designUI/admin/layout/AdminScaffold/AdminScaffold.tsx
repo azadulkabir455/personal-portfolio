@@ -13,7 +13,7 @@ export default function AdminScaffold({ children }: AdminScaffoldProps) {
 
       <Container
         variant="section"
-        className="min-h-screen px-[10px] pt-[10px] pb-[84px] lg:pt-[84px] lg:pr-[10px] lg:pb-[10px] lg:pl-[290px]"
+        className="min-h-screen px-[10px] pt-[10px] pb-[84px] lg:pt-[84px] lg:pr-[10px] lg:pb-0 lg:pl-[290px]"
       >
         {children}
       </Container>

@@ -9,6 +9,8 @@ import Button from "@/designUI/elements/Button/Button";
 import Icon from "@/designUI/elements/Icon/Icon";
 import Select from "@/designUI/elements/formElement/Select/Select";
 import DatePicker from "@/designUI/elements/formElement/DatePicker/DatePicker";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/designUI/utilities/icons";
 import BlogListRow from "./comp/BlogListRow";
 import BlogViewModal from "./comp/BlogViewModal";
@@ -54,6 +56,23 @@ export default function BlogListManager() {
     viewPost,
     setViewPost,
   } = useBlogListManager();
+  const confirmDialog = useConfirmDialog();
+
+  const confirmDeletePost = (href: string) => {
+    confirmDialog.openConfirm({
+      title: "Delete this post?",
+      message: "This post will be permanently removed. This can't be undone.",
+      onConfirm: () => deletePost(href),
+    });
+  };
+
+  const confirmBulkDelete = () => {
+    confirmDialog.openConfirm({
+      title: "Delete selected posts?",
+      message: `${selected.size} post${selected.size === 1 ? "" : "s"} will be permanently removed. This can't be undone.`,
+      onConfirm: bulkDelete,
+    });
+  };
 
   return (
     <Container className="flex w-full flex-col gap-6 rounded-[16px] border border-[#E4E4E4] bg-white p-4 lg:gap-8 lg:p-10">
@@ -123,7 +142,7 @@ export default function BlogListManager() {
           </Text>
           <button
             type="button"
-            onClick={bulkDelete}
+            onClick={confirmBulkDelete}
             className="cursor-pointer font-sans text-[13px] font-medium text-[#E5484D] hover:underline"
           >
             Delete Selected
@@ -157,7 +176,7 @@ export default function BlogListManager() {
               checked={selected.has(post.href)}
               onToggle={() => toggleSelect(post.href)}
               onView={() => setViewPost(post)}
-              onDelete={() => deletePost(post.href)}
+              onDelete={() => confirmDeletePost(post.href)}
             />
           ))
         )}
@@ -209,6 +228,8 @@ export default function BlogListManager() {
       )}
 
       <BlogViewModal post={viewPost} onClose={() => setViewPost(null)} />
+
+      <ConfirmDialog {...confirmDialog} />
     </Container>
   );
 }

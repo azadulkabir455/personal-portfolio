@@ -2,12 +2,15 @@
 
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { ArrowLeftIcon } from "@/designUI/utilities/icons";
 import StorageFolderCard from "./comp/StorageFolderCard";
 import StorageFileCard from "./comp/StorageFileCard";
 import StorageFileModal from "./comp/StorageFileModal";
 import { useStorageManager } from "./function";
 import { FOLDER_LABELS } from "./types";
+import type { RemoteFile } from "@/lib/uploadFolders";
 
 export default function StorageManager() {
   const {
@@ -22,6 +25,15 @@ export default function StorageManager() {
     deletingUrl,
     removeFile,
   } = useStorageManager();
+  const confirmDialog = useConfirmDialog();
+
+  const confirmDeleteFile = (file: RemoteFile) => {
+    confirmDialog.openConfirm({
+      title: "Delete this file?",
+      message: "This file will be permanently removed from storage. This can't be undone.",
+      onConfirm: () => removeFile(file),
+    });
+  };
 
   return (
     <Container className="flex w-full flex-col gap-6 rounded-[16px] border border-[#E4E4E4] bg-white p-4 lg:gap-8 lg:p-10">
@@ -75,7 +87,7 @@ export default function StorageManager() {
               key={file.url}
               file={file}
               onView={() => setViewFile(file)}
-              onDelete={() => void removeFile(file)}
+              onDelete={() => confirmDeleteFile(file)}
               isDeleting={deletingUrl === file.url}
             />
           ))}
@@ -85,9 +97,11 @@ export default function StorageManager() {
       <StorageFileModal
         file={viewFile}
         onClose={() => setViewFile(null)}
-        onDelete={(file) => void removeFile(file)}
+        onDelete={confirmDeleteFile}
         isDeleting={deletingUrl === viewFile?.url}
       />
+
+      <ConfirmDialog {...confirmDialog} />
     </Container>
   );
 }

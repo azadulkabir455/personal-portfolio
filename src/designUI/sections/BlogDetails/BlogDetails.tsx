@@ -9,20 +9,22 @@ import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/designUI/utilities/icons";
 import Blog from "@/designUI/sections/Blog/Blog";
 import { useBlogDetails } from "./function";
+import type { BlogDetailsProps } from "./types";
 
 const backLinkClassName =
   "flex items-center gap-[10px] text-center align-middle font-sans text-[14px] leading-[22px] font-bold tracking-[0.25px] text-[#242423] capitalize";
 
-export default function BlogDetails() {
-  const { data, relatedPosts } = useBlogDetails();
+export default function BlogDetails({ post }: BlogDetailsProps) {
+  const { backLabel, backHref, othersPostIntro, relatedPosts } = useBlogDetails(post);
+  const tags = post.tags?.length ? post.tags : [post.category];
 
   return (
     <>
       <Container variant="section" className="w-full bg-white">
         <Container className="container mx-auto px-[20px] pt-[24px] md:px-[50px] md:pt-[40px] lg:px-[20px] lg:pt-[200px]">
-          <Link href={data.backHref} className={clsx(backLinkClassName, "mb-[12px] md:mb-[16px] lg:mb-[24px]")}>
+          <Link href={backHref} className={clsx(backLinkClassName, "mb-[12px] md:mb-[16px] lg:mb-[24px]")}>
             <ArrowLeftIcon width={14} height={14} color="#388EFF" />
-            {data.backLabel}
+            {backLabel}
           </Link>
 
           <Text
@@ -35,7 +37,7 @@ export default function BlogDetails() {
               "lg:text-[46px] lg:leading-[56px]",
             )}
           >
-            {data.title}
+            {post.title}
           </Text>
 
           <Text
@@ -47,15 +49,15 @@ export default function BlogDetails() {
               "lg:mb-[40px] lg:text-[18px] lg:leading-[24px]",
             )}
           >
-            {data.subtitle}
+            {post.subtitle ?? post.excerpt}
           </Text>
 
           <Container className="relative h-[220px] w-full overflow-hidden md:h-[340px] lg:h-[500px]">
-            <Image src={data.image} alt={data.title} fill className="object-cover object-top" />
+            <Image src={post.image} alt={post.title} fill className="object-cover object-top" />
           </Container>
 
           <Container className="mt-[16px] flex flex-wrap gap-[8px] md:mt-[20px]">
-            {data.tags.map((tag) => (
+            {tags.map((tag) => (
               <Text
                 key={tag}
                 className="rounded-full bg-[linear-gradient(170.92deg,#005CD666_11.6%,#64A6FF66_96.6%,#00D9FF66_279.47%)] px-[10px] py-[3px] font-sans text-[12px] font-light text-[#242423] md:px-[12px] md:py-[4px]"
@@ -80,7 +82,7 @@ export default function BlogDetails() {
               "prose-p:text-[14px] prose-p:leading-[24px] md:prose-p:text-[16px] md:prose-p:leading-[28px]",
               "prose-img:w-full prose-img:h-auto prose-img:rounded-[4px]",
             )}
-            dangerouslySetInnerHTML={{ __html: data.content }}
+            dangerouslySetInnerHTML={{ __html: post.content ?? "" }}
           />
         </Container>
 
@@ -94,7 +96,7 @@ export default function BlogDetails() {
         </Container>
       </Container>
 
-      <Blog intro={data.othersPostIntro} posts={relatedPosts} />
+      <Blog intro={othersPostIntro} posts={relatedPosts} />
     </>
   );
 }

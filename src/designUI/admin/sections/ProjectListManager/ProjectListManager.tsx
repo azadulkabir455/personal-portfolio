@@ -10,6 +10,8 @@ import Input from "@/designUI/elements/formElement/Input/Input";
 import Select from "@/designUI/elements/formElement/Select/Select";
 import DatePicker from "@/designUI/elements/formElement/DatePicker/DatePicker";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/designUI/utilities/icons";
 import ProjectListRow from "./comp/ProjectListRow";
 import ProjectViewModal from "./comp/ProjectViewModal";
@@ -54,6 +56,23 @@ export default function ProjectListManager() {
     viewProject,
     setViewProject,
   } = useProjectListManager();
+  const confirmDialog = useConfirmDialog();
+
+  const confirmDeleteProject = (id: string) => {
+    confirmDialog.openConfirm({
+      title: "Delete this project?",
+      message: "This project will be permanently removed. This can't be undone.",
+      onConfirm: () => deleteProject(id),
+    });
+  };
+
+  const confirmBulkDelete = () => {
+    confirmDialog.openConfirm({
+      title: "Delete selected projects?",
+      message: `${selected.size} project${selected.size === 1 ? "" : "s"} will be permanently removed. This can't be undone.`,
+      onConfirm: bulkDelete,
+    });
+  };
 
   return (
     <Container className="flex w-full flex-col gap-6 rounded-[16px] border border-[#E4E4E4] bg-white p-4 lg:gap-8 lg:p-10">
@@ -135,7 +154,7 @@ export default function ProjectListManager() {
           </Text>
           <button
             type="button"
-            onClick={bulkDelete}
+            onClick={confirmBulkDelete}
             className="cursor-pointer font-sans text-[13px] font-medium text-[#E5484D] hover:underline"
           >
             Delete Selected
@@ -169,7 +188,7 @@ export default function ProjectListManager() {
               checked={selected.has(project.id)}
               onToggle={() => toggleSelect(project.id)}
               onView={() => setViewProject(project)}
-              onDelete={() => deleteProject(project.id)}
+              onDelete={() => confirmDeleteProject(project.id)}
             />
           ))
         )}
@@ -221,6 +240,8 @@ export default function ProjectListManager() {
       )}
 
       <ProjectViewModal project={viewProject} onClose={() => setViewProject(null)} />
+
+      <ConfirmDialog {...confirmDialog} />
     </Container>
   );
 }

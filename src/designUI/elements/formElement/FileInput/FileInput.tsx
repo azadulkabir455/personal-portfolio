@@ -16,9 +16,16 @@ function isImageFile(url: string | null) {
   return IMAGE_EXTENSIONS.some((ext) => url.toLowerCase().endsWith(ext));
 }
 
-function getFileName(url: string | null) {
+function getFileExtension(url: string) {
+  const clean = url.split(/[?#]/)[0];
+  const dotIndex = clean.lastIndexOf(".");
+  return dotIndex === -1 ? "" : clean.slice(dotIndex);
+}
+
+function getDisplayFileName(url: string | null, label: string) {
   if (!url) return "";
-  return url.split("/").pop() ?? url;
+  const slug = label.trim().toLowerCase().replace(/\s+/g, "-");
+  return `${slug}${getFileExtension(url)}`;
 }
 
 export default function FileInput({
@@ -114,7 +121,7 @@ export default function FileInput({
           <div className="flex w-full items-center gap-3 rounded-[10px] bg-white p-3">
             <Icon name="FaFileAlt" width={28} height={28} color="#8A8A86" />
             <span className="min-w-0 flex-1 truncate text-left font-sans text-[13px] font-medium text-[#171717] lg:text-[14px]">
-              {getFileName(currentValue)}
+              {getDisplayFileName(currentValue, label)}
             </span>
             <button
               type="button"

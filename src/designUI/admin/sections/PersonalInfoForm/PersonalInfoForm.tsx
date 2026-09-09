@@ -26,8 +26,9 @@ export default function PersonalInfoForm() {
         control={control}
         name="cv"
         render={({ field }) => (
-          <Container className="mb-2 flex w-full flex-col items-start gap-3 md:mb-0 md:w-[60%] md:flex-row md:items-center">
+          <Container className="mb-2 flex w-full flex-row items-center gap-3 md:mb-0 md:w-[60%]">
             <FileInput
+              containerClassName="min-w-0 flex-1"
               label="CV"
               value={field.value}
               onChange={field.onChange}
@@ -45,8 +46,9 @@ export default function PersonalInfoForm() {
         control={control}
         name="favicon"
         render={({ field }) => (
-          <Container className="flex w-full flex-col items-start gap-3 md:w-[60%] md:flex-row md:items-center">
+          <Container className="flex w-full flex-row items-center gap-3 md:w-[60%]">
             <FileInput
+              containerClassName="min-w-0 flex-1"
               label="Favicon"
               value={field.value}
               onChange={field.onChange}

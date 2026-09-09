@@ -4,6 +4,8 @@ import { useState } from "react";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Button from "@/designUI/elements/Button/Button";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import BlogCategoryCard from "./comp/BlogCategoryCard";
 import EditableLabelRow from "@/designUI/admin/comp/EditableLabelRow/EditableLabelRow";
 import { useBlogCategoriesManager } from "./function";
@@ -25,6 +27,31 @@ export default function BlogCategoriesManager() {
 
   const [categoryDraft, setCategoryDraft] = useState("");
   const [tagDraft, setTagDraft] = useState("");
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveCategory = (id: string) => {
+    confirmDialog.openConfirm({
+      title: "Delete this category?",
+      message: "This category and its subcategories will be permanently removed. This can't be undone.",
+      onConfirm: () => removeCategory(id),
+    });
+  };
+
+  const confirmRemoveSubCategory = (categoryId: string, subId: string) => {
+    confirmDialog.openConfirm({
+      title: "Delete this subcategory?",
+      message: "This subcategory will be permanently removed. This can't be undone.",
+      onConfirm: () => removeSubCategory(categoryId, subId),
+    });
+  };
+
+  const confirmRemoveTag = (tag: string) => {
+    confirmDialog.openConfirm({
+      title: "Delete this tag?",
+      message: "This tag will be permanently removed. This can't be undone.",
+      onConfirm: () => removeTag(tag),
+    });
+  };
 
   const submitCategory = () => {
     if (!categoryDraft.trim()) return;
@@ -73,10 +100,10 @@ export default function BlogCategoriesManager() {
               key={category.id}
               category={category}
               onRename={(label) => renameCategory(category.id, label)}
-              onRemove={() => removeCategory(category.id)}
+              onRemove={() => confirmRemoveCategory(category.id)}
               onAddSubCategory={(label) => addSubCategory(category.id, label)}
               onRenameSubCategory={(subId, label) => renameSubCategory(category.id, subId, label)}
-              onRemoveSubCategory={(subId) => removeSubCategory(category.id, subId)}
+              onRemoveSubCategory={(subId) => confirmRemoveSubCategory(category.id, subId)}
             />
           ))}
         </Container>
@@ -105,12 +132,14 @@ export default function BlogCategoriesManager() {
                 label={tag}
                 size="sm"
                 onRename={(label) => renameTag(tag, label)}
-                onRemove={() => removeTag(tag)}
+                onRemove={() => confirmRemoveTag(tag)}
               />
             </Container>
           ))}
         </Container>
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </Container>
   );
 }
