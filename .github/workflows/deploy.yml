@@ -28,27 +28,18 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Upload build to cPanel via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./
-          server-dir: ./
-          exclude: |
-            **/node_modules/**
-            **/.git*/**
-            **/.github/**
-            src/**
-            scripts/**
-            .next/cache/**
-            **/*.md
-            .env*
+      - name: Package build output
+        run: |
+          rm -rf .next/cache
+          zip -qr deploy.zip .next public package.json pnpm-lock.yaml server.js next.config.ts
 
-      - name: Sync dependencies and restart app
+      - name: Upload package to cPanel via FTPS
+        run: |
+          curl --ftp-ssl -sS -T deploy.zip \
+            "ftp://${{ secrets.FTP_HOST }}/deploy.zip" \
+            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}"
+
+      - name: Extract, sync dependencies and restart app
         run: |
           curl -sf -X POST "https://designwithfatema.me/api/deploy-webhook" \
             -H "x-deploy-secret: ${{ secrets.DEPLOY_WEBHOOK_SECRET }}"

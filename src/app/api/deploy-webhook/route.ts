@@ -34,6 +34,11 @@ async function syncAndRestart() {
   await writeFile(LOCK_PATH, String(Date.now()));
 
   try {
+    if (existsSync(join(cwd, "deploy.zip"))) {
+      console.log("[deploy] extracting new build...");
+      await execAsync("unzip -oq deploy.zip && rm deploy.zip", { cwd });
+    }
+
     console.log("[deploy] installing dependencies...");
     await execAsync("npm install --include=dev", { cwd });
 
