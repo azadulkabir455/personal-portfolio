@@ -37,13 +37,20 @@ export const journeyFormSchema = z.object({
     certificationsTitle: z.string().min(1, "This field is required"),
     certificates: z
       .array(
-        z.object({
-          title: z.string().min(1, "Title is required"),
-          image: uploadedFileSchema,
-          width: positiveNumberString,
-          height: positiveNumberString,
-          link: z.string().min(1, "Link is required"),
-        }),
+        z
+          .object({
+            title: z.string().min(1, "Title is required"),
+            image: uploadedFileSchema,
+            width: positiveNumberString,
+            height: positiveNumberString,
+            isLinkable: z.boolean(),
+            link: z.string().optional(),
+          })
+          .superRefine((certificate, ctx) => {
+            if (certificate.isLinkable && !certificate.link?.trim()) {
+              ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Link is required", path: ["link"] });
+            }
+          }),
       )
       .min(1, "Add at least one certificate"),
   }),

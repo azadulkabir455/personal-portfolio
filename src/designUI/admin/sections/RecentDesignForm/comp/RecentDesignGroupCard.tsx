@@ -64,7 +64,7 @@ export default function RecentDesignGroupCard({
           </Button>
         </Container>
 
-        <Container className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Container className="grid grid-cols-1 gap-4 min-[1400px]:grid-cols-2">
           {imagesArray.fields.map((imageField, imageIndex) => (
             <Container
               key={imageField.id}

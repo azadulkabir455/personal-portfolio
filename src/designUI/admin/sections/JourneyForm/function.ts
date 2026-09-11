@@ -23,6 +23,7 @@ function toFormValues(data: JourneyContent): JourneyFormValues {
         image: certificate.image,
         width: String(certificate.width),
         height: String(certificate.height),
+        isLinkable: certificate.isLinkable,
         link: certificate.link,
       })),
     },
@@ -63,7 +64,8 @@ export function useJourneyForm() {
         image: certificate.image as string,
         width: Number(certificate.width),
         height: Number(certificate.height),
-        link: certificate.link,
+        isLinkable: certificate.isLinkable,
+        link: certificate.link ?? "",
       }));
 
       await saveSectionContent("journey", {

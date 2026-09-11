@@ -23,6 +23,7 @@ export interface JourneyCertificate {
   image: string;
   width: number;
   height: number;
+  isLinkable: boolean;
   link: string;
 }
 
@@ -85,6 +86,7 @@ export const journeyContent: JourneyContent = {
         image: "/images/journey/certificate/cer1.jpg",
         width: 500,
         height: 366,
+        isLinkable: true,
         link: "#",
       },
       {
@@ -92,6 +94,7 @@ export const journeyContent: JourneyContent = {
         image: "/images/journey/certificate/cer2.jpg",
         width: 500,
         height: 366,
+        isLinkable: true,
         link: "#",
       },
       {
@@ -99,6 +102,7 @@ export const journeyContent: JourneyContent = {
         image: "/images/journey/certificate/cer3.jpg",
         width: 670,
         height: 520,
+        isLinkable: true,
         link: "#",
       },
       {
@@ -106,6 +110,7 @@ export const journeyContent: JourneyContent = {
         image: "/images/journey/certificate/cer4.png",
         width: 3300,
         height: 2550,
+        isLinkable: true,
         link: "#",
       },
     ],

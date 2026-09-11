@@ -1,9 +1,11 @@
 "use client";
 
+import clsx from "clsx";
 import { Controller } from "react-hook-form";
 import Input from "@/designUI/elements/formElement/Input/Input";
 import Textarea from "@/designUI/elements/formElement/Textarea/Textarea";
 import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
+import Switch from "@/designUI/elements/formElement/Switch/Switch";
 import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
@@ -22,7 +24,7 @@ const removeButtonClassName =
 export default function JourneyForm() {
   const { form, onSubmit, stepsArray, toolsArray, certificatesArray, status, isContentLoading } =
     useJourneyForm();
-  const { register, control, formState } = form;
+  const { register, control, formState, watch } = form;
   const { errors } = formState;
   const confirmDialog = useConfirmDialog();
 
@@ -171,50 +173,52 @@ export default function JourneyForm() {
           </Button>
         </Container>
 
-        {toolsArray.fields.map((field, index) => (
-          <Container
-            key={field.id}
-            className="flex flex-col gap-4 rounded-[12px] border border-[#E4E4E4] p-4"
-          >
-            <Container className="flex items-center justify-between">
-              <span className="font-sans text-[12px] font-semibold text-[#8A8A86]">
-                Tool {index + 1}
-              </span>
-              <button
-                type="button"
-                onClick={() => confirmRemoveTool(index)}
-                aria-label="Remove tool"
-                className={removeButtonClassName}
-              >
-                <Icon name="FaTrashAlt" width={14} height={14} />
-              </button>
-            </Container>
+        <Container className="grid grid-cols-1 gap-4 min-[1400px]:grid-cols-2">
+          {toolsArray.fields.map((field, index) => (
+            <Container
+              key={field.id}
+              className="flex flex-col gap-4 rounded-[12px] border border-[#E4E4E4] p-4"
+            >
+              <Container className="flex items-center justify-between">
+                <span className="font-sans text-[12px] font-semibold text-[#8A8A86]">
+                  Tool {index + 1}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => confirmRemoveTool(index)}
+                  aria-label="Remove tool"
+                  className={removeButtonClassName}
+                >
+                  <Icon name="FaTrashAlt" width={14} height={14} />
+                </button>
+              </Container>
 
-            <Container className="flex flex-col gap-4 md:flex-row md:items-end">
-              <Controller
-                control={control}
-                name={`toolkit.tools.${index}.icon`}
-                render={({ field: iconField }) => (
-                  <FileInput
-                    label="Icon"
-                    value={iconField.value}
-                    onChange={iconField.onChange}
-                    folder="journey"
-                    error={errors.toolkit?.tools?.[index]?.icon?.message}
-                    containerClassName="w-full md:max-w-[220px] md:shrink-0"
-                  />
-                )}
-              />
-              <Input
-                id={`toolkit.tools.${index}.name`}
-                label="Name"
-                containerClassName="w-full"
-                error={errors.toolkit?.tools?.[index]?.name?.message}
-                {...register(`toolkit.tools.${index}.name`)}
-              />
+              <Container className="flex flex-col gap-4 md:flex-row md:items-end">
+                <Controller
+                  control={control}
+                  name={`toolkit.tools.${index}.icon`}
+                  render={({ field: iconField }) => (
+                    <FileInput
+                      label="Icon"
+                      value={iconField.value}
+                      onChange={iconField.onChange}
+                      folder="journey"
+                      error={errors.toolkit?.tools?.[index]?.icon?.message}
+                      containerClassName="w-full md:max-w-[220px] md:shrink-0"
+                    />
+                  )}
+                />
+                <Input
+                  id={`toolkit.tools.${index}.name`}
+                  label="Name"
+                  containerClassName="w-full"
+                  error={errors.toolkit?.tools?.[index]?.name?.message}
+                  {...register(`toolkit.tools.${index}.name`)}
+                />
+              </Container>
             </Container>
-          </Container>
-        ))}
+          ))}
+        </Container>
       </Container>
 
       <Container className={dividerClassName}>
@@ -237,6 +241,7 @@ export default function JourneyForm() {
                 image: null,
                 width: "500",
                 height: "366",
+                isLinkable: true,
                 link: "",
               })
             }
@@ -281,21 +286,40 @@ export default function JourneyForm() {
               />
 
               <Container className="flex w-full flex-col gap-4">
-                <Input
-                  id={`toolkit.certificates.${index}.title`}
-                  label="Title"
-                  error={errors.toolkit?.certificates?.[index]?.title?.message}
-                  {...register(`toolkit.certificates.${index}.title`)}
-                />
-                <Input
-                  id={`toolkit.certificates.${index}.link`}
-                  label="Link"
-                  error={errors.toolkit?.certificates?.[index]?.link?.message}
-                  {...register(`toolkit.certificates.${index}.link`)}
-                />
-                <span className="font-sans text-[11px] font-semibold text-[#8A8A86] lg:text-[12px]">
-                  Image Resolution
-                </span>
+                <Container className="flex justify-end">
+                  <Controller
+                    control={control}
+                    name={`toolkit.certificates.${index}.isLinkable`}
+                    render={({ field: linkableField }) => (
+                      <Switch
+                        id={`toolkit.certificates.${index}.isLinkable`}
+                        label="Linkable"
+                        checked={linkableField.value}
+                        onChange={linkableField.onChange}
+                      />
+                    )}
+                  />
+                </Container>
+
+                <Container className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <Input
+                    id={`toolkit.certificates.${index}.title`}
+                    label="Title"
+                    containerClassName={clsx(!watch(`toolkit.certificates.${index}.isLinkable`) && "md:col-span-2")}
+                    error={errors.toolkit?.certificates?.[index]?.title?.message}
+                    {...register(`toolkit.certificates.${index}.title`)}
+                  />
+
+                  {watch(`toolkit.certificates.${index}.isLinkable`) && (
+                    <Input
+                      id={`toolkit.certificates.${index}.link`}
+                      label="Link"
+                      error={errors.toolkit?.certificates?.[index]?.link?.message}
+                      {...register(`toolkit.certificates.${index}.link`)}
+                    />
+                  )}
+                </Container>
+
                 <Container className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <Input
                     id={`toolkit.certificates.${index}.width`}
