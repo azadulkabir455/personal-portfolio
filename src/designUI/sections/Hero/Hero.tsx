@@ -56,24 +56,11 @@ export default function Hero() {
                 "text-center text-[37px] md:text-[80px] lg:text-[94px] leading-[56px] md:leading-[92px] lg:leading-[108px] font-bold tracking-[0px] capitalize",
               )}
             >
-              <Container
-                variant="span"
-                data-aos="fade-down"
-                data-aos-easing="ease-in-out"
-                data-aos-duration="2000"
-                className="relative -bottom-[15px] block"
-              >
+              <Container variant="span" className="relative -bottom-[15px] block">
                 {data.title}
               </Container>
               {data.titleExtend && (
-                <Container
-                  variant="span"
-                  data-aos="fade-down"
-                  data-aos-easing="ease-in-out"
-                  data-aos-duration="1000"
-                  data-aos-delay="100"
-                  className="block"
-                >
+                <Container variant="span" className="block">
                   {data.titleExtend}
                 </Container>
               )}
@@ -81,12 +68,7 @@ export default function Hero() {
           </Container>
 
           <Container className="flex flex-col items-center gap-0 md:grid md:grid-cols-2 md:justify-items-center lg:grid lg:w-full lg:grid-cols-[minmax(0,365fr)_minmax(0,510fr)_minmax(0,365fr)] lg:items-end">
-            <HeroContentCard
-              data-aos="fade-right"
-              data-aos-easing="ease-in-out"
-              data-aos-duration="1000"
-              className="order-2 md:order-2 lg:order-none"
-            >
+            <HeroContentCard className="order-2 md:order-2 lg:order-none">
               <Text className={heroCardTextClassName}>{data.greeting}</Text>
               <Link href={data.ctaLink} target="_blank" rel="noopener noreferrer">
                 <Button
@@ -98,12 +80,7 @@ export default function Hero() {
               </Link>
             </HeroContentCard>
 
-            <Container
-              data-aos="fade-up"
-              data-aos-easing="ease-in-out"
-              data-aos-duration="1000"
-              className="relative z-20 order-1 h-[255px] w-[249px] overflow-hidden opacity-100 md:order-1 md:col-span-2 md:h-[400px] md:w-[390px] lg:order-none lg:col-span-1 lg:h-[499px] lg:w-full lg:max-w-[487px] lg:justify-self-center"
-            >
+            <Container className="relative z-20 order-1 h-[255px] w-[249px] overflow-hidden opacity-100 md:order-1 md:col-span-2 md:h-[400px] md:w-[390px] lg:order-none lg:col-span-1 lg:h-[499px] lg:w-full lg:max-w-[487px] lg:justify-self-center">
               <Image
                 src={data.photoUrl}
                 alt={[data.title, data.titleExtend].filter(Boolean).join(" ")}
@@ -116,12 +93,7 @@ export default function Hero() {
               />
             </Container>
 
-            <HeroContentCard
-              data-aos="fade-left"
-              data-aos-easing="ease-in-out"
-              data-aos-duration="1000"
-              className="order-3 md:order-3 lg:order-none"
-            >
+            <HeroContentCard className="order-3 md:order-3 lg:order-none">
               <Text className={heroCardTextClassName}>{data.description}</Text>
               <Container className="flex h-[38px] items-center gap-2 md:h-[52px]">
                 {data.socialLinks.map((link) => (
