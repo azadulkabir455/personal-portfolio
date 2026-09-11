@@ -70,7 +70,7 @@ export default function FeaturedProjects() {
       <div className="relative w-full">
         {data.projects.map((project, index) => (
           <Fragment key={project.title}>
-            <div className="sticky top-0 w-full lg:top-[115px]" style={{ zIndex: index + 1 }}>
+            <div className="sticky top-0 w-full lg:top-[115px] lg:h-[540px]" style={{ zIndex: index + 1 }}>
               {index > 0 && (
                 <div
                   className="relative ml-[calc(50%-50vw)] h-0 w-screen border-t border-[#242423]/12"
