@@ -21,7 +21,6 @@ export const adminNav: AdminNavItem[] = [
     children: [
       { label: "Header", href: "/admin/global/header" },
       { label: "Footer", href: "/admin/global/footer" },
-      { label: "Blog", href: "/admin/global/blog" },
     ],
   },
   {
@@ -37,6 +36,7 @@ export const adminNav: AdminNavItem[] = [
       { label: "Recent Design", href: "/admin/landing/recent-design" },
       { label: "Services", href: "/admin/landing/services" },
       { label: "Case Study", href: "/admin/landing/case-study" },
+      { label: "Blog", href: "/admin/landing/blog" },
     ],
   },
   {

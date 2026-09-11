@@ -5,10 +5,6 @@ export const blogFormSchema = z.object({
     badge: z.string().min(1, "Badge text is required"),
     description: z.string().min(1, "Description is required"),
   }),
-  detailsIntro: z.object({
-    badge: z.string().min(1, "Badge text is required"),
-    description: z.string(),
-  }),
 });
 
 export type BlogFormValues = z.infer<typeof blogFormSchema>;
