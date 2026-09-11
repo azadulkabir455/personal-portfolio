@@ -6,7 +6,9 @@ import { useFeature } from "./function";
 import FeatureLink from "./comp/FeatureLink";
 
 export default function Feature() {
-  const { data } = useFeature();
+  const { links } = useFeature();
+
+  if (links.length === 0) return null;
 
   return (
     <Container variant="section" className="w-full border-b border-[#242423]/12">
@@ -15,11 +17,12 @@ export default function Feature() {
           "container",
           "flex flex-col gap-4",
           "px-4 py-5 md:p-10",
-          "md:flex-row md:items-center md:justify-between md:gap-0",
+          "md:flex-row md:items-center md:gap-0",
+          links.length === 1 ? "md:justify-center" : "md:justify-between",
           "lg:px-[10px]",
         )}
       >
-        {data.links.map((link) => (
+        {links.map((link) => (
           <FeatureLink key={link.label} {...link} />
         ))}
       </Container>

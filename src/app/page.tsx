@@ -26,7 +26,7 @@ export default function HomePage() {
 
       <main className="flex flex-1 flex-col">
         {sectionVisibility.hero && <Hero />}
-        {sectionVisibility.feature && <Feature />}
+        <Feature />
         {sectionVisibility.story && <Story />}
         {sectionVisibility.journey && <Journey />}
         {sectionVisibility.featuredProjects && <FeaturedProjects />}
