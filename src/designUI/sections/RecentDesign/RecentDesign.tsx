@@ -30,7 +30,7 @@ export default function RecentDesign() {
       </Text>
 
       <Container className="relative mt-[20px] overflow-hidden md:mt-[30px] lg:mt-[40px]">
-        <Container className="flex w-max animate-[journey-marquee_30s_linear_infinite] items-center gap-[3px] hover:[animation-play-state:paused] md:gap-[5.5px] lg:gap-[10px]">
+        <Container className="flex w-max animate-[journey-marquee_45s_linear_infinite] items-center gap-[3px] hover:[animation-play-state:paused] md:gap-[5.5px] lg:gap-[10px]">
           {track.map((group, index) => (
             <Fragment key={`${group.images[0]?.src}-${index}`}>
               <RecentDesignSlide {...group} />

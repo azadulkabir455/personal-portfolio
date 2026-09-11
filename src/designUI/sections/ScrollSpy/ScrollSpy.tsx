@@ -11,7 +11,7 @@ export default function ScrollSpy() {
 
   return (
     <>
-      <Container className="fixed top-1/2 right-[50px] z-40 hidden -translate-y-1/2 flex-col items-center gap-[10px] lg:flex">
+      <Container className="fixed top-1/2 right-[50px] z-40 hidden -translate-y-1/2 flex-col items-center gap-[10px] xl:flex">
         <Container
           role="button"
           tabIndex={0}
@@ -36,29 +36,38 @@ export default function ScrollSpy() {
 
       {isOpen && (
         <>
-          <Container className="fixed inset-0 z-40 hidden lg:block" onClick={close} />
+          <Container className="fixed inset-0 z-40 hidden xl:block" onClick={close} />
           <Container
             className={clsx(
               sora.className,
-              "fixed top-1/2 right-[50px] z-50 hidden min-h-[396px] w-[431px] -translate-y-1/2 flex-col gap-[15px] rounded-[12px] p-[40px] lg:flex",
+              "fixed top-1/2 right-[50px] z-50 hidden min-h-[396px] w-[431px] -translate-y-1/2 flex-col overflow-hidden rounded-[12px] p-[40px] xl:flex",
             )}
             style={{ background: "linear-gradient(180deg, #64A6FF 18.22%, #00275C 100%)" }}
           >
-            {sections.map((section, index) => (
-              <Text
-                key={section.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => scrollToSection(section.id)}
-                className={clsx(
-                  "cursor-pointer align-middle font-medium tracking-[0px] text-white transition-colors duration-200 hover:text-white/70",
-                  "text-[18px] leading-[24px]",
-                  index === activeIndex && "font-bold",
-                )}
-              >
-                {index + 1}. {section.label}
-              </Text>
-            ))}
+            {sections.map((section, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <Container
+                  key={section.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => scrollToSection(section.id)}
+                  className="group flex cursor-pointer items-center gap-[10px] py-[14px]"
+                >
+                  <Text
+                    className={clsx(
+                      "shrink-0 align-middle font-bold tracking-[0px] capitalize transition-all duration-200",
+                      isActive
+                        ? "text-[22px] leading-[28px] text-[#FFFF2E]"
+                        : "text-[18px] leading-[24px] text-white group-hover:text-[22px] group-hover:leading-[28px] group-hover:text-[#FFFF2E]",
+                    )}
+                  >
+                    {section.label}
+                  </Text>
+                  {isActive && <Container className="-mr-[40px] h-px flex-1 self-center bg-white/[0.24]" />}
+                </Container>
+              );
+            })}
           </Container>
         </>
       )}

@@ -6,13 +6,13 @@ export default function RecentDesignShape({ reversed = false }: RecentDesignShap
   const half = (
     <Container
       className={clsx(
-        "h-[80px] w-[40px] shrink-0 bg-[#388EFF] md:h-[140px] md:w-[70px] lg:h-[250px] lg:w-[126px]",
+        "h-[130px] w-[65px] shrink-0 bg-[#388EFF] md:h-[190px] md:w-[95px] lg:h-[250px] lg:w-[126px]",
         reversed ? "rounded-r-full" : "rounded-l-full",
       )}
     />
   );
   const round = (
-    <Container className="h-[35px] w-[35px] shrink-0 rounded-full bg-[#242423] md:h-[62px] md:w-[62px] lg:h-[110px] lg:w-[110px]" />
+    <Container className="h-[40px] w-[40px] shrink-0 rounded-full bg-[#242423] md:h-[62px] md:w-[62px] lg:h-[110px] lg:w-[110px]" />
   );
 
   return (

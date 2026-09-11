@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSectionContent } from "@/customHooks/useSectionContent";
 import { topBarContent } from "@/designUI/utilities/content/topbar";
@@ -43,12 +43,13 @@ export function useTopBar() {
     return () => query.removeEventListener("change", updateIsTabletUp);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleScroll = () => {
       setIsAtTop(window.scrollY <= TOP_THRESHOLD);
       setIsVisible(true);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
