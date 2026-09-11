@@ -7,6 +7,8 @@ import FileInput from "@/designUI/elements/formElement/FileInput/FileInput";
 import Container from "@/designUI/elements/Container/Container";
 import Button from "@/designUI/elements/Button/Button";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import type { RecentDesignGroupCardProps } from "../types";
 
 const removeButtonClassName =
@@ -23,6 +25,15 @@ export default function RecentDesignGroupCard({
   onRemove,
 }: RecentDesignGroupCardProps) {
   const imagesArray = useFieldArray({ control, name: `groups.${index}.images` });
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveImage = (imageIndex: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this image?",
+      message: "This image will be removed from the group.",
+      onConfirm: () => imagesArray.remove(imageIndex),
+    });
+  };
 
   return (
     <Container className="flex flex-col gap-4 rounded-[12px] border border-[#E4E4E4] p-4">
@@ -85,7 +96,7 @@ export default function RecentDesignGroupCard({
                   />
                   <button
                     type="button"
-                    onClick={() => imagesArray.remove(imageIndex)}
+                    onClick={() => confirmRemoveImage(imageIndex)}
                     aria-label="Remove image"
                     className={clsx(removeImageButtonClassName, "mb-[18px] lg:mb-5")}
                   >
@@ -104,6 +115,8 @@ export default function RecentDesignGroupCard({
           ))}
         </Container>
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </Container>
   );
 }

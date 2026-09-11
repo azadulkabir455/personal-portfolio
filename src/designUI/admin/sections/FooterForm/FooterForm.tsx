@@ -11,6 +11,8 @@ import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import type { IconName } from "@/designUI/elements/Icon/types";
 import { useFooterForm } from "./function";
 
@@ -24,6 +26,23 @@ export default function FooterForm() {
   const { form, onSubmit, socialLinksArray, legalLinksArray, status, isContentLoading } = useFooterForm();
   const { register, control, formState } = form;
   const { errors } = formState;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveSocialLink = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this social link?",
+      message: "This link will be removed from the list.",
+      onConfirm: () => socialLinksArray.remove(index),
+    });
+  };
+
+  const confirmRemoveLegalLink = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this legal link?",
+      message: "This link will be removed from the list.",
+      onConfirm: () => legalLinksArray.remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -159,7 +178,7 @@ export default function FooterForm() {
               />
               <button
                 type="button"
-                onClick={() => socialLinksArray.remove(index)}
+                onClick={() => confirmRemoveSocialLink(index)}
                 aria-label="Remove social link"
                 className={clsx(removeButtonClassName, "col-start-2 row-start-1 md:col-start-3")}
               >
@@ -178,21 +197,6 @@ export default function FooterForm() {
       </Container>
 
       <Container className={dividerClassName}>
-        <Container className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Input
-            id="legal.copyrightName"
-            label="Name"
-            error={errors.legal?.copyrightName?.message}
-            {...register("legal.copyrightName")}
-          />
-          <Input
-            id="legal.copyrightNameHref"
-            label="Name Link"
-            error={errors.legal?.copyrightNameHref?.message}
-            {...register("legal.copyrightNameHref")}
-          />
-        </Container>
-
         <Container className="flex flex-col gap-4">
           <Container className="flex items-center justify-between">
             <span className="font-sans text-[13px] font-semibold text-[#171717]">
@@ -222,7 +226,7 @@ export default function FooterForm() {
               />
               <button
                 type="button"
-                onClick={() => legalLinksArray.remove(index)}
+                onClick={() => confirmRemoveLegalLink(index)}
                 aria-label="Remove legal link"
                 className={clsx(removeButtonClassName, "col-start-2 row-start-1 md:col-start-3")}
               >
@@ -245,19 +249,38 @@ export default function FooterForm() {
           error={errors.legal?.developedByLabel?.message}
           {...register("legal.developedByLabel")}
         />
-        <Input
-          id="legal.developedByName"
-          label="Developed By Name"
-          error={errors.legal?.developedByName?.message}
-          {...register("legal.developedByName")}
-        />
-        <Input
-          id="legal.developedByHref"
-          label="Developed By Link"
-          error={errors.legal?.developedByHref?.message}
-          {...register("legal.developedByHref")}
-        />
+        <Container className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Input
+            id="legal.developedByName"
+            label="Developed By Name"
+            error={errors.legal?.developedByName?.message}
+            {...register("legal.developedByName")}
+          />
+          <Input
+            id="legal.developedByHref"
+            label="Developed By Link"
+            error={errors.legal?.developedByHref?.message}
+            {...register("legal.developedByHref")}
+          />
+        </Container>
+
+        <Container className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Input
+            id="legal.copyrightName"
+            label="Designer By Name"
+            error={errors.legal?.copyrightName?.message}
+            {...register("legal.copyrightName")}
+          />
+          <Input
+            id="legal.copyrightNameHref"
+            label="Name Link"
+            error={errors.legal?.copyrightNameHref?.message}
+            {...register("legal.copyrightNameHref")}
+          />
+        </Container>
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }

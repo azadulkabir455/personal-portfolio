@@ -10,6 +10,8 @@ import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { useStoryForm } from "./function";
 
 export default function StoryForm() {
@@ -17,6 +19,31 @@ export default function StoryForm() {
     useStoryForm();
   const { register, control, formState } = form;
   const { errors } = formState;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveLogo = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this client logo?",
+      message: "This logo will be removed from the list.",
+      onConfirm: () => clientLogosArray.remove(index),
+    });
+  };
+
+  const confirmRemoveStep = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this process step?",
+      message: "This step will be removed from the list.",
+      onConfirm: () => processStepsArray.remove(index),
+    });
+  };
+
+  const confirmRemoveStat = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this stat?",
+      message: "This stat will be removed from the list.",
+      onConfirm: () => statsArray.remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -66,7 +93,7 @@ export default function StoryForm() {
               </span>
               <button
                 type="button"
-                onClick={() => clientLogosArray.remove(index)}
+                onClick={() => confirmRemoveLogo(index)}
                 aria-label="Remove client logo"
                 className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]"
               >
@@ -134,7 +161,7 @@ export default function StoryForm() {
               </span>
               <button
                 type="button"
-                onClick={() => processStepsArray.remove(index)}
+                onClick={() => confirmRemoveStep(index)}
                 aria-label="Remove process step"
                 className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]"
               >
@@ -142,27 +169,8 @@ export default function StoryForm() {
               </button>
             </Container>
 
-            <Input
-              id={`processSteps.${index}.label`}
-              label="Label"
-              error={errors.processSteps?.[index]?.label?.message}
-              {...register(`processSteps.${index}.label`)}
-            />
-
             {index === 1 && (
-              <Container className="flex flex-col gap-4">
-                <Controller
-                  control={control}
-                  name={`processSteps.${index}.icon`}
-                  render={({ field: iconField }) => (
-                    <Switch
-                      id={`processSteps.${index}.icon`}
-                      label="Show Icon"
-                      checked={iconField.value}
-                      onChange={iconField.onChange}
-                    />
-                  )}
-                />
+              <Container className="flex flex-col gap-4 md:flex-row md:items-start">
                 <Controller
                   control={control}
                   name={`processSteps.${index}.image`}
@@ -177,8 +185,27 @@ export default function StoryForm() {
                     />
                   )}
                 />
+                <Controller
+                  control={control}
+                  name={`processSteps.${index}.icon`}
+                  render={({ field: iconField }) => (
+                    <Switch
+                      id={`processSteps.${index}.icon`}
+                      label="Show Icon"
+                      checked={iconField.value}
+                      onChange={iconField.onChange}
+                    />
+                  )}
+                />
               </Container>
             )}
+
+            <Input
+              id={`processSteps.${index}.label`}
+              label="Label"
+              error={errors.processSteps?.[index]?.label?.message}
+              {...register(`processSteps.${index}.label`)}
+            />
           </Container>
         ))}
       </Container>
@@ -224,7 +251,7 @@ export default function StoryForm() {
               </span>
               <button
                 type="button"
-                onClick={() => statsArray.remove(index)}
+                onClick={() => confirmRemoveStat(index)}
                 aria-label="Remove stat"
                 className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[8px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8]"
               >
@@ -256,6 +283,8 @@ export default function StoryForm() {
           </Container>
         ))}
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }

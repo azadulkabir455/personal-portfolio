@@ -5,6 +5,8 @@ import FormContainer from "@/designUI/elements/FormContainer/FormContainer";
 import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { useRecentDesignForm } from "./function";
 import RecentDesignGroupCard from "./comp/RecentDesignGroupCard";
 
@@ -12,6 +14,15 @@ export default function RecentDesignForm() {
   const { form, onSubmit, groupsArray, status, isContentLoading } = useRecentDesignForm();
   const { register, control, formState } = form;
   const { errors } = formState;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveGroup = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this group?",
+      message: "This group and its images will be removed from the list.",
+      onConfirm: () => groupsArray.remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -49,10 +60,12 @@ export default function RecentDesignForm() {
             register={register}
             errors={errors}
             index={index}
-            onRemove={() => groupsArray.remove(index)}
+            onRemove={() => confirmRemoveGroup(index)}
           />
         ))}
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }

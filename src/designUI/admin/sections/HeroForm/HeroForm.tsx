@@ -10,6 +10,8 @@ import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import type { IconName } from "@/designUI/elements/Icon/types";
 import { useHeroForm } from "./function";
 
@@ -18,6 +20,15 @@ export default function HeroForm() {
   const { register, control, formState } = form;
   const { errors } = formState;
   const { fields, append, remove } = socialLinksArray;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemove = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this social link?",
+      message: "This link will be removed from the list.",
+      onConfirm: () => remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -102,7 +113,7 @@ export default function HeroForm() {
             />
             <button
               type="button"
-              onClick={() => remove(index)}
+              onClick={() => confirmRemove(index)}
               aria-label="Remove social link"
               className="col-start-2 row-start-1 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8] md:col-start-3"
             >
@@ -118,6 +129,8 @@ export default function HeroForm() {
           </Container>
         ))}
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }

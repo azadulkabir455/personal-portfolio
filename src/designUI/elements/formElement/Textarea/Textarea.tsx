@@ -27,10 +27,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textare
         <label
           htmlFor={id}
           className={clsx(
-            "pointer-events-none absolute left-3 font-sans text-[#8A8A86] transition-all duration-200 lg:left-4",
-            "top-2 text-[10px] lg:text-[11px]",
-            "peer-placeholder-shown:top-4 peer-placeholder-shown:text-[13px] lg:peer-placeholder-shown:text-[14px]",
-            "peer-focus:top-2 peer-focus:text-[10px] lg:peer-focus:text-[11px]",
+            "pointer-events-none absolute left-3 rounded-[6px] bg-white px-1 font-sans text-[#8A8A86] transition-all duration-200 lg:left-4",
+            "top-0 -translate-y-1/2 text-[10px] lg:text-[11px]",
+            "peer-placeholder-shown:top-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:rounded-none peer-placeholder-shown:bg-transparent peer-placeholder-shown:px-0 peer-placeholder-shown:text-[13px] lg:peer-placeholder-shown:text-[14px]",
+            "peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:rounded-[6px] peer-focus:bg-white peer-focus:px-1 peer-focus:text-[10px] peer-focus:text-[#242423] lg:peer-focus:text-[11px]",
           )}
         >
           {label}

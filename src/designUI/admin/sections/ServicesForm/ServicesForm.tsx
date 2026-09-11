@@ -6,12 +6,23 @@ import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { useServicesForm } from "./function";
 
 export default function ServicesForm() {
   const { form, onSubmit, itemsArray, status } = useServicesForm();
   const { register, formState } = form;
   const { errors } = formState;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveService = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this service?",
+      message: "This service will be removed from the list.",
+      onConfirm: () => itemsArray.remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -57,7 +68,7 @@ export default function ServicesForm() {
             />
             <button
               type="button"
-              onClick={() => itemsArray.remove(index)}
+              onClick={() => confirmRemoveService(index)}
               aria-label="Remove service"
               className="col-start-2 row-start-1 flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-[10px] bg-[#FDEBEB] text-[#E5484D] transition-colors duration-200 hover:bg-[#FBD8D8] md:col-start-3 lg:h-[52px] lg:w-[52px]"
             >
@@ -73,6 +84,8 @@ export default function ServicesForm() {
           </Container>
         ))}
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }

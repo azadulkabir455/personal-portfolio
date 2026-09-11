@@ -9,6 +9,8 @@ import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { useCaseStudyForm } from "./function";
 
 const removeButtonClassName =
@@ -18,6 +20,15 @@ export default function CaseStudyForm() {
   const { form, onSubmit, slidesArray, status, isContentLoading } = useCaseStudyForm();
   const { register, control, formState } = form;
   const { errors } = formState;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveSlide = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this slide?",
+      message: "This slide will be removed from the list.",
+      onConfirm: () => slidesArray.remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -61,7 +72,7 @@ export default function CaseStudyForm() {
               </span>
               <button
                 type="button"
-                onClick={() => slidesArray.remove(index)}
+                onClick={() => confirmRemoveSlide(index)}
                 aria-label="Remove slide"
                 className={removeButtonClassName}
               >
@@ -130,6 +141,8 @@ export default function CaseStudyForm() {
           </Container>
         ))}
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }

@@ -9,6 +9,8 @@ import Button from "@/designUI/elements/Button/Button";
 import SaveButton from "@/designUI/elements/SaveButton/SaveButton";
 import Container from "@/designUI/elements/Container/Container";
 import Icon from "@/designUI/elements/Icon/Icon";
+import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
+import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { useJourneyForm } from "./function";
 
 const dividerClassName =
@@ -22,6 +24,31 @@ export default function JourneyForm() {
     useJourneyForm();
   const { register, control, formState } = form;
   const { errors } = formState;
+  const confirmDialog = useConfirmDialog();
+
+  const confirmRemoveStep = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this step?",
+      message: "This step will be removed from the list.",
+      onConfirm: () => stepsArray.remove(index),
+    });
+  };
+
+  const confirmRemoveTool = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this tool?",
+      message: "This tool will be removed from the list.",
+      onConfirm: () => toolsArray.remove(index),
+    });
+  };
+
+  const confirmRemoveCertificate = (index: number) => {
+    confirmDialog.openConfirm({
+      title: "Remove this certificate?",
+      message: "This certificate will be removed from the list.",
+      onConfirm: () => certificatesArray.remove(index),
+    });
+  };
 
   return (
     <FormContainer
@@ -91,7 +118,7 @@ export default function JourneyForm() {
               </span>
               <button
                 type="button"
-                onClick={() => stepsArray.remove(index)}
+                onClick={() => confirmRemoveStep(index)}
                 aria-label="Remove step"
                 className={removeButtonClassName}
               >
@@ -155,7 +182,7 @@ export default function JourneyForm() {
               </span>
               <button
                 type="button"
-                onClick={() => toolsArray.remove(index)}
+                onClick={() => confirmRemoveTool(index)}
                 aria-label="Remove tool"
                 className={removeButtonClassName}
               >
@@ -229,7 +256,7 @@ export default function JourneyForm() {
               </span>
               <button
                 type="button"
-                onClick={() => certificatesArray.remove(index)}
+                onClick={() => confirmRemoveCertificate(index)}
                 aria-label="Remove certificate"
                 className={removeButtonClassName}
               >
@@ -290,6 +317,8 @@ export default function JourneyForm() {
           </Container>
         ))}
       </Container>
+
+      <ConfirmDialog {...confirmDialog} />
     </FormContainer>
   );
 }
