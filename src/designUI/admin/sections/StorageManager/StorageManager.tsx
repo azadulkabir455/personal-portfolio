@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import ConfirmDialog from "@/designUI/elements/ConfirmDialog/ConfirmDialog";
 import { useConfirmDialog } from "@/designUI/elements/ConfirmDialog/function";
 import { ArrowLeftIcon } from "@/designUI/utilities/icons";
+import { isFileInUse } from "@/lib/checkFileUsage";
 import StorageFolderCard from "./comp/StorageFolderCard";
 import StorageFileCard from "./comp/StorageFileCard";
 import StorageFileModal from "./comp/StorageFileModal";
@@ -26,13 +28,27 @@ export default function StorageManager() {
     removeFile,
   } = useStorageManager();
   const confirmDialog = useConfirmDialog();
+  const [checkingUrl, setCheckingUrl] = useState<string | null>(null);
 
-  const confirmDeleteFile = (file: RemoteFile) => {
-    confirmDialog.openConfirm({
-      title: "Delete this file?",
-      message: "This file will be permanently removed from storage. This can't be undone.",
-      onConfirm: () => removeFile(file),
-    });
+  const confirmDeleteFile = async (file: RemoteFile) => {
+    setCheckingUrl(file.url);
+    const inUse = await isFileInUse(file.url).catch(() => false);
+    setCheckingUrl(null);
+
+    confirmDialog.openConfirm(
+      inUse
+        ? {
+            title: "This image is currently in use",
+            message:
+              "This image is being shown somewhere on the live site right now. Deleting it will remove the image from that section. Do you still want to delete it?",
+            onConfirm: () => removeFile(file),
+          }
+        : {
+            title: "Delete this file?",
+            message: "This file will be permanently removed from storage. This can't be undone.",
+            onConfirm: () => removeFile(file),
+          },
+    );
   };
 
   return (
@@ -88,7 +104,7 @@ export default function StorageManager() {
               file={file}
               onView={() => setViewFile(file)}
               onDelete={() => confirmDeleteFile(file)}
-              isDeleting={deletingUrl === file.url}
+              isDeleting={deletingUrl === file.url || checkingUrl === file.url}
             />
           ))}
         </Container>
@@ -98,7 +114,7 @@ export default function StorageManager() {
         file={viewFile}
         onClose={() => setViewFile(null)}
         onDelete={confirmDeleteFile}
-        isDeleting={deletingUrl === viewFile?.url}
+        isDeleting={deletingUrl === viewFile?.url || checkingUrl === viewFile?.url}
       />
 
       <ConfirmDialog {...confirmDialog} />

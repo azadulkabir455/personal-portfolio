@@ -1,18 +1,41 @@
 import type { RemoteFile, UploadFolder } from "@/lib/uploadFolders";
 
-export async function uploadFile(file: File, folder: UploadFolder): Promise<string> {
+export function uploadFile(
+  file: File,
+  folder: UploadFolder,
+  onProgress?: (percent: number) => void,
+): Promise<string> {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("folder", folder);
 
-  const res = await fetch("/api/upload", { method: "POST", body: formData });
-  if (!res.ok) {
-    const body = (await res.json().catch(() => null)) as { error?: string } | null;
-    throw new Error(body?.error ?? "Upload failed");
-  }
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/upload");
 
-  const data = (await res.json()) as { url: string };
-  return data.url;
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) onProgress?.(Math.round((event.loaded / event.total) * 100));
+    };
+
+    xhr.onload = () => {
+      let body: { url?: string; error?: string } | null = null;
+      try {
+        body = JSON.parse(xhr.responseText);
+      } catch {
+        // ignore invalid JSON, handled by the status check below
+      }
+
+      if (xhr.status >= 200 && xhr.status < 300 && body?.url) {
+        resolve(body.url);
+      } else {
+        reject(new Error(body?.error ?? "Upload failed"));
+      }
+    };
+
+    xhr.onerror = () => reject(new Error("Upload failed"));
+
+    xhr.send(formData);
+  });
 }
 
 export async function listFiles(folder: UploadFolder): Promise<RemoteFile[]> {

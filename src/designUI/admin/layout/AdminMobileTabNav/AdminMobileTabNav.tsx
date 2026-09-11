@@ -3,12 +3,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
+import Icon from "@/designUI/elements/Icon/Icon";
 import { CloseIcon, HamburgerIcon } from "@/designUI/utilities/icons";
 import AdminNavList from "@/designUI/admin/layout/AdminNavList/AdminNavList";
+import { useAdminLogout } from "@/customHooks/useAdminLogout";
 import { useAdminMobileTabNav } from "./function";
 
 export default function AdminMobileTabNav() {
   const { isOpen, toggle, close } = useAdminMobileTabNav();
+  const { logout, isLoggingOut } = useAdminLogout();
 
   return (
     <>
@@ -51,9 +54,21 @@ export default function AdminMobileTabNav() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: "-100%", opacity: 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="h-full overflow-y-auto rounded-[16px] border border-[#E4E4E4] bg-white p-4 shadow-lg"
+                className="flex h-full flex-col rounded-[16px] border border-[#E4E4E4] bg-white p-4 shadow-lg"
               >
-                <AdminNavList onNavigate={close} />
+                <Container className="flex-1 overflow-y-auto">
+                  <AdminNavList onNavigate={close} />
+                </Container>
+
+                <button
+                  type="button"
+                  onClick={logout}
+                  disabled={isLoggingOut}
+                  className="mt-3 flex cursor-pointer items-center gap-3 rounded-[10px] border-t border-[#E4E4E4] px-4 pt-4 font-sans text-[14px] font-medium text-[#8A8A86] transition-colors duration-200 hover:text-[#E5484D] disabled:cursor-wait disabled:opacity-70"
+                >
+                  <Icon name="FaSignOutAlt" width={18} height={18} />
+                  {isLoggingOut ? "Logging out..." : "Logout"}
+                </button>
               </motion.div>
             </Container>
           </>

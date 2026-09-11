@@ -38,6 +38,7 @@ export default function ForgotPasswordForm() {
         <FieldError message={errorMessage} />
 
         <Button type="submit" disabled={isSubmitting} className="w-full justify-center">
+          <Icon name="FaPaperPlane" width={14} height={14} />
           {isSubmitting ? "Sending..." : "Send Reset Link"}
         </Button>
 

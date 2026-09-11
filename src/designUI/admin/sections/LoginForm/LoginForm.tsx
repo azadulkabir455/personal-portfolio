@@ -59,6 +59,7 @@ export default function LoginForm() {
         <FieldError message={errorMessage} />
 
         <Button type="submit" disabled={isSubmitting} className="w-full justify-center">
+          <Icon name="FaSignInAlt" width={14} height={14} />
           {isSubmitting ? "Logging in..." : "Login"}
         </Button>
       </form>

@@ -41,6 +41,7 @@ export default function FileInput({
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -60,9 +61,10 @@ export default function FileInput({
     }
 
     setUploadError(null);
+    setUploadProgress(0);
     setIsUploading(true);
     try {
-      const url = await uploadFile(file, folder);
+      const url = await uploadFile(file, folder, setUploadProgress);
       onChange(url);
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : "Upload failed. Please try again.");
@@ -109,10 +111,17 @@ export default function FileInput({
         )}
       >
         {isUploading ? (
-          <>
-            <span className="h-7 w-7 shrink-0 animate-spin rounded-full border-2 border-[#E4E4E4] border-t-[#171717]" />
-            <span className="font-sans text-[13px] font-medium text-[#171717] lg:text-[14px]">Uploading...</span>
-          </>
+          <div className="flex w-full max-w-[220px] flex-col items-center gap-2">
+            <span className="font-sans text-[13px] font-medium text-[#171717] lg:text-[14px]">
+              Uploading... {uploadProgress}%
+            </span>
+            <span className="h-[6px] w-full overflow-hidden rounded-full bg-[#E4E4E4]">
+              <span
+                className="block h-full rounded-full bg-[#171717] transition-[width] duration-200 ease-out"
+                style={{ width: `${uploadProgress}%` }}
+              />
+            </span>
+          </div>
         ) : showImagePreview ? (
           <div className="relative h-[160px] w-full overflow-hidden rounded-[10px] bg-white lg:h-[200px]">
             <NextImage src={currentValue as string} alt={label} fill className="object-contain" unoptimized />

@@ -6,7 +6,7 @@ import { subscribeToAuthState, signOutUser } from "@/firebase/authService";
 import { isFirebaseConfigured } from "@/firebase/config";
 
 const SESSION_DURATION_MS = 24 * 60 * 60 * 1000;
-const LOGIN_AT_KEY = "adminLoginAt";
+export const LOGIN_AT_KEY = "adminLoginAt";
 
 export function useAdminAuthGuard() {
   const router = useRouter();
