@@ -27,14 +27,14 @@ function toDateInputValue(publishedDate: string) {
   return `${year}-${month}-${day}`;
 }
 
-const PAGE_SIZE = 10;
-const EMPTY_DATE_RANGE: DateRangeValue = { from: "", to: "" };
+const pageSize = 10;
+const emptyDateRange: DateRangeValue = { from: "", to: "" };
 
 export function useProjectListManager() {
   const [projects, setProjects] = useState<FeaturedProject[]>(featuredProjectsContent.projects);
   const [searchQuery, setSearchQueryState] = useState("");
   const [tagFilter, setTagFilterState] = useState("");
-  const [dateFilter, setDateFilterState] = useState<DateRangeValue>(EMPTY_DATE_RANGE);
+  const [dateFilter, setDateFilterState] = useState<DateRangeValue>(emptyDateRange);
   const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [viewProject, setViewProject] = useState<FeaturedProject | null>(null);
@@ -79,9 +79,9 @@ export function useProjectListManager() {
     });
   }, [projects, searchQuery, tagFilter, dateFilter]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredProjects.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredProjects.length / pageSize));
   const safePage = Math.min(currentPage, totalPages);
-  const paginatedProjects = filteredProjects.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const paginatedProjects = filteredProjects.slice((safePage - 1) * pageSize, safePage * pageSize);
 
   const goToPage = (page: number) => {
     setCurrentPage(Math.min(Math.max(page, 1), totalPages));

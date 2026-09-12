@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const EXIT_DURATION = 1700;
+const exitDuration = 1700;
 
 export function usePageLoader(isLoading: boolean) {
   const [shouldRender, setShouldRender] = useState(true);
@@ -12,7 +12,7 @@ export function usePageLoader(isLoading: boolean) {
     if (isLoading) return;
 
     setIsExiting(true);
-    const timeout = setTimeout(() => setShouldRender(false), EXIT_DURATION);
+    const timeout = setTimeout(() => setShouldRender(false), exitDuration);
     return () => clearTimeout(timeout);
   }, [isLoading]);
 

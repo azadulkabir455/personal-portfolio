@@ -6,8 +6,8 @@ import FieldError from "@/designUI/elements/formElement/FieldError/FieldError";
 import Icon from "@/designUI/elements/Icon/Icon";
 import type { DatePickerProps } from "./types";
 
-const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const MONTH_NAMES = [
+const weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const monthNames = [
   "January",
   "February",
   "March",
@@ -184,7 +184,7 @@ export default function DatePicker({
                 <Icon name="FaChevronLeft" width={10} height={10} />
               </button>
               <span className="font-sans text-[13px] font-semibold text-[#171717]">
-                {MONTH_NAMES[month]} {year}
+                {monthNames[month]} {year}
               </span>
               <button
                 type="button"
@@ -197,7 +197,7 @@ export default function DatePicker({
             </div>
 
             <div className="grid grid-cols-7 gap-1 pb-1">
-              {WEEKDAYS.map((day) => (
+              {weekdays.map((day) => (
                 <span
                   key={day}
                   className="flex h-7 items-center justify-center font-sans text-[10px] font-medium text-[#8A8A86]"

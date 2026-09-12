@@ -2,14 +2,14 @@ import Container from "@/designUI/elements/Container/Container";
 import Image from "@/designUI/elements/Image/Image";
 import type { CaseStudyCompProps } from "../types";
 
-const SCREEN_CLIP_PATH =
+const screenClipPath =
   "polygon(48.94% 9.41%, 50.08% 8.33%, 97.92% 4.03%, 98.79% 4.93%, 87.45% 90.45%, 37.7% 89.28%)";
 
-const SCREEN_TRANSFORM_MOBILE =
+const screenTransformMobile =
   "matrix3d(0.4252721,-0.0232596,0,-0.0001774,-0.2619797,0.7752885,0,-0.0001793,0,0,1,0,179.2262,15.966,0,1)";
-const SCREEN_TRANSFORM_MD =
+const screenTransformMd =
   "matrix3d(0.4252721,-0.0232725,0,-0.0000799,-0.2618349,0.7752885,0,-0.0000807,0,0,1,0,398.0604,35.48,0,1)";
-const SCREEN_TRANSFORM_LG =
+const screenTransformLg =
   "matrix3d(0.4252721,-0.023283,0,-0.0000581,-0.2617165,0.7752885,0,-0.0000587,0,0,1,0,547.0855,48.785,0,1)";
 
 export default function CaseStudyComp({ studyImage }: CaseStudyCompProps) {
@@ -22,7 +22,7 @@ export default function CaseStudyComp({ studyImage }: CaseStudyCompProps) {
           fill
           className="z-[1] object-contain"
         />
-        <Container className="absolute inset-0 z-[2] overflow-hidden" style={{ clipPath: SCREEN_CLIP_PATH }}>
+        <Container className="absolute inset-0 z-[2] overflow-hidden" style={{ clipPath: screenClipPath }}>
           <Image
             src={studyImage}
             alt=""
@@ -31,12 +31,12 @@ export default function CaseStudyComp({ studyImage }: CaseStudyCompProps) {
           />
         </Container>
         <style>{`
-          .case-study-screen-img { transform: ${SCREEN_TRANSFORM_MOBILE}; }
+          .case-study-screen-img { transform: ${screenTransformMobile}; }
           @media (min-width: 768px) {
-            .case-study-screen-img { transform: ${SCREEN_TRANSFORM_MD}; }
+            .case-study-screen-img { transform: ${screenTransformMd}; }
           }
           @media (min-width: 1024px) {
-            .case-study-screen-img { transform: ${SCREEN_TRANSFORM_LG}; }
+            .case-study-screen-img { transform: ${screenTransformLg}; }
           }
         `}</style>
       </Container>

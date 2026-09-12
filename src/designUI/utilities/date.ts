@@ -1,4 +1,4 @@
-const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
 
 export function toISODate(date: Date): string {
   const year = date.getFullYear();
@@ -8,7 +8,7 @@ export function toISODate(date: Date): string {
 }
 
 export function normalizeToISODate(value: string): string {
-  if (ISO_DATE_PATTERN.test(value)) return value;
+  if (isoDatePattern.test(value)) return value;
 
   const parsed = new Date(value);
   return Number.isNaN(parsed.getTime()) ? value : toISODate(parsed);

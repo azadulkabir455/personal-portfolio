@@ -9,11 +9,11 @@ import { uploadFile } from "@/lib/uploadClient";
 import { getUploadValidationError } from "@/lib/uploadValidation";
 import type { FileInputProps } from "./types";
 
-const IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"];
+const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"];
 
 function isImageFile(url: string | null) {
   if (!url) return false;
-  return IMAGE_EXTENSIONS.some((ext) => url.toLowerCase().endsWith(ext));
+  return imageExtensions.some((ext) => url.toLowerCase().endsWith(ext));
 }
 
 function getFileExtension(url: string) {

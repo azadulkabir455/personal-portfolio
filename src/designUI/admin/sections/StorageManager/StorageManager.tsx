@@ -11,7 +11,7 @@ import StorageFolderCard from "./comp/StorageFolderCard";
 import StorageFileCard from "./comp/StorageFileCard";
 import StorageFileModal from "./comp/StorageFileModal";
 import { useStorageManager } from "./function";
-import { FOLDER_LABELS } from "./types";
+import { folderLabels } from "./types";
 import type { RemoteFile } from "@/lib/uploadFolders";
 
 export default function StorageManager() {
@@ -66,7 +66,7 @@ export default function StorageManager() {
         )}
         <Container className="flex flex-col gap-1.5 lg:gap-2">
           <Text variant="h2" className="font-sans text-[18px] font-semibold text-[#171717] lg:text-[24px]">
-            {selectedFolder ? FOLDER_LABELS[selectedFolder] : "Storage"}
+            {selectedFolder ? folderLabels[selectedFolder] : "Storage"}
           </Text>
           <Text className="font-sans text-[12px] text-[#8A8A86] lg:text-[14px]">
             {selectedFolder

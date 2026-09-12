@@ -1,6 +1,6 @@
 import type { RemoteFile, UploadFolder } from "@/lib/uploadFolders";
 
-export const FOLDER_LABELS: Record<UploadFolder, string> = {
+export const folderLabels: Record<UploadFolder, string> = {
   hero: "Hero",
   story: "Story",
   journey: "Journey",

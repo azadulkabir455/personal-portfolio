@@ -39,8 +39,8 @@ function toDateInputValue(publishedDate: string) {
   return `${year}-${month}-${day}`;
 }
 
-const PAGE_SIZE = 10;
-const EMPTY_DATE_RANGE: DateRangeValue = { from: "", to: "" };
+const pageSize = 10;
+const emptyDateRange: DateRangeValue = { from: "", to: "" };
 
 export function useBlogListManager() {
   const [posts, setPosts] = useState<DashboardPost[]>(
@@ -48,7 +48,7 @@ export function useBlogListManager() {
   );
   const [categoryFilter, setCategoryFilterState] = useState("");
   const [tagFilter, setTagFilterState] = useState("");
-  const [dateFilter, setDateFilterState] = useState<DateRangeValue>(EMPTY_DATE_RANGE);
+  const [dateFilter, setDateFilterState] = useState<DateRangeValue>(emptyDateRange);
   const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [viewPost, setViewPost] = useState<BlogPost | null>(null);
@@ -91,9 +91,9 @@ export function useBlogListManager() {
     });
   }, [posts, categoryFilter, tagFilter, dateFilter]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / pageSize));
   const safePage = Math.min(currentPage, totalPages);
-  const paginatedPosts = filteredPosts.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const paginatedPosts = filteredPosts.slice((safePage - 1) * pageSize, safePage * pageSize);
 
   const goToPage = (page: number) => {
     setCurrentPage(Math.min(Math.max(page, 1), totalPages));

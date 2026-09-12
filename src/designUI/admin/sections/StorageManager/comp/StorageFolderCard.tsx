@@ -1,7 +1,7 @@
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import Icon from "@/designUI/elements/Icon/Icon";
-import { FOLDER_LABELS } from "../types";
+import { folderLabels } from "../types";
 import type { StorageFolderCardProps } from "../types";
 
 export default function StorageFolderCard({ folder, onSelect }: StorageFolderCardProps) {
@@ -15,7 +15,7 @@ export default function StorageFolderCard({ folder, onSelect }: StorageFolderCar
         <Icon name="FaFolderOpen" width={20} height={20} />
       </Container>
       <Text className="font-sans text-[14px] font-semibold text-[#171717]">
-        {FOLDER_LABELS[folder]}
+        {folderLabels[folder]}
       </Text>
     </button>
   );

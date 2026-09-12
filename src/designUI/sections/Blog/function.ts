@@ -6,7 +6,7 @@ import { blogContent } from "@/designUI/utilities/content/blog";
 import { blogListContent } from "@/designUI/utilities/content/blogList";
 import { getPublishedPosts } from "@/firebase/blogService";
 
-const FEATURED_POST_COUNT = 3;
+const featuredPostCount = 3;
 
 export function useBlog() {
   const { data, isLoading } = useSectionContent("blog", blogContent);
@@ -15,7 +15,7 @@ export function useBlog() {
   return {
     data: {
       intro: data.intro,
-      posts: posts.slice(0, FEATURED_POST_COUNT),
+      posts: posts.slice(0, featuredPostCount),
     },
     isLoading,
   };

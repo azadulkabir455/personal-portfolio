@@ -8,13 +8,13 @@ import { personalInfoContent } from "@/designUI/utilities/content/personalInfo";
 import { toTelLink } from "@/designUI/utilities/phone";
 import type { TopBarMode } from "./types";
 
-const TOP_THRESHOLD = 24;
-const AUTO_HIDE_DELAY = 3000;
-const PAGE_MARGIN = 20;
-const HEADER_ROW_HEIGHT = 100;
-const MOBILE_PAGE_MARGIN = 10;
-const TABLET_PAGE_MARGIN = 20;
-const TABLET_BREAKPOINT_QUERY = "(min-width: 768px)";
+const topThreshold = 24;
+const autoHideDelay = 3000;
+const pageMargin = 20;
+const headerRowHeight = 100;
+const mobilePageMargin = 10;
+const tabletPageMargin = 20;
+const tabletBreakpointQuery = "(min-width: 768px)";
 
 export function useTopBar() {
   const pathname = usePathname();
@@ -36,7 +36,7 @@ export function useTopBar() {
   }, []);
 
   useEffect(() => {
-    const query = window.matchMedia(TABLET_BREAKPOINT_QUERY);
+    const query = window.matchMedia(tabletBreakpointQuery);
     const updateIsTabletUp = () => setIsTabletUp(query.matches);
     updateIsTabletUp();
     query.addEventListener("change", updateIsTabletUp);
@@ -45,7 +45,7 @@ export function useTopBar() {
 
   useLayoutEffect(() => {
     const handleScroll = () => {
-      setIsAtTop(window.scrollY <= TOP_THRESHOLD);
+      setIsAtTop(window.scrollY <= topThreshold);
       setIsVisible(true);
     };
 
@@ -57,7 +57,7 @@ export function useTopBar() {
   useEffect(() => {
     if (isOpen || isAtTop || !isVisible || isHovered) return;
 
-    const timeout = setTimeout(() => setIsVisible(false), AUTO_HIDE_DELAY);
+    const timeout = setTimeout(() => setIsVisible(false), autoHideDelay);
     return () => clearTimeout(timeout);
   }, [isOpen, isAtTop, isVisible, isHovered]);
 
@@ -88,9 +88,9 @@ export function useTopBar() {
       : isVisible
         ? "sticky"
         : "hidden";
-  const menuHeight = Math.max(viewportHeight - HEADER_ROW_HEIGHT - PAGE_MARGIN, 0);
+  const menuHeight = Math.max(viewportHeight - headerRowHeight - pageMargin, 0);
   const mobileMenuHeight = Math.max(
-    viewportHeight - (isTabletUp ? TABLET_PAGE_MARGIN : MOBILE_PAGE_MARGIN),
+    viewportHeight - (isTabletUp ? tabletPageMargin : mobilePageMargin),
     0,
   );
 

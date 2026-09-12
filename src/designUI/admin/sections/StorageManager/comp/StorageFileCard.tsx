@@ -4,10 +4,10 @@ import Text from "@/designUI/elements/Text/Text";
 import Icon from "@/designUI/elements/Icon/Icon";
 import type { StorageFileCardProps } from "../types";
 
-const IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"];
+const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"];
 
 function isImageFile(name: string) {
-  return IMAGE_EXTENSIONS.some((ext) => name.toLowerCase().endsWith(ext));
+  return imageExtensions.some((ext) => name.toLowerCase().endsWith(ext));
 }
 
 export default function StorageFileCard({ file, onView, onDelete, isDeleting }: StorageFileCardProps) {

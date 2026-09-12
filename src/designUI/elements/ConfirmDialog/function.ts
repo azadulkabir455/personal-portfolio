@@ -8,7 +8,7 @@ interface ConfirmDialogState extends ConfirmDialogOptions {
   isLoading: boolean;
 }
 
-const CLOSED_STATE: ConfirmDialogState = {
+const closedState: ConfirmDialogState = {
   isOpen: false,
   isLoading: false,
   title: "",
@@ -17,19 +17,19 @@ const CLOSED_STATE: ConfirmDialogState = {
 };
 
 export function useConfirmDialog(): UseConfirmDialogReturn {
-  const [state, setState] = useState<ConfirmDialogState>(CLOSED_STATE);
+  const [state, setState] = useState<ConfirmDialogState>(closedState);
 
   const openConfirm = useCallback((options: ConfirmDialogOptions) => {
     setState({ isOpen: true, isLoading: false, ...options });
   }, []);
 
   const closeConfirm = useCallback(() => {
-    setState(CLOSED_STATE);
+    setState(closedState);
   }, []);
 
   const handleConfirm = useCallback(() => {
     setState((current) => ({ ...current, isLoading: true }));
-    void Promise.resolve(state.onConfirm()).finally(() => setState(CLOSED_STATE));
+    void Promise.resolve(state.onConfirm()).finally(() => setState(closedState));
   }, [state]);
 
   return {

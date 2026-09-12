@@ -12,7 +12,7 @@ import { handleTelLinkClick } from "@/designUI/utilities/phone";
 import ProjectCard from "@/designUI/components/ProjectCard/ProjectCard";
 import { useFeaturedProjects } from "./function";
 
-const NUMBER_OFFSET_LG_CLASSES = [
+const numberOffsetLgClasses = [
   "ml-0",
   "ml-[20px] md:ml-[30px]",
   "ml-[40px] md:ml-[60px]",
@@ -83,7 +83,7 @@ export default function FeaturedProjects() {
                     className={clsx(
                       "flex flex-col items-start",
                       "pt-[20px] md:pt-[30px] lg:pt-[60px]",
-                      NUMBER_OFFSET_LG_CLASSES[index],
+                      numberOffsetLgClasses[index],
                     )}
                   >
                     <Container className="relative flex flex-col items-start">

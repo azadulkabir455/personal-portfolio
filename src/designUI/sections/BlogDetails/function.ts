@@ -7,7 +7,7 @@ import { blogListContent } from "@/designUI/utilities/content/blogList";
 import { getPublishedPosts } from "@/firebase/blogService";
 import type { BlogPost } from "@/designUI/utilities/content/blog";
 
-const RELATED_POST_COUNT = 3;
+const relatedPostCount = 3;
 
 export function useBlogDetails(post: BlogPost) {
   const { data } = useSectionContent("blogDetails", blogDetailsContent);
@@ -17,6 +17,6 @@ export function useBlogDetails(post: BlogPost) {
     backLabel: data.backLabel,
     backHref: data.backHref,
     othersPostIntro: data.othersPostIntro,
-    relatedPosts: posts.filter((item) => item.href !== post.href).slice(0, RELATED_POST_COUNT),
+    relatedPosts: posts.filter((item) => item.href !== post.href).slice(0, relatedPostCount),
   };
 }

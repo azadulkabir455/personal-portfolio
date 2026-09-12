@@ -7,7 +7,7 @@ import { sora } from "@/designUI/utilities/fonts/fonts";
 import ProjectCard from "@/designUI/components/ProjectCard/ProjectCard";
 import { useProjects } from "./function";
 
-const GRID_LINE_POSITIONS = ["0%", /* "33.333%", "66.666%", */ "100%"];
+const gridLinePositions = ["0%", /* "33.333%", "66.666%", */ "100%"];
 
 export default function Projects() {
   const { data } = useProjects();
@@ -47,7 +47,7 @@ export default function Projects() {
 
         <Container className="relative w-full border-t border-[#2424231F]">
           <Container className="pointer-events-none absolute inset-y-0 inset-x-[16px] mx-auto max-w-[980px] md:inset-x-[40px] lg:inset-x-0">
-            {GRID_LINE_POSITIONS.map((left) =>
+            {gridLinePositions.map((left) =>
               left === "100%" ? (
                 <Container key={left} className="absolute top-0 right-0 bottom-0 z-0 w-px bg-[#2424231F]" />
               ) : (

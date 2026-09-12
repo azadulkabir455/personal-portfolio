@@ -7,8 +7,8 @@ import { blogListContent } from "@/designUI/utilities/content/blogList";
 import { getPublishedPosts } from "@/firebase/blogService";
 import type { BlogSortDirection, BlogViewMode } from "./types";
 
-const POSTS_PER_PAGE = 6;
-const LOAD_MORE_DELAY = 600;
+const postsPerPage = 6;
+const loadMoreDelay = 600;
 
 export function useBlogList() {
   const { data: taxonomy } = useSectionContent("blogList", {
@@ -26,7 +26,7 @@ export function useBlogList() {
   const [viewMode, setViewMode] = useState<BlogViewMode>("grid");
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+  const [visibleCount, setVisibleCount] = useState(postsPerPage);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const isLoadingMoreRef = useRef(false);
@@ -75,7 +75,7 @@ export function useBlogList() {
   }, [data.posts, activeCategories, activeTag, sortDirection]);
 
   useEffect(() => {
-    setVisibleCount(POSTS_PER_PAGE);
+    setVisibleCount(postsPerPage);
   }, [activeCategories, activeTag, sortDirection]);
 
   const hasMore = visibleCount < posts.length;
@@ -93,10 +93,10 @@ export function useBlogList() {
       setIsLoadingMore(true);
 
       window.setTimeout(() => {
-        setVisibleCount((prev) => Math.min(prev + POSTS_PER_PAGE, posts.length));
+        setVisibleCount((prev) => Math.min(prev + postsPerPage, posts.length));
         setIsLoadingMore(false);
         isLoadingMoreRef.current = false;
-      }, LOAD_MORE_DELAY);
+      }, loadMoreDelay);
     }, { rootMargin: "300px" });
 
     observer.observe(node);
