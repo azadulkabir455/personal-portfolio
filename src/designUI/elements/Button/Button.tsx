@@ -29,7 +29,7 @@ export default function Button({
   return (
     <Tag
       className={clsx(
-        "group inline-flex items-center",
+        "group relative inline-flex items-center",
         "rounded-full",
         "text-center font-sans text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] font-bold tracking-[0.13px] md:tracking-[0.25px] capitalize",
         as === "button" && "cursor-pointer",
@@ -40,6 +40,20 @@ export default function Button({
       )}
       {...props}
     >
+      <Container
+        variant="span"
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-full"
+        style={{
+          padding: "1px",
+          background:
+            "conic-gradient(from var(--border-angle), transparent 0%, transparent 75%, rgba(255,255,255,0.9) 90%, #fff 92%, rgba(255,255,255,0.9) 94%, transparent 100%)",
+          WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+          animation: "border-spin 3s linear infinite",
+        }}
+      />
       {children}
       {icon && (
         <Container

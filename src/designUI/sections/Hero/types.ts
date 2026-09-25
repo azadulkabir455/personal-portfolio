@@ -4,3 +4,7 @@ export interface HeroContentCardProps {
   children: ReactNode;
   className?: string;
 }
+
+export interface HeroProps {
+  isLoading: boolean;
+}

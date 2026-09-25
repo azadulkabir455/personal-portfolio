@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import SocialLinks from "@/designUI/components/SocialLinks/SocialLinks";
+import { GridLineLight, HLine, VLine } from "@/designUI/components/GridLine/GridLine";
 import { footerContent } from "@/designUI/utilities/content/footer";
 import { useTopBar } from "./function";
 import TopBarActionButtons from "./comp/TopBarActionButtons";
@@ -83,8 +84,8 @@ export default function TopBar() {
           >
             {mode !== "transparent" && (
               <Container className="pointer-events-none absolute inset-0 z-0 mx-auto w-full max-w-[1240px]">
-                <Container className="absolute inset-y-0 left-[10px] w-px bg-white/[0.24]" />
-                <Container className="absolute inset-y-0 right-[10px] w-px bg-white/[0.24]" />
+                <VLine className="inset-y-0 left-[10px]" delay={0} />
+                <VLine className="inset-y-0 right-[10px]" delay={0.6} />
               </Container>
             )}
 
@@ -103,7 +104,11 @@ export default function TopBar() {
               </Container>
             </Container>
 
-            {isOpen && <Container className="relative z-10 h-px w-full shrink-0 bg-white/[0.24]" />}
+            {isOpen && (
+              <Container className="relative z-10 h-px w-full shrink-0 overflow-hidden bg-white/[0.24]">
+                <GridLineLight orientation="horizontal" />
+              </Container>
+            )}
 
             <AnimatePresence initial={false}>
               {isOpen && (
@@ -138,8 +143,8 @@ export default function TopBar() {
               "relative flex h-[50px] items-center overflow-hidden rounded-[8px] px-[16px] md:h-auto md:max-h-[72px] md:rounded-[12px] md:px-[40px] md:py-[22px]",
             )}
           >
-            <Container className="pointer-events-none absolute inset-y-0 left-[16px] w-px bg-white/[0.24] md:left-[40px]" />
-            <Container className="pointer-events-none absolute inset-y-0 right-[16px] w-px bg-white/[0.24] md:right-[40px]" />
+            <VLine className="inset-y-0 left-[16px] md:left-[40px]" delay={0} />
+            <VLine className="inset-y-0 right-[16px] md:right-[40px]" delay={0.6} />
 
             <Container className="relative flex w-full items-center justify-between gap-[11.25px] px-[15px] md:px-[30px]">
               <Text className={collapsedExperienceTextClassName}>{data.experienceLabel}</Text>
@@ -168,8 +173,8 @@ export default function TopBar() {
                   "relative flex w-full flex-col overflow-hidden rounded-[8px] border border-white/24",
                 )}
               >
-                <Container className="pointer-events-none absolute inset-y-0 left-[15px] z-0 w-px bg-white/[0.24] md:left-[40px]" />
-                <Container className="pointer-events-none absolute inset-y-0 right-[15px] z-0 w-px bg-white/[0.24] md:right-[40px]" />
+                <VLine className="inset-y-0 left-[15px] z-0 md:left-[40px]" delay={0} />
+                <VLine className="inset-y-0 right-[15px] z-0 md:right-[40px]" delay={0.6} />
 
                 <Container className="no-scrollbar relative z-10 flex w-full flex-1 flex-col justify-between overflow-y-auto">
                   <TopBarNav navLinks={visibleNavLinks} onNavigate={closeMenu} />
@@ -186,7 +191,9 @@ export default function TopBar() {
                   </Container>
                 </Container>
 
-                <Container className="relative z-10 h-px w-full shrink-0 bg-white/[0.24]" />
+                <Container className="relative z-10 h-px w-full shrink-0 overflow-hidden bg-white/[0.24]">
+                  <GridLineLight orientation="horizontal" />
+                </Container>
 
                 <Container className="relative z-10 flex shrink-0 items-center justify-between px-[31px] pt-[20px] pb-[16px] md:px-[70px]">
                   <Text

@@ -4,6 +4,9 @@ import { PlusIcon } from "@/designUI/utilities/icons";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import type { HeroContentCardProps } from "../types";
 
+const noiseTexture =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
 export default function HeroContentCard({
   children,
   className = "",
@@ -18,10 +21,23 @@ export default function HeroContentCard({
         "h-[221px] md:h-[258px] md:w-full lg:max-w-[365px]",
         "p-[12px] md:px-6 md:py-8",
         "overflow-hidden",
-        "bg-gradient-to-b from-[rgba(231,241,255,0.05)] to-[rgba(187,216,255,0.05)]",
+        "backdrop-blur-md",
         className,
       )}
+      style={{
+        background: "rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.14)",
+      }}
     >
+      <Container
+        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+        style={{ backgroundImage: noiseTexture }}
+      />
+      <Container
+        className="pointer-events-none absolute inset-x-0 top-0 h-1/2"
+        style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.18), transparent)" }}
+      />
+
       <PlusIcon
         color="#FFFF2E"
         className="absolute top-[8px] left-[8px] z-10 h-2 w-2 md:top-[15px] md:left-[15px] md:h-3 md:w-3"

@@ -15,6 +15,7 @@ import Blog from "@/designUI/sections/Blog/Blog";
 import Footer from "@/designUI/sections/Footer/Footer";
 import ScrollSpy from "@/designUI/sections/ScrollSpy/ScrollSpy";
 import PageLoader from "@/designUI/components/PageLoader/PageLoader";
+import CustomCursor from "@/designUI/components/CustomCursor/CustomCursor";
 
 export default function HomePage() {
   const isLoading = usePageDataLoading();
@@ -23,9 +24,10 @@ export default function HomePage() {
   return (
     <>
       <PageLoader isLoading={isLoading} />
+      <CustomCursor />
 
       <main className="flex flex-1 flex-col">
-        {sectionVisibility.hero && <Hero />}
+        {sectionVisibility.hero && <Hero isLoading={isLoading} />}
         <Feature />
         {sectionVisibility.story && <Story />}
         {sectionVisibility.journey && <Journey />}
