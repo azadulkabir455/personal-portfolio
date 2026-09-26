@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Providers from "./providers";
 import TopBar from "@/designUI/sections/TopBar/TopBar";
 import Toaster from "@/designUI/elements/Toaster/Toaster";
+import ScrollReveal from "@/designUI/components/ScrollReveal/ScrollReveal";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <TopBar />
           {children}
           <Toaster />
+          <ScrollReveal />
         </Providers>
       </body>
     </html>

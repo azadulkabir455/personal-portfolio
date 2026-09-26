@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { isFirebaseConfigured } from "@/firebase/config";
 import { firestore } from "@/firebase/firestore";
-import { registerPendingLoad, resolvePendingLoad } from "./pageLoadingRegistry";
+import { criticalSectionIds, registerPendingLoad, resolvePendingLoad } from "./pageLoadingRegistry";
 
 const CONTENT_COLLECTION = "content";
 
@@ -14,7 +14,7 @@ export function useSectionContent<T>(sectionId: string, fallback: T) {
 
   useEffect(() => {
     if (!isFirebaseConfigured) return;
-    const token = registerPendingLoad();
+    const token = criticalSectionIds.has(sectionId) ? registerPendingLoad() : null;
 
     getDoc(doc(firestore, CONTENT_COLLECTION, sectionId))
       .then((snapshot) => {
@@ -23,10 +23,12 @@ export function useSectionContent<T>(sectionId: string, fallback: T) {
       .catch((error) => console.error(error))
       .finally(() => {
         setIsLoading(false);
-        resolvePendingLoad(token);
+        if (token) resolvePendingLoad(token);
       });
 
-    return () => resolvePendingLoad(token);
+    return () => {
+      if (token) resolvePendingLoad(token);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sectionId]);
 

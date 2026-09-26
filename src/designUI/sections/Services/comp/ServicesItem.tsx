@@ -6,7 +6,7 @@ import type { ServicesItemProps } from "../types";
 
 export default function ServicesItem({ number, title }: ServicesItemProps) {
   return (
-    <Container className="flex items-start justify-end gap-[8px]">
+    <Container data-reveal className="flex items-start justify-end gap-[8px]">
       <Text
         className={clsx(
           "mt-[2px] shrink-0 text-right font-sans font-semibold tracking-[0px] text-[#242423] md:mt-[4px] lg:mt-[8px]",

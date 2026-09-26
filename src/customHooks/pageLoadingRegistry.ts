@@ -1,7 +1,10 @@
 type Listener = () => void;
 
+export const criticalSectionIds = new Set(["hero", "story", "feature", "topbar", "personalInfo", "homeSections"]);
+
 const pending = new Set<symbol>();
 const listeners = new Set<Listener>();
+let hasStarted = false;
 
 function notify() {
   listeners.forEach((listener) => listener());
@@ -9,6 +12,7 @@ function notify() {
 
 export function registerPendingLoad(): symbol {
   const token = Symbol();
+  hasStarted = true;
   pending.add(token);
   notify();
   return token;
@@ -19,7 +23,7 @@ export function resolvePendingLoad(token: symbol) {
 }
 
 export function hasPendingLoads() {
-  return pending.size > 0;
+  return !hasStarted || pending.size > 0;
 }
 
 export function subscribeToPendingLoads(listener: Listener) {

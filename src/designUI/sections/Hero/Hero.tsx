@@ -117,7 +117,7 @@ export default function Hero({ isLoading }: HeroProps) {
         <HeroGridLines />
 
         <Container
-          className="relative z-10 mx-auto flex w-full max-w-[1240px] flex-col items-center gap-0 px-5 pt-[30px] pb-[30px] text-left text-white md:px-[30px] md:pt-[100px] md:pb-[30px] lg:px-[10px] lg:pt-[100px] lg:pb-[80px]"
+          className="relative z-10 mx-auto flex w-full max-w-[1240px] flex-col items-center gap-0 px-4 pt-[30px] pb-[30px] text-left text-white md:px-[40px] md:pt-[100px] md:pb-[30px] lg:px-[10px] lg:pt-[100px] lg:pb-[80px]"
           style={{ perspective: 1200 }}
         >
           <motion.div
@@ -135,7 +135,7 @@ export default function Hero({ isLoading }: HeroProps) {
                 "text-center text-[37px] md:text-[80px] lg:text-[94px] leading-[30px] md:leading-[70px] lg:leading-[108px] font-bold tracking-[0px] capitalize",
               )}
             >
-              <Container variant="span" className="relative -bottom-[2px] block md:-bottom-[5px] lg:-bottom-[15px]">
+              <Container variant="span" className="relative bottom-0 block md:-bottom-[5px] lg:-bottom-[15px]">
                 {data.title}
               </Container>
               {data.titleExtend && (

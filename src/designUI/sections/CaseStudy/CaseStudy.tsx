@@ -8,12 +8,12 @@ import CaseStudyBottomShape from "./comp/CaseStudyBottomShape";
 import CaseStudyComp from "./comp/CaseStudyComp";
 
 export default function CaseStudy() {
-  const { activeSlide, goToPrevious, goToNext, canGoPrevious, canGoNext } = useCaseStudy();
+  const { data, activeIndex, activeSlide, goToPrevious, goToNext, canGoPrevious, canGoNext } = useCaseStudy();
 
   return (
     <Container variant="section" id="case-study" className="relative w-full overflow-hidden">
       <Container className="px-[5px] md:px-[10px]">
-        <CaseStudySlide {...activeSlide}>
+        <CaseStudySlide slideIndex={activeIndex} {...activeSlide}>
           <CaseStudyArrows
             onPrevious={goToPrevious}
             onNext={goToNext}
@@ -24,7 +24,11 @@ export default function CaseStudy() {
       </Container>
       <Container className="absolute inset-0 mx-[5px] overflow-hidden md:mx-[10px]">
         <CaseStudyBottomShape />
-        <CaseStudyComp studyImage={activeSlide.studyImage} />
+        <CaseStudyComp
+          slideIndex={activeIndex}
+          studyImage={activeSlide.studyImage}
+          preloadImages={data.slides.map((slide) => slide.studyImage)}
+        />
       </Container>
     </Container>
   );

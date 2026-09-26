@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useDragMarquee } from "@/customHooks/useDragMarquee";
 import Container from "@/designUI/elements/Container/Container";
 import Image from "@/designUI/elements/Image/Image";
 import Link from "@/designUI/elements/Link/Link";
@@ -12,13 +13,17 @@ const tileClassName =
 
 export default function JourneyCertificateCarousel({ certificates }: JourneyCertificateCarouselProps) {
   const track = [...certificates, ...certificates];
+  const trackRef = useDragMarquee(25);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const previewCertificate = previewIndex !== null ? certificates[previewIndex] : null;
 
   return (
     <>
       <Container className="relative overflow-hidden">
-        <Container className="flex w-max animate-[journey-marquee_25s_linear_infinite] gap-[4px] hover:[animation-play-state:paused] md:gap-[8px] lg:gap-[24px]">
+        <div
+          ref={trackRef}
+          className="flex w-max cursor-grab touch-pan-y gap-[4px] select-none active:cursor-grabbing md:gap-[8px] lg:gap-[24px]"
+        >
           {track.map((certificate, index) =>
             certificate.isLinkable && certificate.link ? (
               <Link
@@ -43,7 +48,7 @@ export default function JourneyCertificateCarousel({ certificates }: JourneyCert
               </button>
             ),
           )}
-        </Container>
+        </div>
       </Container>
 
       {previewCertificate && (

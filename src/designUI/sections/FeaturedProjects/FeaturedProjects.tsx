@@ -32,7 +32,7 @@ export default function FeaturedProjects() {
             "lg:px-[10px] lg:py-[80px]",
           )}
         >
-          <Container className="relative flex flex-col gap-[12px] md:gap-[24px] lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
+          <Container data-reveal-group className="relative flex flex-col gap-[12px] md:gap-[24px] lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
             <Container className="relative lg:w-1/3 lg:shrink-0">
               <Text
                 className={clsx(
@@ -60,23 +60,16 @@ export default function FeaturedProjects() {
             </Text>
           </Container>
         </Container>
-
-        <Container
-          className="relative ml-[calc(50%-50vw)] h-0 w-screen border-t border-[#242423]/12"
-          style={{ zIndex: data.projects.length + 10 }}
-        />
       </div>
 
       <div className="relative w-full">
         {data.projects.map((project, index) => (
           <Fragment key={project.title}>
             <div className="sticky top-0 w-full lg:top-[115px] lg:h-[540px]" style={{ zIndex: index + 1 }}>
-              {index > 0 && (
-                <div
-                  className="relative ml-[calc(50%-50vw)] h-0 w-screen border-t border-[#242423]/12"
-                  style={{ zIndex: data.projects.length + 10 }}
-                />
-              )}
+              <div
+                className="relative ml-[calc(50%-50vw)] h-0 w-screen border-t border-[#242423]/12"
+                style={{ zIndex: data.projects.length + 10 }}
+              />
               <Container className={clsx("container relative", "px-4", "md:px-[40px]", "lg:px-[10px]")}>
                 <Container className="relative flex w-full flex-col items-start gap-[12px] md:gap-[24px] lg:flex-row lg:justify-between min-[1024px]:max-[1130px]:bg-[#f7f7f7]">
                   <Container
@@ -89,6 +82,7 @@ export default function FeaturedProjects() {
                     <Container className="relative flex flex-col items-start">
                       <Container className="absolute bottom-full left-0 hidden w-px bg-[#242423]/20 lg:block lg:h-[60px]" />
                       <Text
+                        data-reveal
                         className={clsx(
                           sora.className,
                           "inline-block w-fit shrink-0 font-semibold tracking-[0px] text-[#242423]",
@@ -130,8 +124,8 @@ export default function FeaturedProjects() {
             "lg:px-[10px] lg:py-[60px]",
           )}
         >
-          <Link href={data.cta.link} onClick={(event) => handleTelLinkClick(event, phone)}>
-            <Button as="span" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
+          <Link data-reveal href={data.cta.link} onClick={(event) => handleTelLinkClick(event, phone)}>
+            <Button as="span" tone="dark" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
               {data.cta.label}
             </Button>
           </Link>

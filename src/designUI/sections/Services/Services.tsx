@@ -26,6 +26,7 @@ export default function Services() {
 
           <Container className="relative flex flex-col gap-[16px] md:flex-row md:items-start md:justify-between md:gap-0">
             <Text
+              data-reveal
               className={clsx(
                 sora.className,
                 "inline-block w-fit shrink-0 text-left align-middle font-semibold tracking-[1.25px] text-[#388EFF]",

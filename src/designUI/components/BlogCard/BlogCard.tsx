@@ -65,6 +65,7 @@ export default function BlogCard({ type, category, title, image, href, ctaLabel 
         <Button
           as="span"
           variant="plain"
+          tone="dark"
           className="mt-[12px] self-start text-[#242423] md:mt-[24px] lg:mt-[30px]"
           icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" color="#388EFF" />}
         >
