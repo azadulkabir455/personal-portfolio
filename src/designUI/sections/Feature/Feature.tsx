@@ -13,6 +13,7 @@ export default function Feature() {
   return (
     <Container variant="section" className="w-full border-b border-[#242423]/12">
       <Container
+        data-reveal-group
         className={clsx(
           "container",
           "flex flex-col gap-4",

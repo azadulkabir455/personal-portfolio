@@ -18,7 +18,7 @@ export default function Footer() {
   return (
     <Container variant="section" id="footer" className="w-full pb-[5px] md:pb-[10px] lg:pb-0">
       <Container className="relative mx-[5px] bg-[#0B0B0A] pt-[30px] md:mx-[10px] lg:mx-[10px]">
-        <Container className="container relative flex flex-col gap-[10px] px-[16px] md:flex-row md:px-[30px] lg:gap-[30px] lg:px-0">
+        <Container data-reveal-group className="container relative flex flex-col gap-[10px] px-[16px] md:flex-row md:px-[30px] lg:gap-[30px] lg:px-0">
           <Container className="relative z-0 flex flex-1 flex-col overflow-hidden rounded-[8px] bg-[#FFFFFF0A] px-[16px] py-[20px] md:min-h-[460px] md:px-[30px] md:py-[40px] lg:min-h-[520px] lg:rounded-[12px] lg:px-[40px] lg:pt-[60px] lg:pb-[70px]">
             <Container className="absolute top-0 right-0 bottom-0 z-0 w-3/4 md:right-[-75px] md:w-full">
               <Image
@@ -32,19 +32,17 @@ export default function Footer() {
             <Container className="relative flex flex-1 flex-col">
               <Container className="relative z-10 flex max-w-[400px] flex-col">
                 <Container className="flex flex-col gap-[4px] md:max-w-[285px]">
-                  <Text variant="h3">
-                    <Link
-                      href="/"
-                      className={clsx(
-                        sora.className,
-                        "inline-block font-bold tracking-[0px] text-[#F7F7F7] capitalize transition-colors duration-200 hover:text-[#388EFF]",
-                        "text-[12px] leading-[18px]",
-                        "md:text-[16px] md:leading-[28px]",
-                        "lg:text-[18px] lg:leading-[28px]",
-                      )}
-                    >
-                      {data.profile.name}
-                    </Link>
+                  <Text
+                    variant="h3"
+                    className={clsx(
+                      sora.className,
+                      "font-bold tracking-[0px] text-[#F7F7F7] capitalize",
+                      "text-[12px] leading-[18px]",
+                      "md:text-[16px] md:leading-[28px]",
+                      "lg:text-[18px] lg:leading-[28px]",
+                    )}
+                  >
+                    {data.profile.name}
                   </Text>
                   <Text
                     className={clsx(
@@ -172,7 +170,7 @@ export default function Footer() {
           </Container>
         </Container>
 
-        <Container className="container relative flex flex-col items-center justify-between gap-[8px] px-[10px] py-[20px] md:flex-row md:px-[30px] md:py-[30px] lg:px-[10px] lg:py-[40px]">
+        <Container data-reveal className="container relative flex flex-col items-center justify-between gap-[8px] px-[10px] py-[20px] md:flex-row md:px-[30px] md:py-[30px] lg:px-[10px] lg:py-[40px]">
           <Text
             className={clsx(
               "font-sans font-light tracking-[-0.5px] text-[#616161]",
@@ -237,6 +235,7 @@ export default function Footer() {
 
       <Container className="relative mx-[5px] flex items-center justify-center rounded-b-[8px] bg-[#0B0B0A] md:mx-[10px] lg:mx-[10px] lg:rounded-b-[12px]">
         <Text
+          data-reveal
           variant="h2"
           className={clsx(
             sora.className,

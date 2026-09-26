@@ -19,7 +19,10 @@ import CustomCursor from "@/designUI/components/CustomCursor/CustomCursor";
 
 export default function HomePage() {
   const isLoading = usePageDataLoading();
-  const { data: sectionVisibility } = useSectionContent("homeSections", defaultSectionVisibility);
+  const { data: sectionVisibility, isLoading: isVisibilityLoading } = useSectionContent(
+    "homeSections",
+    defaultSectionVisibility,
+  );
 
   return (
     <>
@@ -27,15 +30,19 @@ export default function HomePage() {
       <CustomCursor />
 
       <main className="flex flex-1 flex-col">
-        {sectionVisibility.hero && <Hero isLoading={isLoading} />}
-        <Feature />
-        {sectionVisibility.story && <Story />}
-        {sectionVisibility.journey && <Journey />}
-        {sectionVisibility.featuredProjects && <FeaturedProjects />}
-        {sectionVisibility.recentDesign && <RecentDesign />}
-        {sectionVisibility.services && <Services />}
-        {sectionVisibility.caseStudy && <CaseStudy />}
-        {sectionVisibility.blog && <Blog />}
+        {!isVisibilityLoading && (
+          <>
+            {sectionVisibility.hero && <Hero isLoading={isLoading} />}
+            <Feature />
+            {sectionVisibility.story && <Story />}
+            {sectionVisibility.journey && <Journey />}
+            {sectionVisibility.featuredProjects && <FeaturedProjects />}
+            {sectionVisibility.recentDesign && <RecentDesign />}
+            {sectionVisibility.services && <Services />}
+            {sectionVisibility.caseStudy && <CaseStudy />}
+            {sectionVisibility.blog && <Blog />}
+          </>
+        )}
       </main>
       <Footer />
       <ScrollSpy />

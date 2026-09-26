@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+const exitDelay = 120;
 const exitDuration = 1700;
 
 export function usePageLoader(isLoading: boolean) {
@@ -11,10 +12,16 @@ export function usePageLoader(isLoading: boolean) {
   useEffect(() => {
     if (isLoading) return;
 
-    setIsExiting(true);
-    const timeout = setTimeout(() => setShouldRender(false), exitDuration);
+    const timeout = setTimeout(() => setIsExiting(true), exitDelay);
     return () => clearTimeout(timeout);
   }, [isLoading]);
+
+  useEffect(() => {
+    if (!isExiting) return;
+
+    const timeout = setTimeout(() => setShouldRender(false), exitDuration);
+    return () => clearTimeout(timeout);
+  }, [isExiting]);
 
   return { shouldRender, isExiting };
 }

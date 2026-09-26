@@ -25,7 +25,7 @@ export default function ProjectCard({
         reverse && "md:flex-row-reverse",
       )}
     >
-      <Container className="flex flex-col md:max-w-[420px] lg:max-w-[355px]">
+      <Container data-reveal-group className="flex flex-col md:max-w-[420px] lg:max-w-[355px]">
         <Text
           variant="h3"
           className={clsx(
@@ -60,6 +60,7 @@ export default function ProjectCard({
               <Button
                 as="span"
                 variant="plain"
+                tone="dark"
                 className="self-start text-[#242423]"
                 icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" color="#388EFF" />}
               >
@@ -73,6 +74,7 @@ export default function ProjectCard({
               <Button
                 as="span"
                 variant="plain"
+                tone="dark"
                 className="self-start text-[#242423]"
                 icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" color="#388EFF" />}
               >
@@ -83,7 +85,7 @@ export default function ProjectCard({
         </Container>
       </Container>
 
-      <Container className="relative shrink-0 p-[16px] md:p-[20px] lg:p-[22px]">
+      <Container data-reveal="1" className="relative shrink-0 p-[16px] md:p-[20px] lg:p-[22px]">
         <PlusIcon
           color="#388EFF"
           className="absolute top-0 left-0 z-10 h-[8px] w-[8px] md:h-[12px] md:w-[12px]"

@@ -7,7 +7,7 @@ import type { JourneyStepItemProps } from "../types";
 
 export default function JourneyStepItem({ step, title, description }: JourneyStepItemProps) {
   return (
-    <Container className="relative">
+    <Container data-reveal className="relative">
       <Container className="flex flex-col gap-[12px] lg:flex-row lg:items-start lg:gap-[42px]">
         <Container className="flex items-start gap-[16px] lg:w-[500px] lg:shrink-0">
           <Text

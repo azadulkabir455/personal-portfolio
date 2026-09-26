@@ -15,7 +15,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       frameId = requestAnimationFrame(raf);
     });
 
+    const resizeObserver = new ResizeObserver(() => lenis.resize());
+    resizeObserver.observe(document.body);
+
     return () => {
+      resizeObserver.disconnect();
       cancelAnimationFrame(frameId);
       lenis.destroy();
     };

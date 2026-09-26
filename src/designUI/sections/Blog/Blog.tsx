@@ -51,7 +51,7 @@ export default function Blog({ intro, posts }: BlogProps) {
             "lg:px-[10px] lg:pt-[80px]",
           )}
         >
-          <Container className="relative flex flex-col gap-[12px] md:gap-[24px] lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
+          <Container data-reveal-group className="relative flex flex-col gap-[12px] md:gap-[24px] lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
             <Container className="relative lg:shrink-0">
               <Text
                 className={clsx(
@@ -91,7 +91,7 @@ export default function Blog({ intro, posts }: BlogProps) {
             "lg:px-[10px] lg:pt-[60px] lg:pb-[50px]",
           )}
         >
-          <Container className="grid grid-cols-1 gap-[8px] md:grid-cols-3 md:gap-[16px] lg:gap-[30px]">
+          <Container data-reveal-group className="grid grid-cols-1 gap-[8px] md:grid-cols-3 md:gap-[16px] lg:gap-[30px]">
             {resolvedPosts.map((post, index) => (
               <Container key={post.title} className="relative md:flex md:h-full md:flex-col">
                 <Container className="relative z-10 md:flex-1">

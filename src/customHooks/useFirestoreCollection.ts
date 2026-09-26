@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { isFirebaseConfigured } from "@/firebase/config";
-import { registerPendingLoad, resolvePendingLoad } from "./pageLoadingRegistry";
 
 export function useFirestoreCollection<T>(fetcher: () => Promise<T[]>, fallback: T[]) {
   const [data, setData] = useState<T[]>(fallback);
@@ -10,7 +9,6 @@ export function useFirestoreCollection<T>(fetcher: () => Promise<T[]>, fallback:
 
   useEffect(() => {
     if (!isFirebaseConfigured) return;
-    const token = registerPendingLoad();
 
     fetcher()
       .then((items) => {
@@ -19,10 +17,7 @@ export function useFirestoreCollection<T>(fetcher: () => Promise<T[]>, fallback:
       .catch((error) => console.error(error))
       .finally(() => {
         setIsLoading(false);
-        resolvePendingLoad(token);
       });
-
-    return () => resolvePendingLoad(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

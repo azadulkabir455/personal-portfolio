@@ -15,6 +15,7 @@ export function useCaseStudy() {
   return {
     data,
     isLoading,
+    activeIndex,
     activeSlide: data.slides[activeIndex],
     goToPrevious,
     goToNext,

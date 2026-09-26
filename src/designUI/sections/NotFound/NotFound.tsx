@@ -57,7 +57,7 @@ export default function NotFound() {
         </Text>
 
         <Link href={data.ctaLink} className="mt-[28px] md:mt-[36px] lg:mt-[40px]">
-          <Button as="span" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
+          <Button as="span" tone="dark" icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}>
             {data.ctaLabel}
           </Button>
         </Link>

@@ -8,7 +8,7 @@ import Link from "@/designUI/elements/Link/Link";
 import { sora } from "@/designUI/utilities/fonts/fonts";
 import { ArrowUpRightIcon } from "@/designUI/utilities/icons";
 import { handleTelLinkClick } from "@/designUI/utilities/phone";
-import { useJourney } from "./function";
+import { useJourney, useStickySteps } from "./function";
 import JourneyBackground from "./comp/JourneyBackground";
 import JourneyGridLines from "./comp/JourneyGridLines";
 import JourneyStepItem from "./comp/JourneyStepItem";
@@ -23,6 +23,8 @@ const toolkitTitleClassName = clsx(
 
 export default function Journey() {
   const { data, phone } = useJourney();
+  const { wrapperRef, stickyRef, headingRef, cardRef, listRef, isSticky, contentHeight, viewportHeight } =
+    useStickySteps();
 
   return (
     <Container variant="section" id="journey" className="relative w-full lg:scroll-mt-[140px]">
@@ -39,14 +41,14 @@ export default function Journey() {
         <Container
           className={clsx(
             "relative",
-            "pt-[20px] pb-6",
+            "pt-[20px]",
             "md:pt-[40px]",
             "lg:pt-[80px]",
           )}
         >
           <JourneyGridLines />
 
-          <Container className="relative flex flex-col gap-[12px] md:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
+          <Container data-reveal-group className="relative flex flex-col gap-[12px] md:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-[30px]">
             <Container className="relative lg:w-1/3 lg:shrink-0">
               <Text
                 className={clsx(
@@ -82,6 +84,7 @@ export default function Journey() {
               >
                 <Button
                   as="span"
+                  tone="dark"
                   icon={<ArrowUpRightIcon className="h-[9px] w-[9px] md:h-3 md:w-3" />}
                 >
                   {data.intro.ctaLabel}
@@ -89,41 +92,56 @@ export default function Journey() {
               </Link>
             </Container>
           </Container>
+        </Container>
 
-          <Text
-            variant="h3"
-            className={clsx(
-              sora.className,
-              "pt-[20px] align-middle font-medium tracking-[0px] text-[#242423] capitalize md:pt-[40px] lg:pt-[80px]",
-              "text-[16px] leading-[24px]",
-              "md:text-[24px] md:leading-[32px]",
-            )}
+        <div ref={wrapperRef} style={isSticky ? { height: contentHeight } : undefined}>
+          <div
+            ref={stickyRef}
+            className={clsx("top-0 lg:top-[115px]", isSticky && "sticky flex flex-col")}
+            style={isSticky ? { height: viewportHeight } : undefined}
           >
-            {data.intro.subHeading}
-          </Text>
-        </Container>
+            <div ref={headingRef} className="relative shrink-0 pb-6">
+              <JourneyGridLines />
 
-        <Container
-          className={clsx(
-            "rounded-[8px] bg-[#FFFFFFD9]",
-            "px-[16px] py-[20px]",
-            "md:px-[34px] md:py-[30px]",
-            "lg:px-[60px] lg:py-[60px]",
-          )}
-        >
-          <Container className="flex flex-col gap-[20px] md:gap-[60px]">
-            {data.steps.map((step) => (
-              <JourneyStepItem key={step.step} {...step} />
-            ))}
-          </Container>
-        </Container>
+              <Text
+                data-reveal
+                variant="h3"
+                className={clsx(
+                  sora.className,
+                  "relative pt-[20px] align-middle font-medium tracking-[0px] text-[#242423] capitalize md:pt-[40px] lg:pt-[80px]",
+                  "text-[16px] leading-[24px]",
+                  "md:text-[24px] md:leading-[32px]",
+                )}
+              >
+                {data.intro.subHeading}
+              </Text>
+            </div>
+
+            <div
+              ref={cardRef}
+              className={clsx(
+                "rounded-[8px] bg-[#FFFFFFD9]",
+                "px-[16px] py-[20px]",
+                "md:px-[34px] md:py-[30px]",
+                "lg:px-[60px] lg:py-[60px]",
+                isSticky && "min-h-0 flex-1 overflow-hidden",
+              )}
+            >
+              <div ref={listRef} className="flex flex-col gap-[20px] will-change-transform md:gap-[60px]">
+                {data.steps.map((step) => (
+                  <JourneyStepItem key={step.step} {...step} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
         <Container className="mt-[20px] md:mt-[40px] lg:mt-[60px]">
-          <Text className={toolkitTitleClassName}>{data.toolkit.toolsTitle}</Text>
+          <Text data-reveal className={toolkitTitleClassName}>{data.toolkit.toolsTitle}</Text>
 
           <Container className="mt-[12px] border-b border-[#242423]/24 md:mt-[16px]" />
 
-          <Container className="mt-[16px] flex flex-wrap items-center gap-[4px] md:mt-[24px] md:gap-[8px]">
+          <Container data-reveal-group className="mt-[16px] flex flex-wrap items-center gap-[4px] md:mt-[24px] md:gap-[8px]">
             {data.toolkit.tools.map((tool) => (
               <JourneyToolBadge key={tool.name} {...tool} />
             ))}
@@ -131,11 +149,11 @@ export default function Journey() {
         </Container>
 
         <Container className="mt-6">
-          <Text className={toolkitTitleClassName}>{data.toolkit.certificationsTitle}</Text>
+          <Text data-reveal className={toolkitTitleClassName}>{data.toolkit.certificationsTitle}</Text>
 
           <Container className="mt-[12px] border-b border-[#242423]/24 md:mt-[16px]" />
 
-          <Container className="mt-[16px] md:mt-[24px]">
+          <Container data-reveal className="mt-[16px] md:mt-[24px]">
             <JourneyCertificateCarousel certificates={data.toolkit.certificates} />
           </Container>
         </Container>
