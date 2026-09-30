@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { setupScrollRestoration } from "@/lib/scrollRestoration";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -17,8 +18,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
     const resizeObserver = new ResizeObserver(() => lenis.resize());
     resizeObserver.observe(document.body);
+    const cleanupScrollRestoration = setupScrollRestoration(lenis);
 
     return () => {
+      cleanupScrollRestoration();
       resizeObserver.disconnect();
       cancelAnimationFrame(frameId);
       lenis.destroy();

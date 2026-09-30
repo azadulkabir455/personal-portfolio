@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoContent, type PersonalInfoContent } from "@/designUI/utilities/content/personalInfo";
 import { saveSectionContent } from "@/firebase/sectionContent";
 import { cleanupReplacedFiles } from "@/lib/uploadClient";
+import { applyFavicon } from "@/lib/favicon";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
 import { useSectionContent } from "@/customHooks/useSectionContent";
 import { personalInfoFormSchema, type PersonalInfoFormValues } from "./types";
@@ -40,15 +41,7 @@ export function usePersonalInfoForm() {
   const favicon = useWatch({ control: form.control, name: "favicon" });
 
   useEffect(() => {
-    if (!favicon) return;
-
-    let link = document.querySelector<HTMLLinkElement>("link[rel='icon']");
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      document.head.appendChild(link);
-    }
-    link.href = favicon;
+    if (favicon) applyFavicon(favicon);
   }, [favicon]);
 
   const { status, run } = useSaveStatus();
