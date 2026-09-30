@@ -13,7 +13,7 @@ export default function SocialIcon({ icon, url }: SocialIconProps) {
       rel="noopener noreferrer"
       className="relative flex h-[38px] w-[38px] items-center justify-center overflow-hidden rounded-full text-white backdrop-blur-md transition-transform duration-200 hover:scale-105 md:h-10 md:w-10"
       style={{
-        background: "rgba(255,255,255,0.08)",
+        background: "rgba(255,255,255,0.14)",
         border: "1px solid rgba(255,255,255,0.16)",
       }}
     >

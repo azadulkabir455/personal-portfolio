@@ -7,7 +7,7 @@ import Text from "@/designUI/elements/Text/Text";
 import Icon from "@/designUI/elements/Icon/Icon";
 import type { StorageFileModalProps } from "../types";
 
-const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"];
+const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif", ".ico"];
 
 function isImageFile(name: string) {
   return imageExtensions.some((ext) => name.toLowerCase().endsWith(ext));

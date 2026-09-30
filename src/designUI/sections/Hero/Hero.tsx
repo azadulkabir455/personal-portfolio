@@ -32,12 +32,12 @@ const titleVariants = {
 };
 
 const imageVariants = {
-  hidden: { opacity: 0, y: 90, rotateX: 18, scale: 0.9 },
+  hidden: { opacity: 0, y: 90, rotateX: 18, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
     rotateX: 0,
-    scale: 1,
+    scale: 1.05,
     transition: { duration: 1.2, delay: 0.1, ease: easeOutExpo },
   },
 };
@@ -146,9 +146,9 @@ export default function Hero({ isLoading }: HeroProps) {
             </Text>
           </motion.div>
 
-          <Container className="flex flex-col items-center gap-0 md:grid md:grid-cols-2 md:justify-items-center lg:grid lg:w-full lg:grid-cols-[minmax(0,365fr)_minmax(0,510fr)_minmax(0,365fr)] lg:items-end">
+          <Container className="flex w-full flex-col items-center gap-0 md:grid md:grid-cols-2 md:justify-items-center lg:grid lg:w-full lg:grid-cols-[minmax(0,365fr)_minmax(0,510fr)_minmax(0,365fr)] lg:items-end">
             <motion.div
-              className="order-2 md:hidden"
+              className="order-2 w-full md:hidden"
               initial="hidden"
               animate={animate}
               variants={leftCardVariantsMobile}
@@ -190,6 +190,7 @@ export default function Hero({ isLoading }: HeroProps) {
               initial="hidden"
               animate={animate}
               variants={imageVariants}
+              style={{ transformOrigin: "bottom center" }}
             >
               <Image
                 src={data.photoUrl}
@@ -204,7 +205,7 @@ export default function Hero({ isLoading }: HeroProps) {
             </motion.div>
 
             <motion.div
-              className="order-3 md:hidden"
+              className="order-3 w-full md:hidden"
               initial="hidden"
               animate={animate}
               variants={rightCardVariantsMobile}

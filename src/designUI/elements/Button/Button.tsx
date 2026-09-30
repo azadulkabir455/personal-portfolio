@@ -50,19 +50,21 @@ export default function Button({
       )}
       {...props}
     >
-      <Container
-        variant="span"
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-full"
-        style={{
-          padding: "1px",
-          background: `conic-gradient(from var(--border-angle), transparent 0%, transparent 75%, ${glow.soft} 90%, ${glow.strong} 92%, ${glow.soft} 94%, transparent 100%)`,
-          WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-          animation: "border-spin 3s linear infinite",
-        }}
-      />
+      {variant === "filled" && (
+        <Container
+          variant="span"
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-full"
+          style={{
+            padding: "1px",
+            background: `conic-gradient(from var(--border-angle), transparent 0%, transparent 75%, ${glow.soft} 90%, ${glow.strong} 92%, ${glow.soft} 94%, transparent 100%)`,
+            WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+            animation: "border-spin 3s linear infinite",
+          }}
+        />
+      )}
       {variant === "filled" && (
         <Container
           variant="span"

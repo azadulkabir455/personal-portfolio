@@ -18,24 +18,23 @@ export default function HeroContentCard({
       className={clsx(
         "relative",
         "flex flex-col justify-center",
-        "h-[221px] md:h-[258px] md:w-full lg:max-w-[365px]",
+        "h-[221px] w-full md:h-[258px] lg:max-w-[365px]",
         "p-[12px] md:px-6 md:py-8",
         "overflow-hidden",
-        "backdrop-blur-md",
         className,
       )}
-      style={{
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.14)",
-      }}
     >
       <Container
-        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+        className="pointer-events-none absolute inset-px backdrop-blur-md"
+        style={{ background: "rgba(0,20,51,0.05)" }}
+      />
+      <Container
+        className="pointer-events-none absolute inset-px opacity-[0.06] mix-blend-overlay"
         style={{ backgroundImage: noiseTexture }}
       />
       <Container
-        className="pointer-events-none absolute inset-x-0 top-0 h-1/2"
-        style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.18), transparent)" }}
+        className="pointer-events-none absolute inset-x-px top-px h-1/2"
+        style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)" }}
       />
 
       <PlusIcon

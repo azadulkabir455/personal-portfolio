@@ -24,6 +24,7 @@ export default function HeroGridLines() {
         <VLine className="inset-y-0 left-[40px]" delay={0.3} />
         <VLine className="top-[100px] bottom-[288px] left-[calc(50%-115px)]" delay={0.9} />
         <VLine className="top-[100px] bottom-[288px] left-[calc(50%+115px)]" delay={1.5} />
+        <VLine className="bottom-[30px] h-[258px] left-1/2" delay={1.8} />
         <VLine className="inset-y-0 right-[40px]" delay={2.1} />
       </Container>
 
@@ -42,6 +43,7 @@ export default function HeroGridLines() {
         <HLine className="inset-x-0 top-[30px]" delay={0} />
         <HLine className="inset-x-0 bottom-[472px]" delay={0.6} />
         <HLine className="inset-x-0 bottom-[30px]" delay={1.2} />
+        <HLine className="inset-x-0 bottom-[251px]" delay={0.9} />
         <VLine className="inset-y-0 left-[16px]" delay={0.3} />
         <VLine className="inset-y-0 right-[16px]" delay={0.9} />
       </Container>
