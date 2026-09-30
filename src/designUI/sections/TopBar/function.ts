@@ -6,6 +6,7 @@ import { useSectionContent } from "@/customHooks/useSectionContent";
 import { topBarContent } from "@/designUI/utilities/content/topbar";
 import { personalInfoContent } from "@/designUI/utilities/content/personalInfo";
 import { toTelLink } from "@/designUI/utilities/phone";
+import { applyFavicon } from "@/lib/favicon";
 import type { TopBarMode } from "./types";
 
 const topThreshold = 24;
@@ -27,6 +28,10 @@ export function useTopBar() {
   const [isHovered, setIsHovered] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(0);
   const [isTabletUp, setIsTabletUp] = useState(false);
+
+  useEffect(() => {
+    if (personalInfo.favicon) applyFavicon(personalInfo.favicon);
+  }, [personalInfo.favicon]);
 
   useEffect(() => {
     const updateViewportHeight = () => setViewportHeight(window.innerHeight);
