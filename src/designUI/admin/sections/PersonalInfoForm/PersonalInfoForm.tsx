@@ -53,8 +53,8 @@ export default function PersonalInfoForm() {
               value={field.value}
               onChange={field.onChange}
               folder="personal-info"
-              accept="image/png"
-              hint="PNG, 32x32 recommended, up to 3MB"
+              accept="image/png,image/x-icon,image/vnd.microsoft.icon,.ico"
+              hint="PNG or ICO, 32x32 recommended, up to 3MB"
               error={errors.favicon?.message}
             />
             <FilePreviewButton file={field.value} label="View Fav" kind="image" />

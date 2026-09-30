@@ -9,7 +9,7 @@ import { uploadFile } from "@/lib/uploadClient";
 import { getUploadValidationError } from "@/lib/uploadValidation";
 import type { FileInputProps } from "./types";
 
-const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"];
+const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif", ".ico"];
 
 function isImageFile(url: string | null) {
   if (!url) return false;
@@ -35,7 +35,7 @@ export default function FileInput({
   onChange,
   folder,
   accept = "image/*",
-  hint = "PNG, JPG, WEBP or PDF, up to 3MB",
+  hint = "PNG, JPG, WEBP, ICO or PDF, up to 3MB",
   containerClassName = "",
 }: FileInputProps) {
   const inputId = useId();

@@ -17,7 +17,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <Container className="w-full rounded-[24px] border border-[#E4E4E4] bg-white p-6 shadow-[0_20px_60px_-15px_rgba(0,92,214,0.15)] lg:w-[550px] lg:p-10">
+    <Container className="mr-auto w-full rounded-[24px] border border-[#E4E4E4] bg-white p-6 shadow-[0_20px_60px_-15px_rgba(0,92,214,0.15)] lg:w-[550px] lg:p-10">
       <Container className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-gradient-to-b from-[#64A6FF] to-[#005CD6]">
         <Icon name="FaLock" width={16} height={16} color="#F7F7F7" />
       </Container>

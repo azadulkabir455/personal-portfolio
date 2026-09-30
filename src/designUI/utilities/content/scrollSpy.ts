@@ -10,7 +10,7 @@ export interface ScrollSpyContent {
 
 export const scrollSpyContent: ScrollSpyContent = {
   sections: [
-    { id: "hero", label: "Sliders", visibilityKey: "hero" },
+    { id: "hero", label: "Banner", visibilityKey: "hero" },
     { id: "story", label: "My Story", visibilityKey: "story" },
     { id: "journey", label: "My Path to Mastery", visibilityKey: "journey" },
     { id: "featured-projects", label: "Featured Projects", visibilityKey: "featuredProjects" },
