@@ -19,9 +19,6 @@ Notun branch (jemon `azad`) er jonno alada Vercel project banate:
    if [ "$VERCEL_GIT_COMMIT_REF" != "azad" ]; then exit 0; else exit 1; fi
    ```
 8. Env vars add korar por **Deployments** tab theke manually ekta **Redeploy** trigger koro (naile notun commit push na deওয়া porjonto purono env diye deploy thakবে).
-
-> Note: repo-te root-e `server.js` ache — eta cPanel/Node hosting-er jonno custom server (main branch-er deploy flow). Vercel eta ignore kore native Next.js build ব্যবহার kore, kono conflict hoy na.
-
 ---
 
 ## 2. Firebase Setup (step by step)
@@ -117,7 +114,7 @@ src/
 │   │   ├── (auth)/login, forgot-password    # admin login pages
 │   │   └── admin/blog, global, landing,
 │   │             project, storage           # admin panel pages
-│   ├── api/upload, deploy-webhook           # server-side API routes
+│   ├── api/upload                           # server-side API routes
 │   └── blog, projects, privacy-policy, ...  # public pages
 │
 ├── firebase/                   # Firebase SDK wrapper — sob Firestore/Auth
