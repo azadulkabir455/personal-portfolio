@@ -8,11 +8,15 @@ import Link from "@/designUI/elements/Link/Link";
 import Icon from "@/designUI/elements/Icon/Icon";
 import type { JourneyCertificateCarouselProps } from "../types";
 
+const minTilesPerLoop = 8;
+
 const tileClassName =
   "relative block h-[100px] w-[136px] shrink-0 cursor-pointer overflow-hidden rounded-[4px] bg-[#242423]/5 md:h-[125px] md:w-[170px] lg:h-[219px] lg:w-[283px]";
 
 export default function JourneyCertificateCarousel({ certificates }: JourneyCertificateCarouselProps) {
-  const track = [...certificates, ...certificates];
+  const repeatCount = certificates.length ? Math.ceil(minTilesPerLoop / certificates.length) : 0;
+  const loop = Array.from({ length: repeatCount }, () => certificates).flat();
+  const track = [...loop, ...loop];
   const trackRef = useDragMarquee(25);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const previewCertificate = previewIndex !== null ? certificates[previewIndex] : null;
