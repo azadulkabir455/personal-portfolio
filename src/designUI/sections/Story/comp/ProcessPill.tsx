@@ -9,12 +9,12 @@ export default function ProcessPill({ className = "", image, icon, children }: P
   return (
     <Container
       className={clsx(
-        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full whitespace-nowrap",
+        "relative inline-flex items-center justify-center overflow-hidden rounded-full",
         "gap-[5px] md:gap-[10px]",
         "h-[25px] px-[7px] py-[4px]",
         "md:h-[58px] md:px-[20px] md:py-[16px]",
-        "lg:h-[118px] lg:px-[clamp(24px,4vw,80px)] lg:py-[45px]",
-        "min-[1024px]:max-[1150px]:h-[100px]! min-[1024px]:max-[1150px]:py-[40px]!",
+        "lg:h-[118px] lg:px-[80px] lg:py-[45px]",
+        "min-[1024px]:max-[1150px]:h-[100px]! min-[1024px]:max-[1150px]:px-[60px]! min-[1024px]:max-[1150px]:py-[40px]!",
         className,
       )}
     >

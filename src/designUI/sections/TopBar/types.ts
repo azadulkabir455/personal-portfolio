@@ -1,3 +1,5 @@
+import type { FooterContent } from "@/designUI/utilities/content/footer";
+
 export type TopBarMode = "transparent" | "sticky" | "hidden" | "menu";
 
 export interface TopBarActionButtonsProps {
@@ -12,4 +14,8 @@ export interface TopBarMenuToggleProps {
   isOpen: boolean;
   onToggle: () => void;
   className?: string;
+}
+
+export interface TopBarSocialFooterProps {
+  social: FooterContent["social"];
 }

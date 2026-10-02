@@ -9,7 +9,7 @@ export function useScrollReveal() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(({ target, isIntersecting, boundingClientRect, rootBounds }) => {
-          const element = target as HTMLElement;
+          const element = target as HTMLElement | SVGElement;
           if (isIntersecting) {
             element.dataset.revealState = "visible";
             return;
@@ -21,23 +21,23 @@ export function useScrollReveal() {
     );
 
     const observeWithin = (root: ParentNode) => {
-      root.querySelectorAll<HTMLElement>(revealSelector).forEach((element) => observer.observe(element));
+      root.querySelectorAll<Element>(revealSelector).forEach((element) => observer.observe(element));
     };
 
-    const unobserveWithin = (root: HTMLElement) => {
+    const unobserveWithin = (root: Element) => {
       if (root.matches(revealSelector)) observer.unobserve(root);
-      root.querySelectorAll<HTMLElement>(revealSelector).forEach((element) => observer.unobserve(element));
+      root.querySelectorAll<Element>(revealSelector).forEach((element) => observer.unobserve(element));
     };
 
     const mutationObserver = new MutationObserver((records) => {
       records.forEach((record) => {
         record.addedNodes.forEach((node) => {
-          if (!(node instanceof HTMLElement)) return;
+          if (!(node instanceof Element)) return;
           if (node.matches(revealSelector)) observer.observe(node);
           observeWithin(node);
         });
         record.removedNodes.forEach((node) => {
-          if (node instanceof HTMLElement) unobserveWithin(node);
+          if (node instanceof Element) unobserveWithin(node);
         });
       });
     });
