@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOutUser } from "@/firebase/authService";
-import { LOGIN_AT_KEY } from "./useAdminAuthGuard";
+import { clearAdminSession } from "./useAdminAuthGuard";
 
 export function useAdminLogout() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export function useAdminLogout() {
   const logout = () => {
     setIsLoggingOut(true);
     signOutUser().finally(() => {
-      localStorage.removeItem(LOGIN_AT_KEY);
+      clearAdminSession();
       router.replace("/login");
     });
   };

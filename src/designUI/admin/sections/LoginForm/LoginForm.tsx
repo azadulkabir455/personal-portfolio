@@ -49,12 +49,23 @@ export default function LoginForm() {
           {...register("password")}
         />
 
-        <Link
-          href="/forgot-password"
-          className="-mt-3 self-end font-sans text-[12px] font-medium text-[#388EFF] transition-colors duration-200 hover:text-[#005CD6] lg:text-[13px]"
-        >
-          Forgot password?
-        </Link>
+        <Container className="-mt-3 flex items-center justify-between gap-3">
+          <label htmlFor="rememberMe" className="flex cursor-pointer items-center gap-2 select-none">
+            <input
+              id="rememberMe"
+              type="checkbox"
+              className="h-4 w-4 cursor-pointer accent-[#242423]"
+              {...register("rememberMe")}
+            />
+            <span className="font-sans text-[12px] text-[#8A8A86] lg:text-[13px]">Remember me</span>
+          </label>
+          <Link
+            href="/forgot-password"
+            className="font-sans text-[12px] font-medium text-[#388EFF] transition-colors duration-200 hover:text-[#005CD6] lg:text-[13px]"
+          >
+            Forgot password?
+          </Link>
+        </Container>
 
         <FieldError message={errorMessage} />
 

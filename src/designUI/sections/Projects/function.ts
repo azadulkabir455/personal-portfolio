@@ -6,7 +6,7 @@ import { projectsContent } from "@/designUI/utilities/content/projects";
 import { getFeaturedProjectsForPublic } from "@/firebase/projectService";
 
 export function useProjects() {
-  const { data: sectionData, isLoading } = useSectionContent("projects", {
+  const { data: sectionData, isLoading } = useSectionContent("featuredProjects", {
     intro: projectsContent.intro,
   });
   const { data: projects } = useFirestoreCollection(

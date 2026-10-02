@@ -13,9 +13,9 @@ export default function StatItem({ value, label, description }: StatItemProps) {
       </Text>
       <Container className="flex flex-col items-start gap-[8px] lg:flex-row lg:gap-[20px]">
         <Container className="mt-[2px] flex items-start justify-start gap-1">
-          <Text className="font-sans text-[8px] font-bold text-[#388EFF] md:text-[10px]">[</Text>
-          <Text className="font-sans text-[8px] font-bold text-[#242423] md:text-[10px]">{label}</Text>
-          <Text className="font-sans text-[8px] font-bold text-[#388EFF] md:text-[10px]">]</Text>
+          <Text className="font-sans text-[10px] font-bold text-[#388EFF] lg:text-[12px]">[</Text>
+          <Text className="font-sans text-[10px] font-bold text-[#242423] lg:text-[12px]">{label}</Text>
+          <Text className="font-sans text-[10px] font-bold text-[#388EFF] lg:text-[12px]">]</Text>
         </Container>
         <Text className="font-sans max-w-[280px] text-[12px] text-[#616161] md:text-[14px] lg:text-[16px]">
           {description}

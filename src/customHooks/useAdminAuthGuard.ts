@@ -7,6 +7,18 @@ import { isFirebaseConfigured } from "@/firebase/config";
 
 const SESSION_DURATION_MS = 24 * 60 * 60 * 1000;
 export const LOGIN_AT_KEY = "adminLoginAt";
+export const REMEMBER_ME_KEY = "adminRememberMe";
+
+export function startAdminSession(rememberMe: boolean) {
+  localStorage.setItem(LOGIN_AT_KEY, Date.now().toString());
+  if (rememberMe) localStorage.setItem(REMEMBER_ME_KEY, "true");
+  else localStorage.removeItem(REMEMBER_ME_KEY);
+}
+
+export function clearAdminSession() {
+  localStorage.removeItem(LOGIN_AT_KEY);
+  localStorage.removeItem(REMEMBER_ME_KEY);
+}
 
 export function useAdminAuthGuard() {
   const router = useRouter();
@@ -18,7 +30,7 @@ export function useAdminAuthGuard() {
     let expiryTimeout: ReturnType<typeof setTimeout> | undefined;
 
     const forceLogout = () => {
-      localStorage.removeItem(LOGIN_AT_KEY);
+      clearAdminSession();
       signOutUser().finally(() => router.replace("/login"));
     };
 
@@ -26,8 +38,13 @@ export function useAdminAuthGuard() {
       clearTimeout(expiryTimeout);
 
       if (!user) {
-        localStorage.removeItem(LOGIN_AT_KEY);
+        clearAdminSession();
         router.replace("/login");
+        return;
+      }
+
+      if (localStorage.getItem(REMEMBER_ME_KEY) === "true") {
+        setIsChecking(false);
         return;
       }
 

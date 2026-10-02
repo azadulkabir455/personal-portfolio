@@ -51,8 +51,8 @@ export default function BlogCard({ type, category, title, image, href, ctaLabel 
           <span
             className={clsx(
               "float-left mt-[3px] mr-[16px] flex items-center font-semibold tracking-[0px] text-[#242423]",
-              "text-[8px] leading-[12px]",
-              "md:text-[10px] md:leading-[18px]",
+              "text-[10px] leading-[18px]",
+              "lg:text-[12px]",
             )}
           >
             <span className="px-[3px] text-[#388EFF]">[</span>

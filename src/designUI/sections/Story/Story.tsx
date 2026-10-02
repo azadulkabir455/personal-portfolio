@@ -94,7 +94,7 @@ export default function Story() {
           </Container>
         </Container>
 
-        <Container data-reveal-group className="relative z-30 mb-[20px] flex flex-wrap items-center justify-between px-[16px] md:mb-[40px] md:px-[40px] lg:mb-[80px] lg:px-0">
+        <Container data-reveal-group className="relative z-30 mb-[20px] flex flex-wrap items-center justify-between gap-[4px] px-[16px] md:gap-[8px] lg:gap-[12px] md:mb-[40px] md:px-[40px] lg:mb-[80px] lg:px-0">
           {data.processSteps.map((step, index) => (
             <Fragment key={step.label}>
               <ProcessPill
@@ -109,15 +109,15 @@ export default function Story() {
                 {step.label}
               </ProcessPill>
               {index < data.processSteps.length - 1 && (
-                <DoubleArrowIcon className="h-[10px] w-[10px] md:h-[16px] md:w-[16px] lg:h-6 lg:w-6" />
+                <DoubleArrowIcon className="h-[10px] w-[10px] shrink-0 md:h-[16px] md:w-[16px] lg:h-6 lg:w-6" />
               )}
             </Fragment>
           ))}
         </Container>
 
-        <Container data-reveal-group className="grid grid-cols-1 gap-[16px] px-[16px] md:grid-cols-[auto_1fr] md:items-center md:gap-[24px] md:px-[40px] lg:gap-[50px] lg:px-0">
-          <Container className="relative p-1.5 md:p-2">
-            <Container className="relative h-[165px] w-full md:h-[193px] md:w-[202px] lg:h-[211px] lg:w-[425px]">
+        <Container data-reveal-group className="grid grid-cols-1 gap-[16px] px-[16px] md:grid-cols-[auto_1fr] md:items-stretch md:gap-[24px] md:px-[40px] lg:gap-[50px] lg:px-0">
+          <Container className="relative p-1.5 md:h-full md:p-2">
+            <Container className="relative h-[165px] w-full md:h-full md:w-[202px] lg:w-[425px]">
               <Container className="absolute inset-[8px] overflow-hidden rounded-[4px] md:rounded-[8px] lg:rounded-[12px]">
                 <Image src={data.statsImageUrl} alt="" fill className="object-cover" />
               </Container>
