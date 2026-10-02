@@ -233,9 +233,8 @@ export default function Footer() {
         </Container>
       </Container>
 
-      <Container className="relative mx-[5px] flex items-center justify-center rounded-b-[8px] bg-[#0B0B0A] md:mx-[10px] lg:mx-[10px] lg:rounded-b-[12px]">
+      <Container className="relative mx-[5px] flex items-center justify-center rounded-b-[8px] bg-[#0B0B0A] pb-[35px] md:mx-[10px] md:pb-[38px] lg:mx-[10px] lg:rounded-b-[12px] lg:pb-0">
         <Text
-          data-reveal
           variant="h2"
           className={clsx(
             sora.className,
