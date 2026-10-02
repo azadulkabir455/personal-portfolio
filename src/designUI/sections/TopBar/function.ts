@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSectionContent } from "@/customHooks/useSectionContent";
 import { topBarContent } from "@/designUI/utilities/content/topbar";
 import { personalInfoContent } from "@/designUI/utilities/content/personalInfo";
+import { footerContent } from "@/designUI/utilities/content/footer";
 import { toTelLink } from "@/designUI/utilities/phone";
 import { applyFavicon } from "@/lib/favicon";
 import type { TopBarMode } from "./types";
@@ -22,6 +23,7 @@ export function useTopBar() {
   const isHome = pathname === "/";
   const { data, isLoading } = useSectionContent("topbar", topBarContent);
   const { data: personalInfo } = useSectionContent("personalInfo", personalInfoContent);
+  const { data: footer } = useSectionContent("footer", footerContent);
   const [isOpen, setIsOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
@@ -104,6 +106,7 @@ export function useTopBar() {
     talkHref: toTelLink(personalInfo.phone),
     phone: personalInfo.phone,
     resumeHref: personalInfo.cv,
+    social: footer.social,
     isLoading,
     isOpen,
     mode,

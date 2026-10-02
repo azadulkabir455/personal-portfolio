@@ -16,6 +16,7 @@ import Footer from "@/designUI/sections/Footer/Footer";
 import ScrollSpy from "@/designUI/sections/ScrollSpy/ScrollSpy";
 import PageLoader from "@/designUI/components/PageLoader/PageLoader";
 import CustomCursor from "@/designUI/components/CustomCursor/CustomCursor";
+import ScrollToTop from "@/designUI/components/ScrollToTop/ScrollToTop";
 
 export default function HomePage() {
   const isLoading = usePageDataLoading();
@@ -46,6 +47,7 @@ export default function HomePage() {
       </main>
       <Footer />
       <ScrollSpy />
+      <ScrollToTop />
     </>
   );
 }

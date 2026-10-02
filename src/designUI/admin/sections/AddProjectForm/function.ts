@@ -8,6 +8,7 @@ import { featuredProjectsContent } from "@/designUI/utilities/content/featuredPr
 import { createProject, updateProject } from "@/firebase/projectService";
 import { cleanupReplacedFiles } from "@/lib/uploadClient";
 import { useSaveStatus } from "@/customHooks/useSaveStatus";
+import { useSectionContent } from "@/customHooks/useSectionContent";
 import { addProjectFormSchema, type AddProjectFormValues } from "./types";
 
 export function useAddProjectForm(
@@ -31,6 +32,7 @@ export function useAddProjectForm(
 
   const router = useRouter();
   const { status, run } = useSaveStatus();
+  const { data: projectsData } = useSectionContent("featuredProjects", featuredProjectsContent);
 
   const existingImage = typeof defaultValues?.image === "string" ? defaultValues.image : undefined;
 
@@ -75,5 +77,5 @@ export function useAddProjectForm(
     }),
   );
 
-  return { form, onSubmit, status, tagOptions: featuredProjectsContent.availableTags };
+  return { form, onSubmit, status, tagOptions: projectsData.availableTags };
 }

@@ -94,7 +94,7 @@ export default function Story() {
           </Container>
         </Container>
 
-        <Container data-reveal-group className="relative z-30 mb-[20px] flex flex-wrap items-center justify-between px-[16px] md:mb-[40px] md:px-[40px] lg:mb-[80px] lg:px-0">
+        <Container data-reveal-group className="relative z-30 mb-[20px] flex flex-nowrap items-center justify-between gap-[1vw] px-[16px] lg:gap-0 md:mb-[40px] md:px-[40px] lg:mb-[80px] lg:px-0">
           {data.processSteps.map((step, index) => (
             <Fragment key={step.label}>
               <ProcessPill
@@ -109,7 +109,7 @@ export default function Story() {
                 {step.label}
               </ProcessPill>
               {index < data.processSteps.length - 1 && (
-                <DoubleArrowIcon className="h-[10px] w-[10px] md:h-[16px] md:w-[16px] lg:h-6 lg:w-6" />
+                <DoubleArrowIcon className="h-[10px] w-[10px] shrink-0 md:h-[16px] md:w-[16px] lg:h-6 lg:w-6" />
               )}
             </Fragment>
           ))}

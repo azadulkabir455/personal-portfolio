@@ -14,7 +14,7 @@ export default function JourneyStepItem({ step, title, description }: JourneySte
             className={clsx(
               sora.className,
               "mt-[5px] shrink-0 text-left align-middle font-semibold tracking-[0px]",
-              "text-[10px] leading-[18px]",
+              "text-[10px] leading-[18px] lg:text-[12px]",
             )}
           >
             <span className="text-[#0D75FF]">[</span>

@@ -7,7 +7,6 @@ import Container from "@/designUI/elements/Container/Container";
 import Text from "@/designUI/elements/Text/Text";
 import SocialLinks from "@/designUI/components/SocialLinks/SocialLinks";
 import { GridLineLight, HLine, VLine } from "@/designUI/components/GridLine/GridLine";
-import { footerContent } from "@/designUI/utilities/content/footer";
 import { useTopBar } from "./function";
 import TopBarActionButtons from "./comp/TopBarActionButtons";
 import TopBarMenuToggle from "./comp/TopBarMenuToggle";
@@ -45,6 +44,7 @@ export default function TopBar() {
     talkHref,
     phone,
     resumeHref,
+    social,
     isOpen,
     mode,
     menuHeight,
@@ -124,7 +124,7 @@ export default function TopBar() {
                     <TopBarNav navLinks={visibleNavLinks} onNavigate={closeMenu} />
                   </Container>
 
-                  <TopBarSocialFooter />
+                  <TopBarSocialFooter social={social} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -180,7 +180,7 @@ export default function TopBar() {
                   <TopBarNav navLinks={visibleNavLinks} onNavigate={closeMenu} />
 
                   <Container className="flex flex-col gap-[20px] px-[31px] pb-[24px] md:px-[70px]">
-                    <SocialLinks label={footerContent.social.findMeLabel} links={footerContent.social.links} />
+                    <SocialLinks label={social.findMeLabel} links={social.links} />
                     <TopBarMobileActions
                       talkLabel={data.talkLabel}
                       talkHref={talkHref}
