@@ -3,9 +3,17 @@
 import { useState } from "react";
 import { featuredProjectsContent } from "@/designUI/utilities/content/featuredProjects";
 import { saveSectionContent } from "@/firebase/sectionContent";
+import { useSectionContent } from "@/customHooks/useSectionContent";
 
 export function useProjectTagsManager() {
-  const [tags, setTags] = useState<string[]>(featuredProjectsContent.availableTags);
+  const { data } = useSectionContent("featuredProjects", featuredProjectsContent);
+  const [tags, setTags] = useState<string[]>(data.availableTags);
+  const [syncedData, setSyncedData] = useState(data);
+
+  if (syncedData !== data) {
+    setSyncedData(data);
+    setTags(data.availableTags);
+  }
 
   const persist = (nextTags: string[]) => {
     saveSectionContent("featuredProjects", { availableTags: nextTags }).catch(console.error);
